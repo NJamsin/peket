@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "peket"
+version = "0.1.0"
+description = "An add-on package for PyCBC and NMMA/FIESTA, includes a PyCBC coherent search pipeline generator targeted at BNS and a KN synthetic lightcurve generator based on NMMA."
+dependencies = [
+    "numpy",
+    "pandas",
+    "h5py",
+    "pyyaml",
+    "astropy",
+    "matplotlib",
+    "gwpy",
+    "gwosc",
+    "pycbc",
+    "scipy",
+]
+
+[project.scripts]
+# GW search commands
+gw-setup-pipeline = "peket.gw_search.setup_pipeline:main"
+gw-search-prep = "peket.gw_search.GWsearch_prep:main"
+gw-search-post = "peket.gw_search.GWsearch_post:main"
+# KN side commands
+kn-make-grid = "peket.kn_side.make_grid:main"
+kn-ts-loop = "peket.kn_side.ts_infer:main"
