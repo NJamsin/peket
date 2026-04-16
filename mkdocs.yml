@@ -2,11 +2,14 @@ site_name: PEKET Documentation
 site_description: PyCBC Extension for Kilonova Emission Targeting
 theme:
   name: material
+  logo: assets/bg_less_logo.png   
+  favicon: assets/bg_less_logo.png
   features:
     - navigation.tabs
     - toc.integrate
     - search.suggest
     - navigation.footer
+    - content.code.copy
   palette:
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
@@ -34,3 +37,11 @@ nav:
     - kn-ts-loop: tools/kn-ts-loop.md
   - Tutorials & Utilities: tutorials.md
   - Changelog: changelog.md
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
