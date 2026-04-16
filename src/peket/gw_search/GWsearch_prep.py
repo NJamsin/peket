@@ -15,6 +15,7 @@ import urllib.request
 from gwosc.locate import get_urls
 import glob
 import yaml
+import sys
 import stat
 import argparse
 from pycbc.waveform import get_td_waveform
@@ -25,256 +26,8 @@ from pycbc.noise import noise_from_psd
 import pycbc.noise
 import pycbc.psd
 
-def main():
-    '''
-    DEFINE THE NEEDED VAR FROM THE CONFIG FILE
-    '''
-    parser = argparse.ArgumentParser(description="PyCBC Pipeline Step")
-    parser.add_argument("config", help="Path to the config file")
-    parser.add_argument("--injection", action="store_true", help="Inject a fake signal")
-    parser.add_argument("--template-bank", default=None, help="Path to the template bank file if you want to specify it instead of generating through the resampling posterior. This can be useful if you want to use a custom template bank or if you want to skip the template bank generation step for testing purposes.")
-    parser.add_argument("--detector-threshold", default=0.5, type=float, help="Minimum antenna response required to launch the search. Default is 0.5, can be useful to avoid long search for time windows where the detectors are barely sensitive to the source.")
-    parser.add_argument("--plot-antenna-pattern", default=None, action="store_true", help="If true, will generate an antenna pattern plot for the source location and the injection merger time. Only applied to injections because the merger time is needed for the antenna response.")
-    args = parser.parse_args()
-
-    # Dynamically find the Conda bin directory
-    import sys
-    bin_dir = os.path.dirname(sys.executable)
-    pycbc_geom = os.path.join(bin_dir, "pycbc_geom_nonspinbank")
-    pycbc_split = os.path.join(bin_dir, "pycbc_hdf5_splitbank")
-    pycbc_inspiral = os.path.join(bin_dir, "pycbc_multi_inspiral") # For the bash script later 
-
-    with open(args.config, 'r') as f:
-        config = yaml.safe_load(f)
-
-    # Directory
-    BASE_DIR = os.path.abspath(config['Directory']['BASE_DIR'])
-    SUFFIX = config['Directory']['run_name']
-
-    # KN data
-    KN_detection_date = config['KN_data']['first_detection']
-    KN_ra = config['KN_data']['ra']
-    KN_dec = config['KN_data']['dec']
-    KN_EM_post = config['KN_data']['EM_post_file']
-    KN_resamp_post = config['KN_data']['RESAMP_post_file']
-
-    # GW search
-    NUM_SPLITS = config['GW_search']['num_splits']
-    max_window_size = config['GW_search']['window_size']
-
-    '''
-    Step 0: Create the output directory if it doesn't exist
-    '''
-    os.makedirs(BASE_DIR, exist_ok=True)
-
-    '''
-    Step 1: generate the template bank
-    '''
-    if args.template_bank:
-        print(f"Using user-provided template bank at {args.template_bank}. Skipping generation step.")
-        OUT_FILE_BANK = args.template_bank
-    else:
-        sample = pd.read_csv(KN_resamp_post, delimiter=' ', dtype=np.float32)
-
-        # transform the chirp mass and mass ratio to component masses
-        m1 = sample['chirp_mass'].values * (1 + sample['mass_ratio'].values)**(1/5) / (sample['mass_ratio'].values)**(3/5)
-        m2 = sample['chirp_mass'].values * (1 + sample['mass_ratio'].values)**(1/5) * (sample['mass_ratio'].values)**(2/5)
-
-        # use that to generate the template bank:
-        OUT_FILE_BANK = f"{BASE_DIR}/{SUFFIX}_tmplt.hdf"
-        # Check if the bank file already exists, if so, skip the generation step
-        if os.path.exists(OUT_FILE_BANK):
-            print(f"Template bank file {OUT_FILE_BANK} already exists. Skipping generation.")
-        else:
-            CMD = [pycbc_geom,
-                "--min-mass1", f"{np.percentile(m1,16):.4f}",     
-                "--max-mass1",  f"{np.percentile(m1, 84):.4f}",     
-                "--min-mass2", f"{np.percentile(m2, 16):.4f}",     
-                "--max-mass2", f"{np.percentile(m2, 84):.4f}",     
-                "--f-low", "30.0",     
-                "--f-upper", "2048.0", 
-                "--delta-f", "0.01",     
-                "--pn-order", "threePointFivePN",     
-                "--min-match", "0.97",
-                "--psd-model", "aLIGOZeroDetHighPower",     
-                "--output-file", f"{OUT_FILE_BANK}", 
-                "--verbose"]
-            print(f"Generating non-spinning geometric template bank")
-            subprocess.run(CMD, check=True, cwd=BASE_DIR)
-            print(f"Template bank generated and saved as '{OUT_FILE_BANK}'")
-
-    # Open the geometric bank file to get the numb of template
-    bank = h5py.File(OUT_FILE_BANK, 'r')
-    num_templates = len(bank['mass1'][:])
-
-    # split it
-    TEMPLATE_PER_BANK = int(np.ceil(num_templates / NUM_SPLITS))
-    OUT_SPLIT = f"{BASE_DIR}/{SUFFIX}_split"
-    os.makedirs(OUT_SPLIT, exist_ok=True)
-
-    # check if the split bank files already exist, if so, skip the splitting step
-    existing_split_files = glob.glob(f"{OUT_SPLIT}/split_bank_*.hdf")
-    if len(existing_split_files) == NUM_SPLITS:
-        print(f"All split bank files already exist in {OUT_SPLIT}. Skipping splitting.")
-    else:
-        split_CMD = [pycbc_split,
-            "--bank-file", f"{OUT_FILE_BANK}",
-            "--output-prefix", f"{OUT_SPLIT}/split_bank_",
-            "--templates-per-bank", f"{TEMPLATE_PER_BANK}"]
-
-        subprocess.run(split_CMD, check=True, cwd=BASE_DIR)
-        print(f"Split template banks generated and saved in '{OUT_SPLIT}'")
-
-    # loop over the split template bank to plot 
-    import matplotlib.colors as mcolors
-    norm=mcolors.Normalize(vmin=0, vmax=NUM_SPLITS)
-    cmap = plt.get_cmap('gist_rainbow')
-    col = cmap(np.linspace(0,1,NUM_SPLITS))
-    fig, ax = plt.subplots(figsize=(10, 6))
-    for i in range(NUM_SPLITS):
-        bank = h5py.File(f"{OUT_SPLIT}/split_bank_{i}.hdf", 'r')
-        # Plot the template bank masses
-        m1 = bank['mass1'][:]
-        m2 = bank['mass2'][:]
-
-        ax.scatter(m1, m2, s=5, color=col[i])
-    cbar=plt.colorbar(plt.cm.ScalarMappable(norm=norm, cmap=cmap), ax=ax)
-    cbar.set_label('Split Bank Index')
-    cbar.set_ticks(np.arange(0.5,NUM_SPLITS+0.5,1))
-    ax.set_xlabel(r'Mass 1 ($M_{\odot}$)')
-    ax.set_ylabel(r'Mass 2 ($M_{\odot}$)')
-    ax.set_title('Template Bank Mass Distribution')
-    ax.grid(True)
-    if NUM_SPLITS <= 20: # to avoid overcrowding the colorbar ticks
-        cbar.set_ticklabels([str(idx) for idx in np.arange(0.,NUM_SPLITS,1)])
-    else:
-        cbar.set_ticklabels([str(idx) for idx in np.arange(0.,NUM_SPLITS,1)], fontsize=6)
-    PLOT_DIR = f"{BASE_DIR}/plots"
-    os.makedirs(PLOT_DIR, exist_ok=True)
-    plt.savefig(f"{PLOT_DIR}/{SUFFIX}_template_bank.png")
-    plt.close(fig)
-    print(f"Template bank mass distribution plot saved as '{SUFFIX}_template_bank.png'")
-
-    '''
-    Step 2: define the search window
-    '''
-    # Load the EM posterior samples
-    EM_samp = pd.read_csv(KN_EM_post, delimiter=' ', dtype=np.float32)
-
-    # 1. convert the first detection time to mjd time
-    KN_t0 = Time(KN_detection_date, format='isot', scale='utc').mjd
-
-    # 2. Calculate 1 sigma interval (16th and 84th percentiles) of the timeshift samples
-    p16, p50, p84 = np.percentile(EM_samp['timeshift'], [15.865, 50, 84.135])
-
-    # 3. Define the search window around the median timeshift, extending to the 1sigma interval
-    t_start = KN_t0 + p16
-    t_end = KN_t0 + p84
-
-    # convert to gps time
-    time_mjd = (t_start, t_end)
-    time_gps = Time(time_mjd, format='mjd').gps
-
-    print("\nDefined search window based on EM posterior samples:")
-    print(f"MJD time: {time_mjd}")
-    print(f"GPS time: {int(time_gps[0])} to {int(time_gps[1])}")
-
-    '''
-    Step 3: define sub windows
-    '''
-    num_banks = NUM_SPLITS
-
-    global_start = int(time_gps[0])
-    global_end = int(time_gps[1])
-    chunk_length = max_window_size
-    overlap = 16 # Accounts for 8s padding at start and 8s at end
-
-    WINDOW_FILE = f"{BASE_DIR}/{SUFFIX}_windows.txt"
-
-    with open(WINDOW_FILE, 'w') as f:
-        for bank in range(num_banks):
-            current_start = global_start
-            while current_start < global_end:
-                current_end = min(current_start + chunk_length, global_end)
-                tt = (current_start + current_end) // 2 #for the antenna pattern
-                # Write: BANK_NUM START_TIME END_TIME
-                f.write(f"{bank} {current_start} {current_end} {tt}\n")
-                
-                if current_end == global_end:
-                    break
-                
-                # Step back by the overlap amount for the next chunk
-                current_start = current_end - overlap
-
-    print(f"Generated {WINDOW_FILE}")
-
-    '''
-    Step 4: fetch and clean GW data 
-    '''
-    DATA_DIR = f"{BASE_DIR}/data"
-    os.makedirs(DATA_DIR, exist_ok=True)
-
-    h1_cache = f"{DATA_DIR}/{SUFFIX}_H1.lcf"
-    l1_cache = f"{DATA_DIR}/{SUFFIX}_L1.lcf"
-    detectors = ['H1', 'L1']
-
-    if os.path.exists(h1_cache) and os.path.exists(l1_cache):
-        print(f"Cleaned and merged files {h1_cache} and {l1_cache} already exist. Skipping download and preparation.")
-    else:
-        def robust_get_urls(detector, start, end):
-            from gwosc.locate import get_urls
-            urls = []
-            chunk_size = 86400  # 1 day in seconds
-            current_start = start
-            
-            while current_start < end:
-                current_end = min(current_start + chunk_size, end)
-                try:
-                    # Ask for just this chunk
-                    chunk_urls = get_urls(detector, current_start, current_end, format='gwf', sample_rate=4096)
-                    for u in chunk_urls:
-                        if '4096.gwf' in u and u not in urls: # ensure we only get 4096 files and avoid duplicates (for example the event-specific files)
-                            urls.append(u)
-                except ValueError:
-                    print(f" -> Warning: No public GWOSC data found for {detector} between {int(current_start)} and {int(current_end)}.")
-                
-                current_start = current_end
-                
-            return urls
-        # The exact GPS times from your bash command
-        gps_start = int(time_gps[0]) - 32 # start of the window -32s for padding
-        gps_end = int(time_gps[1]) + 32 # end of the window +32s for padding
-
-        downloaded_files = {'H1': [], 'L1': []}
-
-        for ifo in detectors:
-            print(f"Locating 4kHz data for {ifo}...")
-            # Fetch URLs for the .gwf frame files at 4096 Hz
-            urls = robust_get_urls(ifo, gps_start, gps_end)
-            
-            for url in urls:
-                filename = url.split('/')[-1]
-                filepath = os.path.join(DATA_DIR, filename)
-                
-                if not os.path.exists(filepath):
-                    print(f"Downloading {filename}...")
-                    urllib.request.urlretrieve(url, filepath)
-                else:
-                    print(f"{filename} already exists locally. Skipping.")
-                    
-                downloaded_files[ifo].append(filepath)
-
-        print("\n--- Download Complete ---")
-        print(f"H1 Frame File(s): {','.join(downloaded_files['H1'])}")
-        print(f"L1 Frame File(s): {','.join(downloaded_files['L1'])}")
-
-        # clean and merge
-        # 1. list og files for each detector
-        fichiers_h1 = downloaded_files['H1']
-
-        fichiers_l1 = downloaded_files['L1']
-
-        def preparer_donnees(fichiers, canal, ifo, t_start, t_end, chunk_size=4096):
+# Moved functions outside the main to be able to call it outside GWsearch
+def preparer_donnees(args, config, DATA_DIR, SUFFIX, BASE_DIR, fichiers, canal, ifo, t_start, t_end, chunk_size=4096):
             print(f"Processing strain data files for {canal}...")
 
             if args.injection: # prepare the injected signal before processing the data
@@ -399,30 +152,35 @@ def main():
                 
             # Write out the cache file for PyCBC
             cache_file = f"{DATA_DIR}/{SUFFIX}_{ifo}.lcf"
-            with open(cache_file, "w") as f:
+            with open(cache_file, "a") as f:
                 f.write("\n".join(cache_entries) + "\n")
             if args.injection:
                 return cache_file, merger_time
             else:
                 return cache_file, None
 
-        # because your PyCBC command has a padding of 8 seconds.
-        t_start_pycbc = gps_start - 16
-        t_end_pycbc = gps_end + 16
+def robust_get_urls(detector, start, end):
+            from gwosc.locate import get_urls
+            urls = []
+            chunk_size = 86400  # 1 day in seconds
+            current_start = start
+            
+            while current_start < end:
+                current_end = min(current_start + chunk_size, end)
+                try:
+                    # Ask for just this chunk
+                    chunk_urls = get_urls(detector, current_start, current_end, format='gwf', sample_rate=4096)
+                    for u in chunk_urls:
+                        if '4096.gwf' in u and u not in urls: # ensure we only get 4096 files and avoid duplicates (for example the event-specific files)
+                            urls.append(u)
+                except ValueError:
+                    print(f" -> Warning: No public GWOSC data found for {detector} between {int(current_start)} and {int(current_end)}.")
+                
+                current_start = current_end
+                
+            return urls
 
-        h1_cache, merger_time = preparer_donnees(fichiers_h1, "H1:GWOSC-4KHZ_R1_STRAIN", "H1", t_start_pycbc, t_end_pycbc)
-        l1_cache, _ = preparer_donnees(fichiers_l1, "L1:GWOSC-4KHZ_R1_STRAIN", "L1", t_start_pycbc, t_end_pycbc)
-        print("Completed! The files are ready for PyCBC.")
-
-        # delete the og file to clean some spaces
-        for ifo in detectors:
-            for filepath in downloaded_files[ifo]:
-                os.remove(filepath)
-                print(f"Deleted {filepath}")
-        
-        # plot the antenna pattern for the injection if requested
-        if args.plot_antenna_pattern and args.injection:
-            def plot_antenna_pattern(ifo, ra, dec, merger_time, save_path):
+def plot_antenna_pattern(ifo, ra, dec, merger_time, save_path):
                 det = Detector(ifo)
                 # define a sky position grid
                 ra_grid = np.linspace(-np.pi, np.pi, 200)
@@ -457,6 +215,252 @@ def main():
                 plt.savefig(save_path)
                 plt.close(fig)
                 print(f"Antenna pattern plot saved as '{save_path}'")
+                
+def main():
+    '''
+    DEFINE THE NEEDED VAR FROM THE CONFIG FILE
+    '''
+    parser = argparse.ArgumentParser(description="PyCBC Pipeline Step")
+    parser.add_argument("config", help="Path to the config file")
+    parser.add_argument("--injection", action="store_true", help="Inject a fake signal")
+    parser.add_argument("--template-bank", default=None, help="Path to the template bank file if you want to specify it instead of generating through the resampling posterior. This can be useful if you want to use a custom template bank or if you want to skip the template bank generation step for testing purposes.")
+    parser.add_argument("--detector-threshold", default=0.5, type=float, help="Minimum antenna response required to launch the search. Default is 0.5, can be useful to avoid long search for time windows where the detectors are barely sensitive to the source.")
+    parser.add_argument("--plot-antenna-pattern", default=None, action="store_true", help="If true, will generate an antenna pattern plot for the source location and the injection merger time. Only applied to injections because the merger time is needed for the antenna response.")
+    args = parser.parse_args()
+
+    # Dynamically find the Conda bin directory
+    import sys
+    bin_dir = os.path.dirname(sys.executable)
+    pycbc_geom = os.path.join(bin_dir, "pycbc_geom_nonspinbank")
+    pycbc_split = os.path.join(bin_dir, "pycbc_hdf5_splitbank")
+    pycbc_inspiral = os.path.join(bin_dir, "pycbc_multi_inspiral") # For the bash script later 
+
+    with open(args.config, 'r') as f:
+        config = yaml.safe_load(f)
+
+    # Directory
+    BASE_DIR = os.path.abspath(config['Directory']['BASE_DIR'])
+    SUFFIX = config['Directory']['run_name']
+
+    # KN data
+    KN_detection_date = config['KN_data']['first_detection']
+    KN_ra = config['KN_data']['ra']
+    KN_dec = config['KN_data']['dec']
+    KN_EM_post = config['KN_data']['EM_post_file']
+    KN_resamp_post = config['KN_data']['RESAMP_post_file']
+
+    # GW search
+    NUM_SPLITS = config['GW_search']['num_splits']
+    max_window_size = config['GW_search']['window_size']
+
+    '''
+    Step 0: Create the output directory if it doesn't exist
+    '''
+    os.makedirs(BASE_DIR, exist_ok=True)
+
+    '''
+    Step 1: generate the template bank
+    '''
+    if args.template_bank:
+        print(f"Using user-provided template bank at {args.template_bank}. Skipping generation step.")
+        OUT_FILE_BANK = args.template_bank
+    else:
+        sample = pd.read_csv(KN_resamp_post, delimiter=' ', dtype=np.float32)
+
+        # transform the chirp mass and mass ratio to component masses
+        m1 = sample['chirp_mass'].values * (1 + sample['mass_ratio'].values)**(1/5) / (sample['mass_ratio'].values)**(3/5)
+        m2 = sample['chirp_mass'].values * (1 + sample['mass_ratio'].values)**(1/5) * (sample['mass_ratio'].values)**(2/5)
+
+        # use that to generate the template bank:
+        OUT_FILE_BANK = f"{BASE_DIR}/{SUFFIX}_tmplt.hdf"
+        # Check if the bank file already exists, if so, skip the generation step
+        if os.path.exists(OUT_FILE_BANK):
+            print(f"Template bank file {OUT_FILE_BANK} already exists. Skipping generation.")
+        else:
+            CMD = [pycbc_geom,
+                "--min-mass1", f"{np.percentile(m1,16):.4f}",     
+                "--max-mass1",  f"{np.percentile(m1, 84):.4f}",     
+                "--min-mass2", f"{np.percentile(m2, 16):.4f}",     
+                "--max-mass2", f"{np.percentile(m2, 84):.4f}",     
+                "--f-low", "30.0",     
+                "--f-upper", "2048.0", 
+                "--delta-f", "0.01",     
+                "--pn-order", "threePointFivePN",     
+                "--min-match", "0.97",
+                "--psd-model", "aLIGOZeroDetHighPower",     
+                "--output-file", f"{OUT_FILE_BANK}", 
+                "--verbose"]
+            print(f"Generating non-spinning geometric template bank")
+            subprocess.run(CMD, check=True, cwd=BASE_DIR)
+            print(f"Template bank generated and saved as '{OUT_FILE_BANK}'")
+
+    # Open the geometric bank file to get the numb of template
+    bank = h5py.File(OUT_FILE_BANK, 'r')
+    num_templates = len(bank['mass1'][:])
+
+    # split it
+    TEMPLATE_PER_BANK = int(np.ceil(num_templates / NUM_SPLITS))
+    OUT_SPLIT = f"{BASE_DIR}/{SUFFIX}_split"
+    os.makedirs(OUT_SPLIT, exist_ok=True)
+
+    # check if the split bank files already exist, if so, skip the splitting step
+    existing_split_files = glob.glob(f"{OUT_SPLIT}/split_bank_*.hdf")
+    if len(existing_split_files) == NUM_SPLITS:
+        print(f"All split bank files already exist in {OUT_SPLIT}. Skipping splitting.")
+    else:
+        split_CMD = [pycbc_split,
+            "--bank-file", f"{OUT_FILE_BANK}",
+            "--output-prefix", f"{OUT_SPLIT}/split_bank_",
+            "--templates-per-bank", f"{TEMPLATE_PER_BANK}"]
+
+        subprocess.run(split_CMD, check=True, cwd=BASE_DIR)
+        print(f"Split template banks generated and saved in '{OUT_SPLIT}'")
+
+    # loop over the split template bank to plot 
+    import matplotlib.colors as mcolors
+    norm=mcolors.Normalize(vmin=0, vmax=NUM_SPLITS)
+    cmap = plt.get_cmap('gist_rainbow')
+    col = cmap(np.linspace(0,1,NUM_SPLITS))
+    fig, ax = plt.subplots(figsize=(10, 6))
+    for i in range(NUM_SPLITS):
+        bank = h5py.File(f"{OUT_SPLIT}/split_bank_{i}.hdf", 'r')
+        # Plot the template bank masses
+        m1 = bank['mass1'][:]
+        m2 = bank['mass2'][:]
+
+        ax.scatter(m1, m2, s=5, color=col[i])
+    cbar=plt.colorbar(plt.cm.ScalarMappable(norm=norm, cmap=cmap), ax=ax)
+    cbar.set_label('Split Bank Index')
+    cbar.set_ticks(np.arange(0.5,NUM_SPLITS+0.5,1))
+    ax.set_xlabel(r'Mass 1 ($M_{\odot}$)')
+    ax.set_ylabel(r'Mass 2 ($M_{\odot}$)')
+    ax.set_title('Template Bank Mass Distribution')
+    ax.grid(True)
+    if NUM_SPLITS <= 20: # to avoid overcrowding the colorbar ticks
+        cbar.set_ticklabels([str(int(idx)) for idx in np.arange(0.,NUM_SPLITS,1)])
+    else:
+        cbar.set_ticklabels([str(int(idx)) for idx in np.arange(0.,NUM_SPLITS,1)], fontsize=6)
+    PLOT_DIR = f"{BASE_DIR}/plots"
+    os.makedirs(PLOT_DIR, exist_ok=True)
+    plt.savefig(f"{PLOT_DIR}/{SUFFIX}_template_bank.png")
+    plt.close(fig)
+    print(f"Template bank mass distribution plot saved as '{SUFFIX}_template_bank.png'")
+
+    '''
+    Step 2: define the search window
+    '''
+    # Load the EM posterior samples
+    EM_samp = pd.read_csv(KN_EM_post, delimiter=' ', dtype=np.float32)
+
+    # 1. convert the first detection time to mjd time
+    KN_t0 = Time(KN_detection_date, format='isot', scale='utc').mjd
+
+    # 2. Calculate 1 sigma interval (16th and 84th percentiles) of the timeshift samples
+    p16, p50, p84 = np.percentile(EM_samp['timeshift'], [15.865, 50, 84.135])
+
+    # 3. Define the search window around the median timeshift, extending to the 1sigma interval
+    t_start = KN_t0 + p16
+    t_end = KN_t0 + p84
+
+    # convert to gps time
+    time_mjd = (t_start, t_end)
+    time_gps = Time(time_mjd, format='mjd').gps
+
+    print("\nDefined search window based on EM posterior samples:")
+    print(f"MJD time: {time_mjd}")
+    print(f"GPS time: {int(time_gps[0])} to {int(time_gps[1])}")
+
+    '''
+    Step 3: define sub windows
+    '''
+    num_banks = NUM_SPLITS
+
+    global_start = int(time_gps[0])
+    global_end = int(time_gps[1])
+    chunk_length = max_window_size
+    overlap = 16 # Accounts for 8s padding at start and 8s at end
+
+    WINDOW_FILE = f"{BASE_DIR}/{SUFFIX}_windows.txt"
+
+    with open(WINDOW_FILE, 'w') as f:
+        for bank in range(num_banks):
+            current_start = global_start
+            while current_start < global_end:
+                current_end = min(current_start + chunk_length, global_end)
+                tt = (current_start + current_end) // 2 #for the antenna pattern
+                # Write: BANK_NUM START_TIME END_TIME
+                f.write(f"{bank} {current_start} {current_end} {tt}\n")
+                
+                if current_end == global_end:
+                    break
+                
+                # Step back by the overlap amount for the next chunk
+                current_start = current_end - overlap
+
+    print(f"Generated {WINDOW_FILE}")
+
+    '''
+    Step 4: fetch and clean GW data 
+    '''
+    DATA_DIR = f"{BASE_DIR}/data"
+    os.makedirs(DATA_DIR, exist_ok=True)
+
+    h1_cache = f"{DATA_DIR}/{SUFFIX}_H1.lcf"
+    l1_cache = f"{DATA_DIR}/{SUFFIX}_L1.lcf"
+    detectors = ['H1', 'L1']
+
+    if os.path.exists(h1_cache) and os.path.exists(l1_cache):
+        print(f"Cleaned and merged files {h1_cache} and {l1_cache} already exist. Skipping download and preparation.")
+    else:
+        # The exact GPS times from your bash command
+        gps_start = int(time_gps[0]) - 32 # start of the window -32s for padding
+        gps_end = int(time_gps[1]) + 32 # end of the window +32s for padding
+
+        downloaded_files = {'H1': [], 'L1': []}
+
+        for ifo in detectors:
+            print(f"Locating 4kHz data for {ifo}...")
+            # Fetch URLs for the .gwf frame files at 4096 Hz
+            urls = robust_get_urls(ifo, gps_start, gps_end)
+            
+            for url in urls:
+                filename = url.split('/')[-1]
+                filepath = os.path.join(DATA_DIR, filename)
+                
+                if not os.path.exists(filepath):
+                    print(f"Downloading {filename}...")
+                    urllib.request.urlretrieve(url, filepath)
+                else:
+                    print(f"{filename} already exists locally. Skipping.")
+                    
+                downloaded_files[ifo].append(filepath)
+
+        print("\n--- Download Complete ---")
+        print(f"H1 Frame File(s): {','.join(downloaded_files['H1'])}")
+        print(f"L1 Frame File(s): {','.join(downloaded_files['L1'])}")
+
+        # clean and merge
+        # 1. list og files for each detector
+        fichiers_h1 = downloaded_files['H1']
+
+        fichiers_l1 = downloaded_files['L1']
+
+        # because your PyCBC command has a padding of 8 seconds.
+        t_start_pycbc = gps_start - 16
+        t_end_pycbc = gps_end + 16
+
+        h1_cache, merger_time = preparer_donnees(args, config, DATA_DIR, SUFFIX, BASE_DIR, fichiers_h1, "H1:GWOSC-4KHZ_R1_STRAIN", "H1", t_start_pycbc, t_end_pycbc)
+        l1_cache, _ = preparer_donnees(args, config, DATA_DIR, SUFFIX, BASE_DIR, fichiers_l1, "L1:GWOSC-4KHZ_R1_STRAIN", "L1", t_start_pycbc, t_end_pycbc)
+        print("Completed! The files are ready for PyCBC.")
+
+        # delete the og file to clean some spaces
+        for ifo in detectors:
+            for filepath in downloaded_files[ifo]:
+                os.remove(filepath)
+                print(f"Deleted {filepath}")
+        
+        # plot the antenna pattern for the injection if requested
+        if args.plot_antenna_pattern and args.injection:
             for ifo in detectors:
                 plot_antenna_pattern(ifo, KN_ra, KN_dec, merger_time, f"{PLOT_DIR}/{SUFFIX}_{ifo}_antenna_pattern.png")
     '''

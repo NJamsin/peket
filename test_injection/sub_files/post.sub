@@ -1,5 +1,5 @@
 executable     = /home/stu_jamsin/.conda/envs/fiesta/bin/gw-search-post
-arguments      = $(config) --injection --plot-spectrogram --spectrogram-range 0,15
+arguments      = $(config) --injection
 universe       = vanilla
 
 output         = /home/stu_jamsin/peket/test_injection/logs/post.out
@@ -9,6 +9,6 @@ log            = /home/stu_jamsin/peket/test_injection/logs/pipeline.log
 environment    = "PYTHONUNBUFFERED=1"
 
 request_cpus   = 1
-request_memory = 16GB
+request_memory = 512MB
 
 queue

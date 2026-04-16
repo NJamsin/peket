@@ -11,6 +11,7 @@ import sys
 import bilby
 from astropy.time import Time
 import argparse
+import traceback
 
 def main():
     '''
@@ -102,7 +103,7 @@ def main():
             ax = axes[i, i]
             q16, q50, q84 = plot_data[col].quantile([0.16, 0.5, 0.84])
             inf_txt = rf"${q50:.3f}^{{+{q84-q50:.3f}}}_{{-{q50-q16:.3f}}}$"
-            truth_val = -1*ts if col == 'timeshift' else truth_row[col].values[0]
+            truth_val = -1*ts if col == 'timeshift' else log10_mej if col == 'log10_mej' else truth_row[col].values[0]
             ax.text(0.3, 1.03, inf_txt, transform=ax.transAxes, ha='center', fontsize=10)
             ax.text(0.8, 1.03, rf"{truth_val:.3f}", transform=ax.transAxes, ha='center', fontsize=10, color='red')
 
@@ -231,6 +232,8 @@ ylim : [24, 16]
         save_corner_plot(samples, truth, ts, f"{BASE_DIR}/minus0/corner_minus0_{idx}.png", "Injection analysis with model "+MODEL)
     except Exception as e:
         print(f"Error occurred while saving corner plot: {e}")
+        erreur_detaillee = traceback.format_exc()
+        print(f"Detailed error :\n{erreur_detaillee}")
     del samples, cmd_lc
     gc.collect()
 
@@ -257,8 +260,17 @@ ylim : [24, 16]
             gc.collect()
         data.to_csv(f"{BASE_DIR}/data_minus{j+1}.dat", sep=' ', index=False, header=False)
         # compute the timeshift
-        ts = pd.to_datetime(data[0][0]) - pd.to_datetime(true_merger_time) # keep the same trigger time as for the original data to see how the timeshift evolves
-        ts = ts.total_seconds() / (3600*24) # convert to days
+        try:
+            ts = pd.to_datetime(data[0][0]) - pd.to_datetime(true_merger_time) # keep the same trigger time as for the original data to see how the timeshift evolves
+            ts = ts.total_seconds() / (3600*24) # convert to days
+        except Exception as e:
+            print(f"Error occurred while computing timeshift: {e}")
+            erreur_detaillee = traceback.format_exc()
+            print(f"Detailed error:\n{erreur_detaillee}")
+            if len(data[0]) <= 0:
+                print(f"No data left after removing {j+1} time points. Stopping the analysis for further time shifts.")
+                break
+            ts = None
         if MODEL != 'Bu2026_MLP':
             lc_config = f"""outdir : {BASE_DIR}/minus{j+1}
 interpolation-type : tensorflow
@@ -311,9 +323,13 @@ ylim : [24, 16]
             try:
                 save_corner_plot(samples, truth, ts, f"{BASE_DIR}/minus{j+1}/corner_minus{j+1}_{idx}.png", "Injection analysis with model "+MODEL)
             except Exception as e:
+                erreur_detaillee = traceback.format_exc()
+                print(f"Detailed error :\n{erreur_detaillee}")
                 print(f"Error occurred while saving corner plot: {e}")
         except Exception as e:
             print(f"Error occurred during the analysis for minus {j+1} time points: {e}")
+            erreur_detaillee = traceback.format_exc()
+            print(f"Detailed error :\n{erreur_detaillee}")
         del samples, cmd_lc
         gc.collect()
 

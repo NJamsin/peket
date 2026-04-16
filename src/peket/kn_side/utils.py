@@ -6,7 +6,11 @@ import astropy.units as u
 import astropy.constants as c
 import matplotlib.pyplot as plt
 import os
+from astropy.time import Time
 import matplotlib.colors as mcolors
+from rubin_sim.phot_utils import PhotometricParameters, Bandpass
+from rubin_sim.phot_utils import calc_snr_m5, calc_mag_error_m5
+from rubin_scheduler.data import get_data_dir
 from lal import MRSUN_SI
 import glob
 from nmma.em.model import FiestaKilonovaModel
@@ -529,7 +533,7 @@ def generate_synth_lc_v2(model_name='Bu2019lm',
                             "luminosity_distance": 40,
                             "timeshift": 0.0
                         },
-                    filters_band=['ps1__g', 'ps1__r', 'ps1__i'],
+                    filters_band=['ps1::g', 'ps1::r', 'ps1::i'],
                     noise_level=0.3,
                     max_error_level=0.6,
                     trigger_iso='2025-01-01T00:00:00',
@@ -541,7 +545,10 @@ def generate_synth_lc_v2(model_name='Bu2019lm',
                     filename='synthetic_kilonova_svd.dat',
                     detection_limit_dict=None,
                     svd_path="/home/stu_jamsin/jamsin/NMMA/svdmodels"):
-    """Generate synthetic lightcurves using SVDLightCurveModel.
+    """
+    
+    Generate synthetic lightcurves using SVDLightCurveModel.
+
     Parameters
     ----------
     model_name : str
@@ -615,6 +622,118 @@ def generate_synth_lc_v2(model_name='Bu2019lm',
     if save:
         data_nmma_svd.to_csv(filename, sep=' ', index=False, header=False)
     return data_nmma_svd, trigger
+
+def generate_synth_lc_lsst(source,
+                    model_name,
+                    model_param,
+                    save=False,
+                    filename='test_lc_lsst.dat',
+                    svd_path = "/home/stu_jamsin/jamsin/NMMA/svdmodels"):
+    '''
+    Generate a synthetic light curve based on the LSST observations of a given source and a given model. The light curve is generated for each filter in the observations and then merged together to have a full light curve with all the filters. The generated light curve is then saved to a file if save is True.
+
+    Parameters
+    ----------
+    source : dict
+        Dictionary containing the LSST observations of the source. It should have the following structure:
+        {
+            'observations': pd.DataFrame with columns ['filter', 'expMJD', '5sigmaDepth', ...]
+        }
+        Should be an element of the list of sources returned by the function find_valid_sources().
+    model_name : str
+        Name of the model to be used for the light curve generation (e.g. 'Bu2026_MLP' or 'Bu2019lm').
+    model_param : dict
+        Dictionary containing the parameters of the model to be used for the light curve generation. The keys and values of the dictionary should be coherent with the model used (e.g. for 'Bu2026_MLP', the parameters should be 'log10_mej_dyn', 'log10_mej_wind', 'inclination_EM', 'luminosity_distance', 'v_ej_dyn', 'v_ej_wind', 'Ye_dyn', 'Ye_wind', 'timeshift').
+    save : bool
+        If True, the generated light curve will be saved to a file with the name specified in filename. If False, the generated light curve will not be saved.
+    filename : str
+        Name of the file where the generated light curve will be saved if save is True. The file will be saved in the current working directory.
+    svd_path : str
+        Path to the directory where the SVD models are stored. This is used only if the model_name is not 'Bu2026_MLP' because this model is not an SVD model and is directly instantiated with the FiestaKilonovaModel class.
+    Returns
+    -------
+    full_lc : pd.DataFrame
+        The generated synthetic light curve with all the filters merged together.
+    '''
+    print(f"Generating synthetic lightcurve based on LSST observations...")
+
+    # extract the filter from the obs
+    filters = source['observations']['filter'].unique()
+    print(f"Filters in the observations: {filters.tolist()}")
+    # need to transform the filter names to match the ones used in the model: go from i to ps1::i for example
+    filters = [("sdssu" if filt == "u" else f"ps1::{filt}") for filt in filters]
+
+    if model_name == "Bu2026_MLP":
+        try: # instantiate the model
+            model = FiestaKilonovaModel(model_name, filters=filters)
+        except Exception as e:
+            print(f"  - {model_name}: error during SVD model creation ->", e)
+            raise e
+    
+    dic = build_dic(source) # get the diff samples times for each filter
+
+    full_lc = None # instanciate a var to store the full light curve (with all the filters merged together)
+
+    # loop over the filters and generate the light curve for each filter
+    for filter in dic.keys():
+        if len(filter) > 1: 
+            continue # skip for the m5 keys (filter key are like i and m5 keys are like i_m5)
+        time_samples = dic[filter]
+        m5_samples = dic[f"{filter}_m5"]
+        print(f"Sample times for filter {filter}:")
+        print(time_samples)
+
+        if model_name == "Bu2026_MLP":
+            # generate the light curve for the given filter and time samples
+            mag_filter = model.generate_lightcurve(time_samples, model_param)
+        else:
+            try:
+                svd_model = SVDLightCurveModel(
+                        model=model_name,
+                        sample_times=time_samples,
+                        svd_path=svd_path,
+                        interpolation_type='tensorflow',
+                        filters=filters
+                )
+            except Exception as e:
+                print(f"  - {model_name}: error during SVD model creation ->", e)
+                raise e
+            mag_filter = svd_model.generate_lightcurve(time_samples, model_param)
+
+        # transform the mag to observed mag
+        mag_filter = abs_to_app_mag(mag_filter, model_param["luminosity_distance"])
+
+        # get the mjd date of the first observation in that filter
+        mjd_epoch = source['observations'][source['observations']['filter'] == filter]['expMJD'].iloc[0]
+        # transform it to ISOT date
+        t = Time(mjd_epoch, format='mjd')
+        iso_epoch = t.isot
+
+        # transform the mag to observed mag based on the m5 samples
+        err = {}
+        key = "sdssu" if filter == "u" else f"ps1::{filter}"
+        if key not in mag_filter:
+            raise KeyError(f"Missing key in mag_filter: {key}. Available: {list(mag_filter.keys())}")
+        err[key] = [None] * len(mag_filter[key])
+
+        for idx, mag in enumerate(mag_filter[key]):
+            m5 = m5_samples[idx]
+            mag_filter[key][idx], err[key][idx] = get_obs_mag_from_lsst(filter, mag, m5)
+
+        # format the output to match the expected format by nmma
+        list_f = [key]
+        formatted_lc, _ = format_nmma_data_v2(time_samples, mag_filter, err, list_f, iso_epoch, 0)
+        # merge it with previous filters (just append the 'formatted_lc' to each other) 
+        if full_lc is None:
+            full_lc = formatted_lc
+        else:
+            full_lc = pd.concat([full_lc, formatted_lc], ignore_index=True)
+
+
+    if save:
+        full_lc.to_csv(filename, sep=' ', index=False, header=False)
+        print(f"Light curve saved to {filename}")
+    return full_lc
 
 """
 Plotting utils for ts-loop
@@ -852,4 +971,152 @@ def plot_param_evolution(MODEL, DIR, UL=False, true_merger='2020-01-07T00:00:00.
         figg.savefig(f"{OUT_DIR}/{param_name}_pp.png")
         print(f"Saved {param_name} evolution plot in {OUT_DIR}/{param_name}_evolution.png")
         print(f"Saved {param_name} pp plot in {OUT_DIR}/{param_name}_pp.png")
+    return None
+    
+'''
+LSST utils for synthetic lightcurve
+'''
+def get_lsst_observations(db_path, full_df=False, n_visits=20):
+    '''
+    Retrieve LSST observations from a SQLite database. Assumes a table named 'observations' with columns:
+    - observationStartMJD (float): Modified Julian Date of the observation start
+    - filter (string): Filter used for the observation (e.g., 'u', 'g', 'r', 'i', 'z', 'y')
+    - fiveSigmaDepth (float): 5-sigma depth for the observation (limiting magnitude)
+    - fieldRA (float): Right Ascension of the observed field
+    - fieldDec (float): Declination of the observed field
+    '''
+    import sqlite3
+    con = sqlite3.connect(db_path)
+    # randomly select n_visits observations to simulate a realistic observing cadence
+    if full_df:
+        query = """
+        SELECT observationStartMJD as expMJD, fieldRA as _ra, fieldDec as _dec, filter, fiveSigmaDepth 
+        FROM observations
+        ORDER BY observationStartMJD ASC
+        """
+    else:
+        query = """
+    SELECT observationStartMJD as expMJD, fieldRA as _ra, fieldDec as _dec, filter, fiveSigmaDepth 
+    FROM observations
+    ORDER BY RANDOM()
+    LIMIT {n_visits}
+    """.format(n_visits=n_visits)
+    df_rubin = pd.read_sql_query(query, con)
+    con.close()
+    df_rubin['filter'] = df_rubin['filter']
+    df_rubin = df_rubin.sort_values('expMJD')
+    return df_rubin
+
+def get_source_observations(df_lsst, t0_mjd, ra, dec, duration=20, verbose=True):
+    '''
+    Extract LSST observations that are relevant for a source that exploded at t0_mjd and is located at (ra, dec).
+    This function filters the LSST observations to find those that occurred during the expected lifetime of the kilonova (e.g., 20 days) and checks if the source was in the field of view
+
+    Parameters:
+    - df_lsst: DataFrame containing LSST observations with columns 'expMJD', '_ra', '_dec', 'filter', 'fiveSigmaDepth'
+    - t0_mjd: MJD of the explosion (t0)
+    - ra: Right Ascension of the source in degrees
+    - dec: Declination of the source in degrees
+    - duration: Expected lifetime of the kilonova in days (default is 20)
+    - verbose: If True, print information about the filtering process
+    '''
+    df_lsst['time_days'] = df_lsst['expMJD'] - t0_mjd
+    valid_obs = df_lsst[(df_lsst['time_days'] > 0) & (df_lsst['time_days'] < duration)].copy()
+    
+    if valid_obs.empty:
+        if verbose:
+            print("No observations during the KN lifetime.")
+        return None # Aucune observation pendant la vie de la KN
+    # check for the presence of the source in the field of view (simplified as a circular area around the pointing)
+    from astropy.coordinates import SkyCoord
+    import astropy.units as u
+
+    center = SkyCoord(ra=ra*u.deg, dec=dec*u.deg, frame="icrs")
+    pts = SkyCoord(ra=valid_obs["_ra"].to_numpy()*u.deg,
+                dec=valid_obs["_dec"].to_numpy()*u.deg, frame="icrs")
+
+    valid_obs["in_fov"] = pts.separation(center).deg < 1.75 # LSST FOV is ~3.5 deg in diameter, so we take half of that as radius
+    valid_obs = valid_obs[valid_obs["in_fov"]]
+
+    if valid_obs.empty:
+        if verbose:
+            print("No observations in the field of view.")
         return None
+    return valid_obs
+
+def find_valid_sources(df_lsst, n_sources=5, duration=20, min_observations=3):
+    '''
+    Find n_sources valid sources in the LSST database that have observations during their expected kilonova lifetime and are located within the field of view.
+
+    Parameters:
+    - df_lsst: DataFrame containing LSST observations with columns 'expMJD', '_ra', '_dec', 'filter', 'fiveSigmaDepth'
+    - n_sources: Number of valid sources to find (default is 5)
+    - duration: Expected lifetime of the kilonova in days (default is 20)
+    - min_observations: Minimum number of observations required for a source to be considered valid (default is 3)
+    '''
+    valid_sources = []
+    while len(valid_sources) < n_sources:
+        # Randomly select a source position and explosion time
+        ra = np.random.uniform(0, 360)
+        dec = np.random.uniform(-90, 90)
+        t0_mjd = np.random.uniform(df_lsst['expMJD'].min(), df_lsst['expMJD'].max() - duration)
+
+        obs = get_source_observations(df_lsst, t0_mjd, ra, dec, duration, verbose=False)
+        if obs is not None and len(obs) >= min_observations:
+            valid_sources.append({
+                'ra': ra,
+                'dec': dec,
+                't0_mjd': t0_mjd,
+                'observations': obs
+            })
+    
+    return valid_sources
+
+def get_obs_mag_from_lsst(filter, model_mag, m5):
+    '''
+    Compute the observed mag based the 5 sigma depth mag using ``rubin_sim.phot_utils``
+    '''
+    # get detector status
+    phot_params = PhotometricParameters(bandpass=filter)
+
+    # load filter bandpass with lsst's throughtput files
+    throughput_dir = os.path.join(get_data_dir(), "throughputs", "baseline")
+    bp_filepath = os.path.join(throughput_dir, f"total_{filter}.dat")
+    bp = Bandpass()
+    bp.read_throughput(bp_filepath)
+
+    # compute snr and associated error
+    snr, gamma = calc_snr_m5(model_mag, bp, m5, phot_params)
+    mag_err, _ = calc_mag_error_m5(model_mag, bp, m5, phot_params, gamma=gamma)
+
+    # get real mag from Gaussian distrib
+    mag_obs = np.random.normal(loc=model_mag, scale=mag_err)
+    is_detected = mag_obs < m5 # (ou SNR > 5)
+    if is_detected == False:
+        return m5, np.inf # upper lim at m5
+    else:
+        return mag_obs, mag_err
+    
+def build_dic(source):
+    '''
+    Build a dic containing: 
+    filter
+            associated time samples
+    filter_m5
+            associated m5 samples
+    Used for generate_synth_lc_lsst()
+    '''
+    observations = source['observations']
+    obs_per_band = observations['filter']
+    time_arrays = {}
+
+    for band in obs_per_band.unique():
+        mask = obs_per_band == band
+            
+        temp_array = observations[mask]['time_days'].to_numpy()
+        m5 = observations[mask]['fiveSigmaDepth'].to_numpy()
+        #print(f"Band: {band}, time samples: {temp_array}, m5: {m5}")
+            
+        time_arrays[band] = temp_array
+        time_arrays[f"{band}_m5"] = m5
+    return time_arrays

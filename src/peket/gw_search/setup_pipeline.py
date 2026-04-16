@@ -25,6 +25,11 @@ def main():
     parser.add_argument("--template-bank", default=None, help="Path to the template bank file if you want to specify it instead of generating through the resampling posterior. This can be useful if you want to use a custom template bank or if you want to skip the template bank generation. The template bank will still be split for parrallelization. /!\\ Expect an hdf file.")
     parser.add_argument("--detector-threshold", default=0.5, type=float, help="Minimum antenna response required to launch the search. Default is 0.5, can be useful to avoid long search for time windows where the detectors are barely sensitive to the source. Only applied to injections because the merger time is needed for the antenna response.")
     parser.add_argument("--plot-antenna-pattern", default=None, action="store_true", help="If true, will generate an antenna pattern plot for the source location and the injection merger time. Only applied to injections because the merger time is needed for the antenna response. /!\\ The plot is generated at the end of the preparation so if the search is stopped by the threshold it won't be generated.")
+    # Signifiance related args
+    parser.add_argument("--compute-significance", action="store_true", help="If true, runs a significance job after the search to estimate FAR and p-value.")
+    parser.add_argument("--significance-method", default="offsource", choices=["offsource", "timeslides"], help="Method to use for background estimation.")
+    parser.add_argument("--n-background", default=50, type=int, help="Number of background windows/slides to use.") 
+
     args = parser.parse_args()
 
     config_path = os.path.abspath(args.config)
@@ -40,14 +45,20 @@ def main():
     sub_files_dir = os.path.join(base_dir, 'sub_files')
     os.makedirs(sub_files_dir, exist_ok=True)
 
-    # check that prep and post .out file exist, if so deletes them to avoid problem with the --monitor flag
+    # check that prep and post .out & .err files exist, if so deletes them to avoid problem with the --monitor flag
     prep_out = os.path.join(logs_dir, "prep.out")
     post_out = os.path.join(logs_dir, "post.out")
+    prep_err = os.path.join(logs_dir, "prep.err")
+    post_err = os.path.join(logs_dir, "post.err")
     if os.path.exists(prep_out):
         os.remove(prep_out)
     if os.path.exists(post_out):
         os.remove(post_out)
-    
+    if os.path.exists(prep_err):
+        os.remove(prep_err)
+    if os.path.exists(post_err):
+        os.remove(post_err)
+
     # Dynamically grab the exact Python interpreter currently running this CLI
     current_python = sys.executable 
 
@@ -74,6 +85,14 @@ def main():
             cmd_args += f" --expected-trigger-time {args.expected_trigger_time}"
         if args.plot_spectrogram and sub_name == "post.sub": # only add the --plot-spectrogram flag to the post script, since it's the one that will generate the spectrogram plots
             cmd_args += f" --plot-spectrogram --spectrogram-range {args.spectrogram_range}"
+        if sub_name == "significance.sub": # for the significance job, we also need to pass the config path as an argument to be able to read the SIG_WINDOW_FILE variable
+            cmd_args += f" --method {args.significance_method}"
+            cmd_args += f" --n-background {args.n_background}"
+            mem = "1GB"
+        elif sub_name == "prep.sub": # the prep step can be a bit more memory intensive because of the template bank generation, especially if the user specified a low detector threshold that leads to long time windows. 
+            mem = "16GB"
+        else:
+            mem = "512MB"
 
         content = f"""executable     = {cmd_path}
 arguments      = {cmd_args}
@@ -86,7 +105,7 @@ log            = {logs_dir}/pipeline.log
 environment    = "PYTHONUNBUFFERED=1"
 
 request_cpus   = 1
-request_memory = 16GB
+request_memory = {mem}
 
 queue
 """
@@ -119,6 +138,8 @@ VARS POST config="{config_path}"
     else:
         write_sub_file("prep.sub", args.prep_script if args.prep_script else "GWsearch_prep.py")
         write_sub_file("post.sub", args.post_script if args.post_script else "GWsearch_post.py")
+        if args.compute_significance:
+            write_sub_file("significance.sub", "GWsignifiance.py")
 
     '''
     Create the DAG file
@@ -126,10 +147,18 @@ VARS POST config="{config_path}"
     dag_path = os.path.join(base_dir, "sub_files", "pipeline.dag")
     split_search_sub = os.path.join(base_dir, "sub_files", "split_search.sub")
     
+    sig_dag_lines = ""
+    if args.compute_significance:
+        sig_dag_lines = f"""JOB SIG {sub_files_dir}/significance.sub
+VARS SIG config="{config_path}"
+PARENT SEARCH CHILD SIG
+"""
+
     dag_content = f"""# Define the nodes
 JOB PREP {os.path.join(base_dir, "sub_files", "prep.sub")}
 JOB SEARCH {split_search_sub}
 JOB POST {os.path.join(base_dir, "sub_files", "post.sub")}
+{sig_dag_lines}
 
 # Pass the config file path into the prep and post jobs dynamically
 VARS PREP config="{config_path}"
@@ -155,7 +184,7 @@ PARENT SEARCH CHILD POST
     if args.monitor:
 
         print("\n" + "="*50)
-        print("PIPELINE MONITOR ACTIVE")
+        print("PEKET PIPELINE MONITOR ACTIVE")
         print("Press Ctrl+C at any time to detach and let it run in the background.")
         print("="*50 + "\n")
 

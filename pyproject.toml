@@ -24,6 +24,7 @@ dependencies = [
 gw-setup-pipeline = "peket.gw_search.setup_pipeline:main"
 gw-search-prep = "peket.gw_search.GWsearch_prep:main"
 gw-search-post = "peket.gw_search.GWsearch_post:main"
+gw-search-significance = "peket.gw_search.GWsignifiance:main"
 # KN side commands
 kn-make-grid = "peket.kn_side.make_grid:main"
 kn-ts-loop = "peket.kn_side.ts_infer:main"

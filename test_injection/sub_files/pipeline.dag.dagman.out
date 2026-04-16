@@ -1627,3 +1627,1901 @@
 04/10/26 14:06:07 Wrote metrics file /home/stu_jamsin/peket/test_injection/sub_files/pipeline.dag.metrics.
 04/10/26 14:06:07 DAGMan Runtime Statistics: [ EventCycleTimeAvg = 0.0006964450610817681; EventCycleTimeCount = 694.0; EventCycleTimeMax = 0.1171028614044189; EventCycleTimeMin = 1.096725463867188E-05; EventCycleTimeStd = 0.005327297618404626; EventCycleTimeSum = 0.4833328723907471; LogProcessCycleTimeAvg = 0.0004097501952926834; LogProcessCycleTimeCount = 154.0; LogProcessCycleTimeMax = 0.008099079132080078; LogProcessCycleTimeMin = 9.512901306152344E-05; LogProcessCycleTimeStd = 0.0006441817804856571; LogProcessCycleTimeSum = 0.06310153007507324; SleepCycleTimeAvg = 5.004960026108909; SleepCycleTimeCount = 694.0; SleepCycleTimeMax = 5.005982160568237; SleepCycleTimeMin = 5.000756978988647; SleepCycleTimeStd = 0.000430192653978685; SleepCycleTimeSum = 3473.442258119583; SubmitCycleTimeAvg = 0.0002681121551733223; SubmitCycleTimeCount = 695.0; SubmitCycleTimeMax = 0.1168568134307861; SubmitCycleTimeMin = 4.053115844726562E-06; SubmitCycleTimeStd = 0.004665310260978323; SubmitCycleTimeSum = 0.186337947845459; ]
 04/10/26 14:06:07 **** condor_scheduniv_exec.464.0 (condor_DAGMAN) pid 1957284 EXITING WITH STATUS 0
+04/13/26 17:11:42 ******************************************************
+04/13/26 17:11:42 ** condor_scheduniv_exec.510.0 (CONDOR_DAGMAN) STARTING UP
+04/13/26 17:11:42 ** /usr/bin/condor_dagman
+04/13/26 17:11:42 ** SubsystemInfo: name=DAGMAN type=DAGMAN(9) class=CLIENT(2)
+04/13/26 17:11:42 ** Configuration: subsystem:DAGMAN local:<NONE> class:CLIENT
+04/13/26 17:11:42 ** $CondorVersion: 10.9.0 2023-09-28 BuildID: 678228 PackageID: 10.9.0-1.1 $
+04/13/26 17:11:42 ** $CondorPlatform: X86_64-Ubuntu_22.04 $
+04/13/26 17:11:42 ** PID = 1271110
+04/13/26 17:11:42 ** Log last touched 4/10 14:06:07
+04/13/26 17:11:42 ******************************************************
+04/13/26 17:11:42 Using config source: /etc/condor/condor_config
+04/13/26 17:11:42 Using local config sources: 
+04/13/26 17:11:42    /etc/condor/config.d/00-htcondor-9.0.config
+04/13/26 17:11:42    /etc/condor/config.d/00-minicondor
+04/13/26 17:11:42    /etc/condor/config.d/99-custom-cpus.conf
+04/13/26 17:11:42    /etc/condor/config.d/99-dynamic-slots.conf
+04/13/26 17:11:42    /etc/condor/condor_config.local
+04/13/26 17:11:42 config Macros = 95, Sorted = 95, StringBytes = 2684, TablesBytes = 3492
+04/13/26 17:11:42 CLASSAD_CACHING is ENABLED
+04/13/26 17:11:42 Daemon Log is logging: D_ALWAYS D_ERROR D_STATUS
+04/13/26 17:11:42 DaemonCore: No command port requested.
+04/13/26 17:11:42 DAGMAN_USE_STRICT setting: 1
+04/13/26 17:11:42 DAGMAN_VERBOSITY setting: 3
+04/13/26 17:11:42 DAGMAN_DEBUG_CACHE_SIZE setting: 5242880
+04/13/26 17:11:42 DAGMAN_DEBUG_CACHE_ENABLE setting: False
+04/13/26 17:11:42 DAGMAN_SUBMIT_DELAY setting: 0
+04/13/26 17:11:42 DAGMAN_MAX_SUBMIT_ATTEMPTS setting: 3
+04/13/26 17:11:42 DAGMAN_STARTUP_CYCLE_DETECT setting: False
+04/13/26 17:11:42 DAGMAN_MAX_SUBMITS_PER_INTERVAL setting: 100
+04/13/26 17:11:42 DAGMAN_AGGRESSIVE_SUBMIT setting: False
+04/13/26 17:11:42 DAGMAN_USER_LOG_SCAN_INTERVAL setting: 5
+04/13/26 17:11:42 DAGMAN_QUEUE_UPDATE_INTERVAL setting: 300
+04/13/26 17:11:42 DAGMAN_DEFAULT_PRIORITY setting: 0
+04/13/26 17:11:42 DAGMAN_SUPPRESS_NOTIFICATION setting: True
+04/13/26 17:11:42 allow_events (DAGMAN_ALLOW_EVENTS) setting: 114
+04/13/26 17:11:42 DAGMAN_RETRY_SUBMIT_FIRST setting: True
+04/13/26 17:11:42 DAGMAN_RETRY_NODE_FIRST setting: False
+04/13/26 17:11:42 DAGMAN_MAX_JOBS_IDLE setting: 1000
+04/13/26 17:11:42 DAGMAN_MAX_JOBS_SUBMITTED setting: 0
+04/13/26 17:11:42 DAGMAN_MAX_PRE_SCRIPTS setting: 10
+04/13/26 17:11:42 DAGMAN_MAX_POST_SCRIPTS setting: 10
+04/13/26 17:11:42 DAGMAN_MAX_HOLD_SCRIPTS setting: 20
+04/13/26 17:11:42 DAGMAN_MUNGE_NODE_NAMES setting: True
+04/13/26 17:11:42 DAGMAN_PROHIBIT_MULTI_JOBS setting: False
+04/13/26 17:11:42 DAGMAN_SUBMIT_DEPTH_FIRST setting: False
+04/13/26 17:11:42 DAGMAN_ALWAYS_RUN_POST setting: False
+04/13/26 17:11:42 DAGMAN_CONDOR_SUBMIT_EXE setting: /usr/bin/condor_submit
+04/13/26 17:11:42 DAGMAN_USE_DIRECT_SUBMIT setting: True
+04/13/26 17:11:42 DAGMAN_DEFAULT_APPEND_VARS setting: False
+04/13/26 17:11:42 DAGMAN_ABORT_DUPLICATES setting: True
+04/13/26 17:11:42 DAGMAN_ABORT_ON_SCARY_SUBMIT setting: True
+04/13/26 17:11:42 DAGMAN_PENDING_REPORT_INTERVAL setting: 600
+04/13/26 17:11:42 DAGMAN_AUTO_RESCUE setting: True
+04/13/26 17:11:42 DAGMAN_MAX_RESCUE_NUM setting: 100
+04/13/26 17:11:42 DAGMAN_WRITE_PARTIAL_RESCUE setting: True
+04/13/26 17:11:42 DAGMAN_DEFAULT_NODE_LOG setting: @(DAG_DIR)/@(DAG_FILE).nodes.log
+04/13/26 17:11:42 DAGMAN_GENERATE_SUBDAG_SUBMITS setting: True
+04/13/26 17:11:42 DAGMAN_MAX_JOB_HOLDS setting: 100
+04/13/26 17:11:42 DAGMAN_HOLD_CLAIM_TIME setting: 20
+04/13/26 17:11:42 ALL_DEBUG setting: 
+04/13/26 17:11:42 DAGMAN_DEBUG setting: 
+04/13/26 17:11:42 DAGMAN_SUPPRESS_JOB_LOGS setting: False
+04/13/26 17:11:42 DAGMAN_REMOVE_NODE_JOBS setting: True
+04/13/26 17:11:42 DAGMAN will adjust edges after parsing
+04/13/26 17:11:42 argv[0] == "condor_scheduniv_exec.510.0"
+04/13/26 17:11:42 argv[1] == "-Lockfile"
+04/13/26 17:11:42 argv[2] == "/home/stu_jamsin/peket/test_injection/sub_files/pipeline.dag.lock"
+04/13/26 17:11:42 argv[3] == "-AutoRescue"
+04/13/26 17:11:42 argv[4] == "1"
+04/13/26 17:11:42 argv[5] == "-DoRescueFrom"
+04/13/26 17:11:42 argv[6] == "0"
+04/13/26 17:11:42 argv[7] == "-Dag"
+04/13/26 17:11:42 argv[8] == "/home/stu_jamsin/peket/test_injection/sub_files/pipeline.dag"
+04/13/26 17:11:42 argv[9] == "-Suppress_notification"
+04/13/26 17:11:42 argv[10] == "-CsdVersion"
+04/13/26 17:11:42 argv[11] == "$CondorVersion: 10.9.0 2023-09-28 BuildID: 678228 PackageID: 10.9.0-1.1 $"
+04/13/26 17:11:42 argv[12] == "-Force"
+04/13/26 17:11:42 argv[13] == "-Dagman"
+04/13/26 17:11:42 argv[14] == "/usr/bin/condor_dagman"
+04/13/26 17:11:42 Can't open directory "/etc/condor/passwords.d" as PRIV_ROOT, errno: 13 (Permission denied)
+04/13/26 17:11:42 Can't open directory "/etc/condor/passwords.d" as PRIV_ROOT, errno: 13 (Permission denied)
+04/13/26 17:11:42 Workflow batch-id: <510.0>
+04/13/26 17:11:42 Workflow batch-name: <pipeline.dag+510>
+04/13/26 17:11:42 Workflow accounting_group: <>
+04/13/26 17:11:42 Workflow accounting_group_user: <>
+04/13/26 17:11:42 Warning: failed to get attribute DAGNodeName
+04/13/26 17:11:42 DAGMAN_LOG_ON_NFS_IS_ERROR setting: False
+04/13/26 17:11:42 Default node log file is: </home/stu_jamsin/peket/test_injection/sub_files/pipeline.dag.nodes.log>
+04/13/26 17:11:42 DAG Lockfile will be written to /home/stu_jamsin/peket/test_injection/sub_files/pipeline.dag.lock
+04/13/26 17:11:42 DAG Input file is /home/stu_jamsin/peket/test_injection/sub_files/pipeline.dag
+04/13/26 17:11:42 Parsing 1 dagfiles
+04/13/26 17:11:42 Parsing /home/stu_jamsin/peket/test_injection/sub_files/pipeline.dag ...
+04/13/26 17:11:42 Adjusting edges
+04/13/26 17:11:42 Dag contains 3 total jobs
+04/13/26 17:11:42 Bootstrapping...
+04/13/26 17:11:42 Number of pre-completed nodes: 0
+04/13/26 17:11:42 MultiLogFiles: truncating log file /home/stu_jamsin/peket/test_injection/sub_files/pipeline.dag.nodes.log
+04/13/26 17:11:42 DAG status: 0 (DAG_STATUS_OK)
+04/13/26 17:11:42 Of 3 nodes total:
+04/13/26 17:11:42  Done     Pre   Queued    Post   Ready   Un-Ready   Failed   Futile
+04/13/26 17:11:42   ===     ===      ===     ===     ===        ===      ===      ===
+04/13/26 17:11:42     0       0        0       0       1          2        0        0
+04/13/26 17:11:42 0 job proc(s) currently held
+04/13/26 17:11:42 DAGMan Runtime Statistics: [ EventCycleTimeCount = 0.0; EventCycleTimeSum = 0.0; LogProcessCycleTimeCount = 0.0; LogProcessCycleTimeSum = 0.0; SleepCycleTimeCount = 0.0; SleepCycleTimeSum = 0.0; SubmitCycleTimeCount = 0.0; SubmitCycleTimeSum = 0.0; ]
+04/13/26 17:11:42 Registering condor_event_timer...
+04/13/26 17:11:43 Submitting HTCondor Node PREP job(s)...
+04/13/26 17:11:43 Submitting node PREP from file /home/stu_jamsin/peket/test_injection/sub_files/prep.sub using direct job submission
+04/13/26 17:11:44 	assigned HTCondor ID (511.0.0)
+04/13/26 17:11:44 Just submitted 1 job this cycle...
+04/13/26 17:11:44 DAG status: 0 (DAG_STATUS_OK)
+04/13/26 17:11:44 Of 3 nodes total:
+04/13/26 17:11:44  Done     Pre   Queued    Post   Ready   Un-Ready   Failed   Futile
+04/13/26 17:11:44   ===     ===      ===     ===     ===        ===      ===      ===
+04/13/26 17:11:44     0       0        1       0       0          2        0        0
+04/13/26 17:11:44 0 job proc(s) currently held
+04/13/26 17:11:44 DAGMan Runtime Statistics: [ EventCycleTimeCount = 0.0; EventCycleTimeSum = 0.0; LogProcessCycleTimeCount = 0.0; LogProcessCycleTimeSum = 0.0; SleepCycleTimeCount = 0.0; SleepCycleTimeSum = 0.0; SubmitCycleTimeAvg = 0.03206896781921387; SubmitCycleTimeCount = 1.0; SubmitCycleTimeMax = 0.03206896781921387; SubmitCycleTimeMin = 0.03206896781921387; SubmitCycleTimeStd = 0.03206896781921387; SubmitCycleTimeSum = 0.03206896781921387; ]
+04/13/26 17:11:49 Currently monitoring 1 HTCondor log file(s)
+04/13/26 17:11:49 Reassigning the id of job PREP from (511.0.0) to (511.0.0)
+04/13/26 17:11:49 Event: ULOG_SUBMIT for HTCondor Node PREP (511.0.0) {04/13/26 17:11:44}
+04/13/26 17:11:49 Number of idle job procs: 1
+04/13/26 17:11:54 Currently monitoring 1 HTCondor log file(s)
+04/13/26 17:11:54 Event: ULOG_EXECUTE for HTCondor Node PREP (511.0.0) {04/13/26 17:11:50}
+04/13/26 17:11:54 Number of idle job procs: 0
+04/13/26 17:21:54 600 seconds since last log event
+04/13/26 17:21:54 Pending DAG nodes:
+04/13/26 17:21:54   Node PREP, HTCondor ID 511, status STATUS_SUBMITTED
+04/13/26 17:31:55 1201 seconds since last log event
+04/13/26 17:31:55 Pending DAG nodes:
+04/13/26 17:31:55   Node PREP, HTCondor ID 511, status STATUS_SUBMITTED
+04/13/26 17:41:55 1801 seconds since last log event
+04/13/26 17:41:55 Pending DAG nodes:
+04/13/26 17:41:55   Node PREP, HTCondor ID 511, status STATUS_SUBMITTED
+04/13/26 17:48:31 Currently monitoring 1 HTCondor log file(s)
+04/13/26 17:48:31 Event: ULOG_JOB_TERMINATED for HTCondor Node PREP (511.0.0) {04/13/26 17:48:27}
+04/13/26 17:48:31 Number of idle job procs: 0
+04/13/26 17:48:31 Node PREP job proc (511.0.0) failed with status 1.
+04/13/26 17:48:31 DAG status: 2 (DAG_STATUS_NODE_FAILED)
+04/13/26 17:48:31 Of 3 nodes total:
+04/13/26 17:48:31  Done     Pre   Queued    Post   Ready   Un-Ready   Failed   Futile
+04/13/26 17:48:31   ===     ===      ===     ===     ===        ===      ===      ===
+04/13/26 17:48:31     0       0        0       0       0          0        1        2
+04/13/26 17:48:31 0 job proc(s) currently held
+04/13/26 17:48:31 DAGMan Runtime Statistics: [ EventCycleTimeAvg = 0.0003977968038615185; EventCycleTimeCount = 441.0; EventCycleTimeMax = 0.03223490715026855; EventCycleTimeMin = 1.001358032226562E-05; EventCycleTimeStd = 0.002854149986224735; EventCycleTimeSum = 0.1754283905029297; LogProcessCycleTimeAvg = 0.0002052783966064453; LogProcessCycleTimeCount = 3.0; LogProcessCycleTimeMax = 0.0002439022064208984; LogProcessCycleTimeMin = 0.000164031982421875; LogProcessCycleTimeStd = 3.999964638187647E-05; LogProcessCycleTimeSum = 0.0006158351898193359; SleepCycleTimeAvg = 5.004969298434095; SleepCycleTimeCount = 441.0; SleepCycleTimeMax = 5.005684852600098; SleepCycleTimeMin = 5.000907897949219; SleepCycleTimeStd = 0.0003625863776540219; SleepCycleTimeSum = 2207.191460609436; SubmitCycleTimeAvg = 8.288228134224317E-05; SubmitCycleTimeCount = 442.0; SubmitCycleTimeMax = 0.03206896781921387; SubmitCycleTimeMin = 5.006790161132812E-06; SubmitCycleTimeStd = 0.001524878391116459; SubmitCycleTimeSum = 0.03663396835327148; ]
+04/13/26 17:48:31 ERROR: the following job(s) failed:
+04/13/26 17:48:31 ---------------------- Job ----------------------
+04/13/26 17:48:31       Node Name: PREP
+04/13/26 17:48:31            Noop: false
+04/13/26 17:48:31          NodeID: 0
+04/13/26 17:48:31     Node Status: STATUS_ERROR    
+04/13/26 17:48:31 Node return val: 1
+04/13/26 17:48:31           Error: Job proc (511.0.0) failed with status 1
+04/13/26 17:48:31 Job Submit File: /home/stu_jamsin/peket/test_injection/sub_files/prep.sub
+04/13/26 17:48:31  HTCondor Job ID: (511.0.0)
+04/13/26 17:48:31 PARENTS:  WAITING: 0 CHILDREN: SEARCH
+04/13/26 17:48:31 ---------------------------------------	<END>
+04/13/26 17:48:31 Aborting DAG...
+04/13/26 17:48:31 Writing Rescue DAG to /home/stu_jamsin/peket/test_injection/sub_files/pipeline.dag.rescue001...
+04/13/26 17:48:31 Removing submitted jobs...
+04/13/26 17:48:31 Removing any/all submitted HTCondor jobs...
+04/13/26 17:48:31 Running: /usr/bin/condor_rm -const DAGManJobId==510 -reason DAG' 'Abort:' 'DAG' 'is' 'exiting' 'and' 'writing' 'rescue' 'file.
+04/13/26 17:48:31 Note: 0 total job deferrals because of -MaxJobs limit (0)
+04/13/26 17:48:31 Note: 0 total job deferrals because of -MaxIdle limit (1000)
+04/13/26 17:48:31 Note: 0 total job deferrals because of node category throttles
+04/13/26 17:48:31 Note: 0 total PRE script deferrals because of -MaxPre limit (10) or DEFER
+04/13/26 17:48:31 Note: 0 total POST script deferrals because of -MaxPost limit (10) or DEFER
+04/13/26 17:48:31 Note: 0 total HOLD script deferrals because of -MaxHold limit (20) or DEFER
+04/13/26 17:48:31 DAG status: 2 (DAG_STATUS_NODE_FAILED)
+04/13/26 17:48:31 Of 3 nodes total:
+04/13/26 17:48:31  Done     Pre   Queued    Post   Ready   Un-Ready   Failed   Futile
+04/13/26 17:48:31   ===     ===      ===     ===     ===        ===      ===      ===
+04/13/26 17:48:31     0       0        0       0       0          0        1        2
+04/13/26 17:48:31 0 job proc(s) currently held
+04/13/26 17:48:31 DAGMan Runtime Statistics: [ EventCycleTimeAvg = 0.0003977968038615185; EventCycleTimeCount = 441.0; EventCycleTimeMax = 0.03223490715026855; EventCycleTimeMin = 1.001358032226562E-05; EventCycleTimeStd = 0.002854149986224735; EventCycleTimeSum = 0.1754283905029297; LogProcessCycleTimeAvg = 0.0002052783966064453; LogProcessCycleTimeCount = 3.0; LogProcessCycleTimeMax = 0.0002439022064208984; LogProcessCycleTimeMin = 0.000164031982421875; LogProcessCycleTimeStd = 3.999964638187647E-05; LogProcessCycleTimeSum = 0.0006158351898193359; SleepCycleTimeAvg = 5.004969298434095; SleepCycleTimeCount = 441.0; SleepCycleTimeMax = 5.005684852600098; SleepCycleTimeMin = 5.000907897949219; SleepCycleTimeStd = 0.0003625863776540219; SleepCycleTimeSum = 2207.191460609436; SubmitCycleTimeAvg = 8.288228134224317E-05; SubmitCycleTimeCount = 442.0; SubmitCycleTimeMax = 0.03206896781921387; SubmitCycleTimeMin = 5.006790161132812E-06; SubmitCycleTimeStd = 0.001524878391116459; SubmitCycleTimeSum = 0.03663396835327148; ]
+04/13/26 17:48:31 Wrote metrics file /home/stu_jamsin/peket/test_injection/sub_files/pipeline.dag.metrics.
+04/13/26 17:48:31 DAGMan Runtime Statistics: [ EventCycleTimeAvg = 0.0003977968038615185; EventCycleTimeCount = 441.0; EventCycleTimeMax = 0.03223490715026855; EventCycleTimeMin = 1.001358032226562E-05; EventCycleTimeStd = 0.002854149986224735; EventCycleTimeSum = 0.1754283905029297; LogProcessCycleTimeAvg = 0.0002052783966064453; LogProcessCycleTimeCount = 3.0; LogProcessCycleTimeMax = 0.0002439022064208984; LogProcessCycleTimeMin = 0.000164031982421875; LogProcessCycleTimeStd = 3.999964638187647E-05; LogProcessCycleTimeSum = 0.0006158351898193359; SleepCycleTimeAvg = 5.004969298434095; SleepCycleTimeCount = 441.0; SleepCycleTimeMax = 5.005684852600098; SleepCycleTimeMin = 5.000907897949219; SleepCycleTimeStd = 0.0003625863776540219; SleepCycleTimeSum = 2207.191460609436; SubmitCycleTimeAvg = 8.288228134224317E-05; SubmitCycleTimeCount = 442.0; SubmitCycleTimeMax = 0.03206896781921387; SubmitCycleTimeMin = 5.006790161132812E-06; SubmitCycleTimeStd = 0.001524878391116459; SubmitCycleTimeSum = 0.03663396835327148; ]
+04/13/26 17:48:31 **** condor_scheduniv_exec.510.0 (condor_DAGMAN) pid 1271110 EXITING WITH STATUS 1
+04/13/26 19:37:15 ******************************************************
+04/13/26 19:37:15 ** condor_scheduniv_exec.512.0 (CONDOR_DAGMAN) STARTING UP
+04/13/26 19:37:15 ** /usr/bin/condor_dagman
+04/13/26 19:37:15 ** SubsystemInfo: name=DAGMAN type=DAGMAN(9) class=CLIENT(2)
+04/13/26 19:37:15 ** Configuration: subsystem:DAGMAN local:<NONE> class:CLIENT
+04/13/26 19:37:15 ** $CondorVersion: 10.9.0 2023-09-28 BuildID: 678228 PackageID: 10.9.0-1.1 $
+04/13/26 19:37:15 ** $CondorPlatform: X86_64-Ubuntu_22.04 $
+04/13/26 19:37:15 ** PID = 1293988
+04/13/26 19:37:15 ** Log last touched 4/13 17:48:31
+04/13/26 19:37:15 ******************************************************
+04/13/26 19:37:15 Using config source: /etc/condor/condor_config
+04/13/26 19:37:15 Using local config sources: 
+04/13/26 19:37:15    /etc/condor/config.d/00-htcondor-9.0.config
+04/13/26 19:37:15    /etc/condor/config.d/00-minicondor
+04/13/26 19:37:15    /etc/condor/config.d/99-custom-cpus.conf
+04/13/26 19:37:15    /etc/condor/config.d/99-dynamic-slots.conf
+04/13/26 19:37:15    /etc/condor/condor_config.local
+04/13/26 19:37:15 config Macros = 95, Sorted = 95, StringBytes = 2684, TablesBytes = 3492
+04/13/26 19:37:15 CLASSAD_CACHING is ENABLED
+04/13/26 19:37:15 Daemon Log is logging: D_ALWAYS D_ERROR D_STATUS
+04/13/26 19:37:15 DaemonCore: No command port requested.
+04/13/26 19:37:15 DAGMAN_USE_STRICT setting: 1
+04/13/26 19:37:15 DAGMAN_VERBOSITY setting: 3
+04/13/26 19:37:15 DAGMAN_DEBUG_CACHE_SIZE setting: 5242880
+04/13/26 19:37:15 DAGMAN_DEBUG_CACHE_ENABLE setting: False
+04/13/26 19:37:15 DAGMAN_SUBMIT_DELAY setting: 0
+04/13/26 19:37:15 DAGMAN_MAX_SUBMIT_ATTEMPTS setting: 3
+04/13/26 19:37:15 DAGMAN_STARTUP_CYCLE_DETECT setting: False
+04/13/26 19:37:15 DAGMAN_MAX_SUBMITS_PER_INTERVAL setting: 100
+04/13/26 19:37:15 DAGMAN_AGGRESSIVE_SUBMIT setting: False
+04/13/26 19:37:15 DAGMAN_USER_LOG_SCAN_INTERVAL setting: 5
+04/13/26 19:37:15 DAGMAN_QUEUE_UPDATE_INTERVAL setting: 300
+04/13/26 19:37:15 DAGMAN_DEFAULT_PRIORITY setting: 0
+04/13/26 19:37:15 DAGMAN_SUPPRESS_NOTIFICATION setting: True
+04/13/26 19:37:15 allow_events (DAGMAN_ALLOW_EVENTS) setting: 114
+04/13/26 19:37:15 DAGMAN_RETRY_SUBMIT_FIRST setting: True
+04/13/26 19:37:15 DAGMAN_RETRY_NODE_FIRST setting: False
+04/13/26 19:37:15 DAGMAN_MAX_JOBS_IDLE setting: 1000
+04/13/26 19:37:15 DAGMAN_MAX_JOBS_SUBMITTED setting: 0
+04/13/26 19:37:15 DAGMAN_MAX_PRE_SCRIPTS setting: 10
+04/13/26 19:37:15 DAGMAN_MAX_POST_SCRIPTS setting: 10
+04/13/26 19:37:15 DAGMAN_MAX_HOLD_SCRIPTS setting: 20
+04/13/26 19:37:15 DAGMAN_MUNGE_NODE_NAMES setting: True
+04/13/26 19:37:15 DAGMAN_PROHIBIT_MULTI_JOBS setting: False
+04/13/26 19:37:15 DAGMAN_SUBMIT_DEPTH_FIRST setting: False
+04/13/26 19:37:15 DAGMAN_ALWAYS_RUN_POST setting: False
+04/13/26 19:37:15 DAGMAN_CONDOR_SUBMIT_EXE setting: /usr/bin/condor_submit
+04/13/26 19:37:15 DAGMAN_USE_DIRECT_SUBMIT setting: True
+04/13/26 19:37:15 DAGMAN_DEFAULT_APPEND_VARS setting: False
+04/13/26 19:37:15 DAGMAN_ABORT_DUPLICATES setting: True
+04/13/26 19:37:15 DAGMAN_ABORT_ON_SCARY_SUBMIT setting: True
+04/13/26 19:37:15 DAGMAN_PENDING_REPORT_INTERVAL setting: 600
+04/13/26 19:37:15 DAGMAN_AUTO_RESCUE setting: True
+04/13/26 19:37:15 DAGMAN_MAX_RESCUE_NUM setting: 100
+04/13/26 19:37:15 DAGMAN_WRITE_PARTIAL_RESCUE setting: True
+04/13/26 19:37:15 DAGMAN_DEFAULT_NODE_LOG setting: @(DAG_DIR)/@(DAG_FILE).nodes.log
+04/13/26 19:37:15 DAGMAN_GENERATE_SUBDAG_SUBMITS setting: True
+04/13/26 19:37:15 DAGMAN_MAX_JOB_HOLDS setting: 100
+04/13/26 19:37:15 DAGMAN_HOLD_CLAIM_TIME setting: 20
+04/13/26 19:37:15 ALL_DEBUG setting: 
+04/13/26 19:37:15 DAGMAN_DEBUG setting: 
+04/13/26 19:37:15 DAGMAN_SUPPRESS_JOB_LOGS setting: False
+04/13/26 19:37:15 DAGMAN_REMOVE_NODE_JOBS setting: True
+04/13/26 19:37:15 DAGMAN will adjust edges after parsing
+04/13/26 19:37:15 argv[0] == "condor_scheduniv_exec.512.0"
+04/13/26 19:37:15 argv[1] == "-Lockfile"
+04/13/26 19:37:15 argv[2] == "/home/stu_jamsin/peket/test_injection/sub_files/pipeline.dag.lock"
+04/13/26 19:37:15 argv[3] == "-AutoRescue"
+04/13/26 19:37:15 argv[4] == "1"
+04/13/26 19:37:15 argv[5] == "-DoRescueFrom"
+04/13/26 19:37:15 argv[6] == "0"
+04/13/26 19:37:15 argv[7] == "-Dag"
+04/13/26 19:37:15 argv[8] == "/home/stu_jamsin/peket/test_injection/sub_files/pipeline.dag"
+04/13/26 19:37:15 argv[9] == "-Suppress_notification"
+04/13/26 19:37:15 argv[10] == "-CsdVersion"
+04/13/26 19:37:15 argv[11] == "$CondorVersion: 10.9.0 2023-09-28 BuildID: 678228 PackageID: 10.9.0-1.1 $"
+04/13/26 19:37:15 argv[12] == "-Force"
+04/13/26 19:37:15 argv[13] == "-Dagman"
+04/13/26 19:37:15 argv[14] == "/usr/bin/condor_dagman"
+04/13/26 19:37:15 Can't open directory "/etc/condor/passwords.d" as PRIV_ROOT, errno: 13 (Permission denied)
+04/13/26 19:37:15 Can't open directory "/etc/condor/passwords.d" as PRIV_ROOT, errno: 13 (Permission denied)
+04/13/26 19:37:15 Workflow batch-id: <512.0>
+04/13/26 19:37:15 Workflow batch-name: <pipeline.dag+512>
+04/13/26 19:37:15 Workflow accounting_group: <>
+04/13/26 19:37:15 Workflow accounting_group_user: <>
+04/13/26 19:37:15 Warning: failed to get attribute DAGNodeName
+04/13/26 19:37:15 DAGMAN_LOG_ON_NFS_IS_ERROR setting: False
+04/13/26 19:37:15 Default node log file is: </home/stu_jamsin/peket/test_injection/sub_files/pipeline.dag.nodes.log>
+04/13/26 19:37:15 DAG Lockfile will be written to /home/stu_jamsin/peket/test_injection/sub_files/pipeline.dag.lock
+04/13/26 19:37:15 DAG Input file is /home/stu_jamsin/peket/test_injection/sub_files/pipeline.dag
+04/13/26 19:37:15 Parsing 1 dagfiles
+04/13/26 19:37:15 Parsing /home/stu_jamsin/peket/test_injection/sub_files/pipeline.dag ...
+04/13/26 19:37:15 Adjusting edges
+04/13/26 19:37:15 Dag contains 3 total jobs
+04/13/26 19:37:15 Bootstrapping...
+04/13/26 19:37:15 Number of pre-completed nodes: 0
+04/13/26 19:37:15 MultiLogFiles: truncating log file /home/stu_jamsin/peket/test_injection/sub_files/pipeline.dag.nodes.log
+04/13/26 19:37:15 DAG status: 0 (DAG_STATUS_OK)
+04/13/26 19:37:15 Of 3 nodes total:
+04/13/26 19:37:15  Done     Pre   Queued    Post   Ready   Un-Ready   Failed   Futile
+04/13/26 19:37:15   ===     ===      ===     ===     ===        ===      ===      ===
+04/13/26 19:37:15     0       0        0       0       1          2        0        0
+04/13/26 19:37:15 0 job proc(s) currently held
+04/13/26 19:37:15 DAGMan Runtime Statistics: [ EventCycleTimeCount = 0.0; EventCycleTimeSum = 0.0; LogProcessCycleTimeCount = 0.0; LogProcessCycleTimeSum = 0.0; SleepCycleTimeCount = 0.0; SleepCycleTimeSum = 0.0; SubmitCycleTimeCount = 0.0; SubmitCycleTimeSum = 0.0; ]
+04/13/26 19:37:15 Registering condor_event_timer...
+04/13/26 19:37:16 Submitting HTCondor Node PREP job(s)...
+04/13/26 19:37:16 Submitting node PREP from file /home/stu_jamsin/peket/test_injection/sub_files/prep.sub using direct job submission
+04/13/26 19:37:16 	assigned HTCondor ID (513.0.0)
+04/13/26 19:37:16 Just submitted 1 job this cycle...
+04/13/26 19:37:16 DAG status: 0 (DAG_STATUS_OK)
+04/13/26 19:37:16 Of 3 nodes total:
+04/13/26 19:37:16  Done     Pre   Queued    Post   Ready   Un-Ready   Failed   Futile
+04/13/26 19:37:16   ===     ===      ===     ===     ===        ===      ===      ===
+04/13/26 19:37:16     0       0        1       0       0          2        0        0
+04/13/26 19:37:16 0 job proc(s) currently held
+04/13/26 19:37:16 DAGMan Runtime Statistics: [ EventCycleTimeCount = 0.0; EventCycleTimeSum = 0.0; LogProcessCycleTimeCount = 0.0; LogProcessCycleTimeSum = 0.0; SleepCycleTimeCount = 0.0; SleepCycleTimeSum = 0.0; SubmitCycleTimeAvg = 0.03653597831726074; SubmitCycleTimeCount = 1.0; SubmitCycleTimeMax = 0.03653597831726074; SubmitCycleTimeMin = 0.03653597831726074; SubmitCycleTimeStd = 0.03653597831726074; SubmitCycleTimeSum = 0.03653597831726074; ]
+04/13/26 19:37:21 Currently monitoring 1 HTCondor log file(s)
+04/13/26 19:37:21 Reassigning the id of job PREP from (513.0.0) to (513.0.0)
+04/13/26 19:37:21 Event: ULOG_SUBMIT for HTCondor Node PREP (513.0.0) {04/13/26 19:37:16}
+04/13/26 19:37:21 Number of idle job procs: 1
+04/13/26 19:37:26 Currently monitoring 1 HTCondor log file(s)
+04/13/26 19:37:26 Event: ULOG_EXECUTE for HTCondor Node PREP (513.0.0) {04/13/26 19:37:24}
+04/13/26 19:37:26 Number of idle job procs: 0
+04/13/26 19:37:40 Received SIGUSR1
+04/13/26 19:37:40 Aborting DAG...
+04/13/26 19:37:40 Writing Rescue DAG to /home/stu_jamsin/peket/test_injection/sub_files/pipeline.dag.rescue001...
+04/13/26 19:37:40 Removing submitted jobs...
+04/13/26 19:37:40 Removing any/all submitted HTCondor jobs...
+04/13/26 19:37:40 Running: /usr/bin/condor_rm -const DAGManJobId==512 -reason DAG' 'Removed:' 'User' 'removed' 'scheduler' 'job' 'from' 'queue.
+04/13/26 19:37:40 Note: 0 total job deferrals because of -MaxJobs limit (0)
+04/13/26 19:37:40 Note: 0 total job deferrals because of -MaxIdle limit (1000)
+04/13/26 19:37:40 Note: 0 total job deferrals because of node category throttles
+04/13/26 19:37:40 Note: 0 total PRE script deferrals because of -MaxPre limit (10) or DEFER
+04/13/26 19:37:40 Note: 0 total POST script deferrals because of -MaxPost limit (10) or DEFER
+04/13/26 19:37:40 Note: 0 total HOLD script deferrals because of -MaxHold limit (20) or DEFER
+04/13/26 19:37:40 DAG status: 4 (DAG_STATUS_RM)
+04/13/26 19:37:40 Of 3 nodes total:
+04/13/26 19:37:40  Done     Pre   Queued    Post   Ready   Un-Ready   Failed   Futile
+04/13/26 19:37:40   ===     ===      ===     ===     ===        ===      ===      ===
+04/13/26 19:37:40     0       0        1       0       0          2        0        0
+04/13/26 19:37:40 0 job proc(s) currently held
+04/13/26 19:37:40 DAGMan Runtime Statistics: [ EventCycleTimeAvg = 0.007425260543823242; EventCycleTimeCount = 5.0; EventCycleTimeMax = 0.03672099113464355; EventCycleTimeMin = 1.096725463867188E-05; EventCycleTimeStd = 0.01637703956955844; EventCycleTimeSum = 0.03712630271911621; LogProcessCycleTimeAvg = 0.0001699924468994141; LogProcessCycleTimeCount = 2.0; LogProcessCycleTimeMax = 0.0001780986785888672; LogProcessCycleTimeMin = 0.0001618862152099609; LogProcessCycleTimeStd = 1.146394279496318E-05; LogProcessCycleTimeSum = 0.0003399848937988281; SleepCycleTimeAvg = 5.005066394805908; SleepCycleTimeCount = 4.0; SleepCycleTimeMax = 5.005102872848511; SleepCycleTimeMin = 5.005040884017944; SleepCycleTimeStd = 2.613340256848161E-05; SleepCycleTimeSum = 20.02026557922363; SubmitCycleTimeAvg = 0.007314205169677734; SubmitCycleTimeCount = 5.0; SubmitCycleTimeMax = 0.03653597831726074; SubmitCycleTimeMin = 5.960464477539062E-06; SubmitCycleTimeStd = 0.01633546789389769; SubmitCycleTimeSum = 0.03657102584838867; ]
+04/13/26 19:37:40 Wrote metrics file /home/stu_jamsin/peket/test_injection/sub_files/pipeline.dag.metrics.
+04/13/26 19:37:40 DAGMan Runtime Statistics: [ EventCycleTimeAvg = 0.007425260543823242; EventCycleTimeCount = 5.0; EventCycleTimeMax = 0.03672099113464355; EventCycleTimeMin = 1.096725463867188E-05; EventCycleTimeStd = 0.01637703956955844; EventCycleTimeSum = 0.03712630271911621; LogProcessCycleTimeAvg = 0.0001699924468994141; LogProcessCycleTimeCount = 2.0; LogProcessCycleTimeMax = 0.0001780986785888672; LogProcessCycleTimeMin = 0.0001618862152099609; LogProcessCycleTimeStd = 1.146394279496318E-05; LogProcessCycleTimeSum = 0.0003399848937988281; SleepCycleTimeAvg = 5.005066394805908; SleepCycleTimeCount = 4.0; SleepCycleTimeMax = 5.005102872848511; SleepCycleTimeMin = 5.005040884017944; SleepCycleTimeStd = 2.613340256848161E-05; SleepCycleTimeSum = 20.02026557922363; SubmitCycleTimeAvg = 0.007314205169677734; SubmitCycleTimeCount = 5.0; SubmitCycleTimeMax = 0.03653597831726074; SubmitCycleTimeMin = 5.960464477539062E-06; SubmitCycleTimeStd = 0.01633546789389769; SubmitCycleTimeSum = 0.03657102584838867; ]
+04/13/26 19:37:40 **** condor_scheduniv_exec.512.0 (condor_DAGMAN) pid 1293988 EXITING WITH STATUS 2
+04/13/26 19:40:12 ******************************************************
+04/13/26 19:40:12 ** condor_scheduniv_exec.514.0 (CONDOR_DAGMAN) STARTING UP
+04/13/26 19:40:12 ** /usr/bin/condor_dagman
+04/13/26 19:40:12 ** SubsystemInfo: name=DAGMAN type=DAGMAN(9) class=CLIENT(2)
+04/13/26 19:40:12 ** Configuration: subsystem:DAGMAN local:<NONE> class:CLIENT
+04/13/26 19:40:12 ** $CondorVersion: 10.9.0 2023-09-28 BuildID: 678228 PackageID: 10.9.0-1.1 $
+04/13/26 19:40:12 ** $CondorPlatform: X86_64-Ubuntu_22.04 $
+04/13/26 19:40:12 ** PID = 1294757
+04/13/26 19:40:12 ** Log last touched 4/13 19:37:40
+04/13/26 19:40:12 ******************************************************
+04/13/26 19:40:12 Using config source: /etc/condor/condor_config
+04/13/26 19:40:12 Using local config sources: 
+04/13/26 19:40:12    /etc/condor/config.d/00-htcondor-9.0.config
+04/13/26 19:40:12    /etc/condor/config.d/00-minicondor
+04/13/26 19:40:12    /etc/condor/config.d/99-custom-cpus.conf
+04/13/26 19:40:12    /etc/condor/config.d/99-dynamic-slots.conf
+04/13/26 19:40:12    /etc/condor/condor_config.local
+04/13/26 19:40:12 config Macros = 95, Sorted = 95, StringBytes = 2684, TablesBytes = 3492
+04/13/26 19:40:12 CLASSAD_CACHING is ENABLED
+04/13/26 19:40:12 Daemon Log is logging: D_ALWAYS D_ERROR D_STATUS
+04/13/26 19:40:12 DaemonCore: No command port requested.
+04/13/26 19:40:12 DAGMAN_USE_STRICT setting: 1
+04/13/26 19:40:12 DAGMAN_VERBOSITY setting: 3
+04/13/26 19:40:12 DAGMAN_DEBUG_CACHE_SIZE setting: 5242880
+04/13/26 19:40:12 DAGMAN_DEBUG_CACHE_ENABLE setting: False
+04/13/26 19:40:12 DAGMAN_SUBMIT_DELAY setting: 0
+04/13/26 19:40:12 DAGMAN_MAX_SUBMIT_ATTEMPTS setting: 3
+04/13/26 19:40:12 DAGMAN_STARTUP_CYCLE_DETECT setting: False
+04/13/26 19:40:12 DAGMAN_MAX_SUBMITS_PER_INTERVAL setting: 100
+04/13/26 19:40:12 DAGMAN_AGGRESSIVE_SUBMIT setting: False
+04/13/26 19:40:12 DAGMAN_USER_LOG_SCAN_INTERVAL setting: 5
+04/13/26 19:40:12 DAGMAN_QUEUE_UPDATE_INTERVAL setting: 300
+04/13/26 19:40:12 DAGMAN_DEFAULT_PRIORITY setting: 0
+04/13/26 19:40:12 DAGMAN_SUPPRESS_NOTIFICATION setting: True
+04/13/26 19:40:12 allow_events (DAGMAN_ALLOW_EVENTS) setting: 114
+04/13/26 19:40:12 DAGMAN_RETRY_SUBMIT_FIRST setting: True
+04/13/26 19:40:12 DAGMAN_RETRY_NODE_FIRST setting: False
+04/13/26 19:40:12 DAGMAN_MAX_JOBS_IDLE setting: 1000
+04/13/26 19:40:12 DAGMAN_MAX_JOBS_SUBMITTED setting: 0
+04/13/26 19:40:12 DAGMAN_MAX_PRE_SCRIPTS setting: 10
+04/13/26 19:40:12 DAGMAN_MAX_POST_SCRIPTS setting: 10
+04/13/26 19:40:12 DAGMAN_MAX_HOLD_SCRIPTS setting: 20
+04/13/26 19:40:12 DAGMAN_MUNGE_NODE_NAMES setting: True
+04/13/26 19:40:12 DAGMAN_PROHIBIT_MULTI_JOBS setting: False
+04/13/26 19:40:12 DAGMAN_SUBMIT_DEPTH_FIRST setting: False
+04/13/26 19:40:12 DAGMAN_ALWAYS_RUN_POST setting: False
+04/13/26 19:40:12 DAGMAN_CONDOR_SUBMIT_EXE setting: /usr/bin/condor_submit
+04/13/26 19:40:12 DAGMAN_USE_DIRECT_SUBMIT setting: True
+04/13/26 19:40:12 DAGMAN_DEFAULT_APPEND_VARS setting: False
+04/13/26 19:40:12 DAGMAN_ABORT_DUPLICATES setting: True
+04/13/26 19:40:12 DAGMAN_ABORT_ON_SCARY_SUBMIT setting: True
+04/13/26 19:40:12 DAGMAN_PENDING_REPORT_INTERVAL setting: 600
+04/13/26 19:40:12 DAGMAN_AUTO_RESCUE setting: True
+04/13/26 19:40:12 DAGMAN_MAX_RESCUE_NUM setting: 100
+04/13/26 19:40:12 DAGMAN_WRITE_PARTIAL_RESCUE setting: True
+04/13/26 19:40:12 DAGMAN_DEFAULT_NODE_LOG setting: @(DAG_DIR)/@(DAG_FILE).nodes.log
+04/13/26 19:40:12 DAGMAN_GENERATE_SUBDAG_SUBMITS setting: True
+04/13/26 19:40:12 DAGMAN_MAX_JOB_HOLDS setting: 100
+04/13/26 19:40:12 DAGMAN_HOLD_CLAIM_TIME setting: 20
+04/13/26 19:40:12 ALL_DEBUG setting: 
+04/13/26 19:40:12 DAGMAN_DEBUG setting: 
+04/13/26 19:40:12 DAGMAN_SUPPRESS_JOB_LOGS setting: False
+04/13/26 19:40:12 DAGMAN_REMOVE_NODE_JOBS setting: True
+04/13/26 19:40:12 DAGMAN will adjust edges after parsing
+04/13/26 19:40:12 argv[0] == "condor_scheduniv_exec.514.0"
+04/13/26 19:40:12 argv[1] == "-Lockfile"
+04/13/26 19:40:12 argv[2] == "/home/stu_jamsin/peket/test_injection/sub_files/pipeline.dag.lock"
+04/13/26 19:40:12 argv[3] == "-AutoRescue"
+04/13/26 19:40:12 argv[4] == "1"
+04/13/26 19:40:12 argv[5] == "-DoRescueFrom"
+04/13/26 19:40:12 argv[6] == "0"
+04/13/26 19:40:12 argv[7] == "-Dag"
+04/13/26 19:40:12 argv[8] == "/home/stu_jamsin/peket/test_injection/sub_files/pipeline.dag"
+04/13/26 19:40:12 argv[9] == "-Suppress_notification"
+04/13/26 19:40:12 argv[10] == "-CsdVersion"
+04/13/26 19:40:12 argv[11] == "$CondorVersion: 10.9.0 2023-09-28 BuildID: 678228 PackageID: 10.9.0-1.1 $"
+04/13/26 19:40:12 argv[12] == "-Force"
+04/13/26 19:40:12 argv[13] == "-Dagman"
+04/13/26 19:40:12 argv[14] == "/usr/bin/condor_dagman"
+04/13/26 19:40:12 Can't open directory "/etc/condor/passwords.d" as PRIV_ROOT, errno: 13 (Permission denied)
+04/13/26 19:40:12 Can't open directory "/etc/condor/passwords.d" as PRIV_ROOT, errno: 13 (Permission denied)
+04/13/26 19:40:12 Workflow batch-id: <514.0>
+04/13/26 19:40:12 Workflow batch-name: <pipeline.dag+514>
+04/13/26 19:40:12 Workflow accounting_group: <>
+04/13/26 19:40:12 Workflow accounting_group_user: <>
+04/13/26 19:40:12 Warning: failed to get attribute DAGNodeName
+04/13/26 19:40:12 DAGMAN_LOG_ON_NFS_IS_ERROR setting: False
+04/13/26 19:40:12 Default node log file is: </home/stu_jamsin/peket/test_injection/sub_files/pipeline.dag.nodes.log>
+04/13/26 19:40:12 DAG Lockfile will be written to /home/stu_jamsin/peket/test_injection/sub_files/pipeline.dag.lock
+04/13/26 19:40:12 DAG Input file is /home/stu_jamsin/peket/test_injection/sub_files/pipeline.dag
+04/13/26 19:40:12 Parsing 1 dagfiles
+04/13/26 19:40:12 Parsing /home/stu_jamsin/peket/test_injection/sub_files/pipeline.dag ...
+04/13/26 19:40:12 Adjusting edges
+04/13/26 19:40:12 Dag contains 3 total jobs
+04/13/26 19:40:12 Bootstrapping...
+04/13/26 19:40:12 Number of pre-completed nodes: 0
+04/13/26 19:40:12 MultiLogFiles: truncating log file /home/stu_jamsin/peket/test_injection/sub_files/pipeline.dag.nodes.log
+04/13/26 19:40:12 DAG status: 0 (DAG_STATUS_OK)
+04/13/26 19:40:12 Of 3 nodes total:
+04/13/26 19:40:12  Done     Pre   Queued    Post   Ready   Un-Ready   Failed   Futile
+04/13/26 19:40:12   ===     ===      ===     ===     ===        ===      ===      ===
+04/13/26 19:40:12     0       0        0       0       1          2        0        0
+04/13/26 19:40:12 0 job proc(s) currently held
+04/13/26 19:40:12 DAGMan Runtime Statistics: [ EventCycleTimeCount = 0.0; EventCycleTimeSum = 0.0; LogProcessCycleTimeCount = 0.0; LogProcessCycleTimeSum = 0.0; SleepCycleTimeCount = 0.0; SleepCycleTimeSum = 0.0; SubmitCycleTimeCount = 0.0; SubmitCycleTimeSum = 0.0; ]
+04/13/26 19:40:12 Registering condor_event_timer...
+04/13/26 19:40:13 Submitting HTCondor Node PREP job(s)...
+04/13/26 19:40:13 Submitting node PREP from file /home/stu_jamsin/peket/test_injection/sub_files/prep.sub using direct job submission
+04/13/26 19:40:13 	assigned HTCondor ID (515.0.0)
+04/13/26 19:40:13 Just submitted 1 job this cycle...
+04/13/26 19:40:13 DAG status: 0 (DAG_STATUS_OK)
+04/13/26 19:40:13 Of 3 nodes total:
+04/13/26 19:40:13  Done     Pre   Queued    Post   Ready   Un-Ready   Failed   Futile
+04/13/26 19:40:13   ===     ===      ===     ===     ===        ===      ===      ===
+04/13/26 19:40:13     0       0        1       0       0          2        0        0
+04/13/26 19:40:13 0 job proc(s) currently held
+04/13/26 19:40:13 DAGMan Runtime Statistics: [ EventCycleTimeCount = 0.0; EventCycleTimeSum = 0.0; LogProcessCycleTimeCount = 0.0; LogProcessCycleTimeSum = 0.0; SleepCycleTimeCount = 0.0; SleepCycleTimeSum = 0.0; SubmitCycleTimeAvg = 0.03162193298339844; SubmitCycleTimeCount = 1.0; SubmitCycleTimeMax = 0.03162193298339844; SubmitCycleTimeMin = 0.03162193298339844; SubmitCycleTimeStd = 0.03162193298339844; SubmitCycleTimeSum = 0.03162193298339844; ]
+04/13/26 19:40:18 Currently monitoring 1 HTCondor log file(s)
+04/13/26 19:40:18 Reassigning the id of job PREP from (515.0.0) to (515.0.0)
+04/13/26 19:40:18 Event: ULOG_SUBMIT for HTCondor Node PREP (515.0.0) {04/13/26 19:40:13}
+04/13/26 19:40:18 Number of idle job procs: 1
+04/13/26 19:40:23 Currently monitoring 1 HTCondor log file(s)
+04/13/26 19:40:23 Event: ULOG_EXECUTE for HTCondor Node PREP (515.0.0) {04/13/26 19:40:20}
+04/13/26 19:40:23 Number of idle job procs: 0
+04/13/26 19:49:44 Currently monitoring 1 HTCondor log file(s)
+04/13/26 19:49:44 Event: ULOG_JOB_TERMINATED for HTCondor Node PREP (515.0.0) {04/13/26 19:49:42}
+04/13/26 19:49:44 Number of idle job procs: 0
+04/13/26 19:49:44 Node PREP job proc (515.0.0) completed successfully.
+04/13/26 19:49:44 Node PREP job completed
+04/13/26 19:49:44 DAG status: 0 (DAG_STATUS_OK)
+04/13/26 19:49:44 Of 3 nodes total:
+04/13/26 19:49:44  Done     Pre   Queued    Post   Ready   Un-Ready   Failed   Futile
+04/13/26 19:49:44   ===     ===      ===     ===     ===        ===      ===      ===
+04/13/26 19:49:44     1       0        0       0       1          1        0        0
+04/13/26 19:49:44 0 job proc(s) currently held
+04/13/26 19:49:44 DAGMan Runtime Statistics: [ EventCycleTimeAvg = 0.0004850040402328759; EventCycleTimeCount = 114.0; EventCycleTimeMax = 0.03179097175598145; EventCycleTimeMin = 1.192092895507812E-05; EventCycleTimeStd = 0.003525280626887865; EventCycleTimeSum = 0.05529046058654785; LogProcessCycleTimeAvg = 0.0002636114756266276; LogProcessCycleTimeCount = 3.0; LogProcessCycleTimeMax = 0.0004799365997314453; LogProcessCycleTimeMin = 0.0001518726348876953; LogProcessCycleTimeStd = 0.0001873771844661651; LogProcessCycleTimeSum = 0.0007908344268798828; SleepCycleTimeAvg = 5.005243303482993; SleepCycleTimeCount = 114.0; SleepCycleTimeMax = 5.00660514831543; SleepCycleTimeMin = 5.004790067672729; SleepCycleTimeStd = 0.0003256755437815162; SleepCycleTimeSum = 570.5977365970612; SubmitCycleTimeAvg = 0.000289048319277556; SubmitCycleTimeCount = 115.0; SubmitCycleTimeMax = 0.03162193298339844; SubmitCycleTimeMin = 5.960464477539062E-06; SubmitCycleTimeStd = 0.002947446253488552; SubmitCycleTimeSum = 0.03324055671691895; ]
+04/13/26 19:49:49 Submitting HTCondor Node SEARCH job(s)...
+04/13/26 19:49:49 Submitting node SEARCH from file /home/stu_jamsin/peket/test_injection/sub_files/split_search.sub using direct job submission
+04/13/26 19:49:49 	assigned HTCondor ID (516.0.0)
+04/13/26 19:49:49 Just submitted 1 job this cycle...
+04/13/26 19:49:49 DAG status: 0 (DAG_STATUS_OK)
+04/13/26 19:49:49 Of 3 nodes total:
+04/13/26 19:49:49  Done     Pre   Queued    Post   Ready   Un-Ready   Failed   Futile
+04/13/26 19:49:49   ===     ===      ===     ===     ===        ===      ===      ===
+04/13/26 19:49:49     1       0        1       0       0          1        0        0
+04/13/26 19:49:49 0 job proc(s) currently held
+04/13/26 19:49:49 DAGMan Runtime Statistics: [ EventCycleTimeAvg = 0.0004867159801980724; EventCycleTimeCount = 115.0; EventCycleTimeMax = 0.03179097175598145; EventCycleTimeMin = 1.192092895507812E-05; EventCycleTimeStd = 0.003509832826141061; EventCycleTimeSum = 0.05597233772277832; LogProcessCycleTimeAvg = 0.0002636114756266276; LogProcessCycleTimeCount = 3.0; LogProcessCycleTimeMax = 0.0004799365997314453; LogProcessCycleTimeMin = 0.0001518726348876953; LogProcessCycleTimeStd = 0.0001873771844661651; LogProcessCycleTimeSum = 0.0007908344268798828; SleepCycleTimeAvg = 5.005240170851998; SleepCycleTimeCount = 115.0; SleepCycleTimeMax = 5.00660514831543; SleepCycleTimeMin = 5.004790067672729; SleepCycleTimeStd = 0.0003259796071432336; SleepCycleTimeSum = 575.6026196479797; SubmitCycleTimeAvg = 0.001266841230721309; SubmitCycleTimeCount = 116.0; SubmitCycleTimeMax = 0.1137130260467529; SubmitCycleTimeMin = 5.960464477539062E-06; SubmitCycleTimeStd = 0.01093238573575911; SubmitCycleTimeSum = 0.1469535827636719; ]
+04/13/26 19:49:54 Currently monitoring 1 HTCondor log file(s)
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.0.0) to (516.0.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.0.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 1
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.0.0) to (516.1.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.1.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 2
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.1.0) to (516.2.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.2.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 3
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.2.0) to (516.3.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.3.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 4
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.3.0) to (516.4.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.4.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 5
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.4.0) to (516.5.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.5.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 6
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.5.0) to (516.6.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.6.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 7
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.6.0) to (516.7.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.7.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 8
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.7.0) to (516.8.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.8.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 9
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.8.0) to (516.9.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.9.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 10
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.9.0) to (516.10.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.10.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 11
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.10.0) to (516.11.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.11.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 12
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.11.0) to (516.12.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.12.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 13
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.12.0) to (516.13.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.13.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 14
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.13.0) to (516.14.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.14.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 15
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.14.0) to (516.15.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.15.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 16
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.15.0) to (516.16.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.16.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 17
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.16.0) to (516.17.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.17.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 18
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.17.0) to (516.18.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.18.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 19
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.18.0) to (516.19.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.19.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 20
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.19.0) to (516.20.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.20.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 21
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.20.0) to (516.21.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.21.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 22
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.21.0) to (516.22.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.22.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 23
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.22.0) to (516.23.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.23.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 24
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.23.0) to (516.24.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.24.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 25
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.24.0) to (516.25.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.25.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 26
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.25.0) to (516.26.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.26.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 27
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.26.0) to (516.27.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.27.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 28
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.27.0) to (516.28.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.28.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 29
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.28.0) to (516.29.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.29.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 30
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.29.0) to (516.30.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.30.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 31
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.30.0) to (516.31.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.31.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 32
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.31.0) to (516.32.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.32.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 33
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.32.0) to (516.33.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.33.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 34
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.33.0) to (516.34.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.34.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 35
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.34.0) to (516.35.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.35.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 36
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.35.0) to (516.36.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.36.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 37
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.36.0) to (516.37.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.37.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 38
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.37.0) to (516.38.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.38.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 39
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.38.0) to (516.39.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.39.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 40
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.39.0) to (516.40.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.40.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 41
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.40.0) to (516.41.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.41.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 42
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.41.0) to (516.42.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.42.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 43
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.42.0) to (516.43.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.43.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 44
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.43.0) to (516.44.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.44.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 45
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.44.0) to (516.45.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.45.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 46
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.45.0) to (516.46.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.46.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 47
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.46.0) to (516.47.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.47.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 48
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.47.0) to (516.48.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.48.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 49
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.48.0) to (516.49.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.49.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 50
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.49.0) to (516.50.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.50.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 51
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.50.0) to (516.51.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.51.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 52
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.51.0) to (516.52.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.52.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 53
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.52.0) to (516.53.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.53.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 54
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.53.0) to (516.54.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.54.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 55
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.54.0) to (516.55.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.55.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 56
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.55.0) to (516.56.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.56.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 57
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.56.0) to (516.57.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.57.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 58
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.57.0) to (516.58.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.58.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 59
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.58.0) to (516.59.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.59.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 60
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.59.0) to (516.60.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.60.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 61
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.60.0) to (516.61.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.61.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 62
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.61.0) to (516.62.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.62.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 63
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.62.0) to (516.63.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.63.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 64
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.63.0) to (516.64.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.64.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 65
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.64.0) to (516.65.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.65.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 66
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.65.0) to (516.66.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.66.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 67
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.66.0) to (516.67.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.67.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 68
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.67.0) to (516.68.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.68.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 69
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.68.0) to (516.69.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.69.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 70
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.69.0) to (516.70.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.70.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 71
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.70.0) to (516.71.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.71.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 72
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.71.0) to (516.72.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.72.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 73
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.72.0) to (516.73.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.73.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 74
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.73.0) to (516.74.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.74.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 75
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.74.0) to (516.75.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.75.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 76
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.75.0) to (516.76.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.76.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 77
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.76.0) to (516.77.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.77.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 78
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.77.0) to (516.78.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.78.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 79
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.78.0) to (516.79.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.79.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 80
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.79.0) to (516.80.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.80.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 81
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.80.0) to (516.81.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.81.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 82
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.81.0) to (516.82.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.82.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 83
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.82.0) to (516.83.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.83.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 84
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.83.0) to (516.84.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.84.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 85
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.84.0) to (516.85.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.85.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 86
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.85.0) to (516.86.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.86.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 87
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.86.0) to (516.87.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.87.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 88
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.87.0) to (516.88.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.88.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 89
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.88.0) to (516.89.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.89.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 90
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.89.0) to (516.90.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.90.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 91
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.90.0) to (516.91.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.91.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 92
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.91.0) to (516.92.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.92.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 93
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.92.0) to (516.93.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.93.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 94
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.93.0) to (516.94.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.94.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 95
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.94.0) to (516.95.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.95.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 96
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.95.0) to (516.96.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.96.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 97
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.96.0) to (516.97.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.97.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 98
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.97.0) to (516.98.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.98.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 99
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.98.0) to (516.99.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.99.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 100
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.99.0) to (516.100.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.100.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 101
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.100.0) to (516.101.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.101.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 102
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.101.0) to (516.102.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.102.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 103
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.102.0) to (516.103.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.103.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 104
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.103.0) to (516.104.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.104.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 105
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.104.0) to (516.105.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.105.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 106
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.105.0) to (516.106.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.106.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 107
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.106.0) to (516.107.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.107.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 108
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.107.0) to (516.108.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.108.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 109
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.108.0) to (516.109.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.109.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 110
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.109.0) to (516.110.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.110.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 111
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.110.0) to (516.111.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.111.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 112
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.111.0) to (516.112.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.112.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 113
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.112.0) to (516.113.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.113.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 114
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.113.0) to (516.114.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.114.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 115
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.114.0) to (516.115.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.115.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 116
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.115.0) to (516.116.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.116.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 117
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.116.0) to (516.117.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.117.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 118
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.117.0) to (516.118.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.118.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 119
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.118.0) to (516.119.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.119.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 120
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.119.0) to (516.120.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.120.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 121
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.120.0) to (516.121.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.121.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 122
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.121.0) to (516.122.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.122.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 123
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.122.0) to (516.123.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.123.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 124
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.123.0) to (516.124.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.124.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 125
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.124.0) to (516.125.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.125.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 126
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.125.0) to (516.126.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.126.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 127
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.126.0) to (516.127.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.127.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 128
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.127.0) to (516.128.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.128.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 129
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.128.0) to (516.129.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.129.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 130
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.129.0) to (516.130.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.130.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 131
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.130.0) to (516.131.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.131.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 132
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.131.0) to (516.132.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.132.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 133
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.132.0) to (516.133.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.133.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 134
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.133.0) to (516.134.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.134.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 135
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.134.0) to (516.135.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.135.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 136
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.135.0) to (516.136.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.136.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 137
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.136.0) to (516.137.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.137.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 138
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.137.0) to (516.138.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.138.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 139
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.138.0) to (516.139.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.139.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 140
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.139.0) to (516.140.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.140.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 141
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.140.0) to (516.141.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.141.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 142
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.141.0) to (516.142.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.142.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 143
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.142.0) to (516.143.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.143.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 144
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.143.0) to (516.144.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.144.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 145
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.144.0) to (516.145.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.145.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 146
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.145.0) to (516.146.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.146.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 147
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.146.0) to (516.147.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.147.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 148
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.147.0) to (516.148.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.148.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 149
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.148.0) to (516.149.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.149.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 150
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.149.0) to (516.150.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.150.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 151
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.150.0) to (516.151.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.151.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 152
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.151.0) to (516.152.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.152.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 153
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.152.0) to (516.153.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.153.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 154
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.153.0) to (516.154.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.154.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 155
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.154.0) to (516.155.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.155.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 156
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.155.0) to (516.156.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.156.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 157
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.156.0) to (516.157.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.157.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 158
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.157.0) to (516.158.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.158.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 159
+04/13/26 19:49:54 Reassigning the id of job SEARCH from (516.158.0) to (516.159.0)
+04/13/26 19:49:54 Event: ULOG_SUBMIT for HTCondor Node SEARCH (516.159.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 160
+04/13/26 19:49:54 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.0.0) {04/13/26 19:49:49}
+04/13/26 19:49:54 Number of idle job procs: 159
+04/13/26 19:49:59 Currently monitoring 1 HTCondor log file(s)
+04/13/26 19:49:59 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.1.0) {04/13/26 19:49:55}
+04/13/26 19:49:59 Number of idle job procs: 158
+04/13/26 19:49:59 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.2.0) {04/13/26 19:49:55}
+04/13/26 19:49:59 Number of idle job procs: 157
+04/13/26 19:49:59 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.3.0) {04/13/26 19:49:55}
+04/13/26 19:49:59 Number of idle job procs: 156
+04/13/26 19:49:59 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.4.0) {04/13/26 19:49:55}
+04/13/26 19:49:59 Number of idle job procs: 155
+04/13/26 19:49:59 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.5.0) {04/13/26 19:49:55}
+04/13/26 19:49:59 Number of idle job procs: 154
+04/13/26 19:49:59 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.6.0) {04/13/26 19:49:55}
+04/13/26 19:49:59 Number of idle job procs: 153
+04/13/26 19:49:59 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.7.0) {04/13/26 19:49:55}
+04/13/26 19:49:59 Number of idle job procs: 152
+04/13/26 19:49:59 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.8.0) {04/13/26 19:49:56}
+04/13/26 19:49:59 Number of idle job procs: 151
+04/13/26 19:49:59 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.9.0) {04/13/26 19:49:56}
+04/13/26 19:49:59 Number of idle job procs: 150
+04/13/26 19:49:59 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.10.0) {04/13/26 19:49:56}
+04/13/26 19:49:59 Number of idle job procs: 149
+04/13/26 19:49:59 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.11.0) {04/13/26 19:49:56}
+04/13/26 19:49:59 Number of idle job procs: 148
+04/13/26 19:49:59 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.12.0) {04/13/26 19:49:56}
+04/13/26 19:49:59 Number of idle job procs: 147
+04/13/26 19:49:59 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.13.0) {04/13/26 19:49:56}
+04/13/26 19:49:59 Number of idle job procs: 146
+04/13/26 19:49:59 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.14.0) {04/13/26 19:49:56}
+04/13/26 19:49:59 Number of idle job procs: 145
+04/13/26 19:49:59 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.15.0) {04/13/26 19:49:56}
+04/13/26 19:49:59 Number of idle job procs: 144
+04/13/26 19:49:59 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.16.0) {04/13/26 19:49:56}
+04/13/26 19:49:59 Number of idle job procs: 143
+04/13/26 19:49:59 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.17.0) {04/13/26 19:49:56}
+04/13/26 19:49:59 Number of idle job procs: 142
+04/13/26 19:49:59 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.18.0) {04/13/26 19:49:56}
+04/13/26 19:49:59 Number of idle job procs: 141
+04/13/26 19:49:59 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.19.0) {04/13/26 19:49:56}
+04/13/26 19:49:59 Number of idle job procs: 140
+04/13/26 19:49:59 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.20.0) {04/13/26 19:49:56}
+04/13/26 19:49:59 Number of idle job procs: 139
+04/13/26 19:49:59 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.21.0) {04/13/26 19:49:56}
+04/13/26 19:49:59 Number of idle job procs: 138
+04/13/26 19:49:59 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.22.0) {04/13/26 19:49:56}
+04/13/26 19:49:59 Number of idle job procs: 137
+04/13/26 19:49:59 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.23.0) {04/13/26 19:49:56}
+04/13/26 19:49:59 Number of idle job procs: 136
+04/13/26 19:49:59 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.24.0) {04/13/26 19:49:56}
+04/13/26 19:49:59 Number of idle job procs: 135
+04/13/26 19:49:59 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.25.0) {04/13/26 19:49:56}
+04/13/26 19:49:59 Number of idle job procs: 134
+04/13/26 19:53:19 Currently monitoring 1 HTCondor log file(s)
+04/13/26 19:53:19 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.15.0) {04/13/26 19:53:17}
+04/13/26 19:53:19 Number of idle job procs: 134
+04/13/26 19:53:19 Node SEARCH job proc (516.15.0) completed successfully.
+04/13/26 19:53:19 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.26.0) {04/13/26 19:53:17}
+04/13/26 19:53:19 Number of idle job procs: 133
+04/13/26 19:56:24 Currently monitoring 1 HTCondor log file(s)
+04/13/26 19:56:24 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.8.0) {04/13/26 19:56:22}
+04/13/26 19:56:24 Number of idle job procs: 133
+04/13/26 19:56:24 Node SEARCH job proc (516.8.0) completed successfully.
+04/13/26 19:56:24 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.27.0) {04/13/26 19:56:23}
+04/13/26 19:56:24 Number of idle job procs: 132
+04/13/26 19:56:34 Currently monitoring 1 HTCondor log file(s)
+04/13/26 19:56:34 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.4.0) {04/13/26 19:56:30}
+04/13/26 19:56:34 Number of idle job procs: 132
+04/13/26 19:56:34 Node SEARCH job proc (516.4.0) completed successfully.
+04/13/26 19:56:34 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.28.0) {04/13/26 19:56:30}
+04/13/26 19:56:34 Number of idle job procs: 131
+04/13/26 19:56:34 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.2.0) {04/13/26 19:56:32}
+04/13/26 19:56:34 Number of idle job procs: 131
+04/13/26 19:56:34 Node SEARCH job proc (516.2.0) completed successfully.
+04/13/26 19:56:34 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.29.0) {04/13/26 19:56:32}
+04/13/26 19:56:34 Number of idle job procs: 130
+04/13/26 19:56:39 Currently monitoring 1 HTCondor log file(s)
+04/13/26 19:56:39 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.0.0) {04/13/26 19:56:36}
+04/13/26 19:56:39 Number of idle job procs: 130
+04/13/26 19:56:39 Node SEARCH job proc (516.0.0) completed successfully.
+04/13/26 19:56:39 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.30.0) {04/13/26 19:56:36}
+04/13/26 19:56:39 Number of idle job procs: 129
+04/13/26 19:56:39 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.23.0) {04/13/26 19:56:38}
+04/13/26 19:56:39 Number of idle job procs: 129
+04/13/26 19:56:39 Node SEARCH job proc (516.23.0) completed successfully.
+04/13/26 19:56:39 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.31.0) {04/13/26 19:56:38}
+04/13/26 19:56:39 Number of idle job procs: 128
+04/13/26 19:56:39 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.17.0) {04/13/26 19:56:38}
+04/13/26 19:56:39 Number of idle job procs: 128
+04/13/26 19:56:39 Node SEARCH job proc (516.17.0) completed successfully.
+04/13/26 19:56:39 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.14.0) {04/13/26 19:56:38}
+04/13/26 19:56:39 Number of idle job procs: 128
+04/13/26 19:56:39 Node SEARCH job proc (516.14.0) completed successfully.
+04/13/26 19:56:39 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.32.0) {04/13/26 19:56:38}
+04/13/26 19:56:39 Number of idle job procs: 127
+04/13/26 19:56:39 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.33.0) {04/13/26 19:56:38}
+04/13/26 19:56:39 Number of idle job procs: 126
+04/13/26 19:56:44 Currently monitoring 1 HTCondor log file(s)
+04/13/26 19:56:44 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.1.0) {04/13/26 19:56:40}
+04/13/26 19:56:44 Number of idle job procs: 126
+04/13/26 19:56:44 Node SEARCH job proc (516.1.0) completed successfully.
+04/13/26 19:56:44 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.34.0) {04/13/26 19:56:40}
+04/13/26 19:56:44 Number of idle job procs: 125
+04/13/26 19:56:44 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.13.0) {04/13/26 19:56:41}
+04/13/26 19:56:44 Number of idle job procs: 125
+04/13/26 19:56:44 Node SEARCH job proc (516.13.0) completed successfully.
+04/13/26 19:56:44 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.35.0) {04/13/26 19:56:41}
+04/13/26 19:56:44 Number of idle job procs: 124
+04/13/26 19:56:44 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.18.0) {04/13/26 19:56:42}
+04/13/26 19:56:44 Number of idle job procs: 124
+04/13/26 19:56:44 Node SEARCH job proc (516.18.0) completed successfully.
+04/13/26 19:56:44 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.36.0) {04/13/26 19:56:42}
+04/13/26 19:56:44 Number of idle job procs: 123
+04/13/26 19:57:04 Currently monitoring 1 HTCondor log file(s)
+04/13/26 19:57:04 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.3.0) {04/13/26 19:57:00}
+04/13/26 19:57:04 Number of idle job procs: 123
+04/13/26 19:57:04 Node SEARCH job proc (516.3.0) completed successfully.
+04/13/26 19:57:04 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.37.0) {04/13/26 19:57:00}
+04/13/26 19:57:04 Number of idle job procs: 122
+04/13/26 19:57:04 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.22.0) {04/13/26 19:57:01}
+04/13/26 19:57:04 Number of idle job procs: 122
+04/13/26 19:57:04 Node SEARCH job proc (516.22.0) completed successfully.
+04/13/26 19:57:04 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.38.0) {04/13/26 19:57:01}
+04/13/26 19:57:04 Number of idle job procs: 121
+04/13/26 19:57:04 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.21.0) {04/13/26 19:57:01}
+04/13/26 19:57:04 Number of idle job procs: 121
+04/13/26 19:57:04 Node SEARCH job proc (516.21.0) completed successfully.
+04/13/26 19:57:04 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.39.0) {04/13/26 19:57:02}
+04/13/26 19:57:04 Number of idle job procs: 120
+04/13/26 19:57:04 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.6.0) {04/13/26 19:57:04}
+04/13/26 19:57:04 Number of idle job procs: 120
+04/13/26 19:57:04 Node SEARCH job proc (516.6.0) completed successfully.
+04/13/26 19:57:04 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.40.0) {04/13/26 19:57:04}
+04/13/26 19:57:04 Number of idle job procs: 119
+04/13/26 19:57:09 Currently monitoring 1 HTCondor log file(s)
+04/13/26 19:57:09 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.7.0) {04/13/26 19:57:06}
+04/13/26 19:57:09 Number of idle job procs: 119
+04/13/26 19:57:09 Node SEARCH job proc (516.7.0) completed successfully.
+04/13/26 19:57:09 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.41.0) {04/13/26 19:57:06}
+04/13/26 19:57:09 Number of idle job procs: 118
+04/13/26 19:57:09 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.11.0) {04/13/26 19:57:06}
+04/13/26 19:57:09 Number of idle job procs: 118
+04/13/26 19:57:09 Node SEARCH job proc (516.11.0) completed successfully.
+04/13/26 19:57:09 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.42.0) {04/13/26 19:57:06}
+04/13/26 19:57:09 Number of idle job procs: 117
+04/13/26 19:57:14 Currently monitoring 1 HTCondor log file(s)
+04/13/26 19:57:14 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.16.0) {04/13/26 19:57:14}
+04/13/26 19:57:14 Number of idle job procs: 117
+04/13/26 19:57:14 Node SEARCH job proc (516.16.0) completed successfully.
+04/13/26 19:57:14 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.43.0) {04/13/26 19:57:14}
+04/13/26 19:57:14 Number of idle job procs: 116
+04/13/26 19:57:29 Currently monitoring 1 HTCondor log file(s)
+04/13/26 19:57:29 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.24.0) {04/13/26 19:57:28}
+04/13/26 19:57:29 Number of idle job procs: 116
+04/13/26 19:57:29 Node SEARCH job proc (516.24.0) completed successfully.
+04/13/26 19:57:29 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.44.0) {04/13/26 19:57:28}
+04/13/26 19:57:29 Number of idle job procs: 115
+04/13/26 19:58:04 Currently monitoring 1 HTCondor log file(s)
+04/13/26 19:58:04 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.5.0) {04/13/26 19:58:01}
+04/13/26 19:58:04 Number of idle job procs: 115
+04/13/26 19:58:04 Node SEARCH job proc (516.5.0) completed successfully.
+04/13/26 19:58:04 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.45.0) {04/13/26 19:58:01}
+04/13/26 19:58:04 Number of idle job procs: 114
+04/13/26 19:58:29 Currently monitoring 1 HTCondor log file(s)
+04/13/26 19:58:29 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.20.0) {04/13/26 19:58:27}
+04/13/26 19:58:29 Number of idle job procs: 114
+04/13/26 19:58:29 Node SEARCH job proc (516.20.0) completed successfully.
+04/13/26 19:58:29 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.46.0) {04/13/26 19:58:27}
+04/13/26 19:58:29 Number of idle job procs: 113
+04/13/26 19:58:45 Currently monitoring 1 HTCondor log file(s)
+04/13/26 19:58:45 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.19.0) {04/13/26 19:58:40}
+04/13/26 19:58:45 Number of idle job procs: 113
+04/13/26 19:58:45 Node SEARCH job proc (516.19.0) completed successfully.
+04/13/26 19:58:45 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.47.0) {04/13/26 19:58:40}
+04/13/26 19:58:45 Number of idle job procs: 112
+04/13/26 19:59:00 Currently monitoring 1 HTCondor log file(s)
+04/13/26 19:59:00 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.9.0) {04/13/26 19:58:57}
+04/13/26 19:59:00 Number of idle job procs: 112
+04/13/26 19:59:00 Node SEARCH job proc (516.9.0) completed successfully.
+04/13/26 19:59:00 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.48.0) {04/13/26 19:58:57}
+04/13/26 19:59:00 Number of idle job procs: 111
+04/13/26 19:59:30 Currently monitoring 1 HTCondor log file(s)
+04/13/26 19:59:30 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.25.0) {04/13/26 19:59:28}
+04/13/26 19:59:30 Number of idle job procs: 111
+04/13/26 19:59:30 Node SEARCH job proc (516.25.0) completed successfully.
+04/13/26 19:59:30 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.49.0) {04/13/26 19:59:28}
+04/13/26 19:59:30 Number of idle job procs: 110
+04/13/26 19:59:40 Currently monitoring 1 HTCondor log file(s)
+04/13/26 19:59:40 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.31.0) {04/13/26 19:59:35}
+04/13/26 19:59:40 Number of idle job procs: 110
+04/13/26 19:59:40 Node SEARCH job proc (516.31.0) completed successfully.
+04/13/26 19:59:40 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.50.0) {04/13/26 19:59:35}
+04/13/26 19:59:40 Number of idle job procs: 109
+04/13/26 20:02:10 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:02:10 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.47.0) {04/13/26 20:02:07}
+04/13/26 20:02:10 Number of idle job procs: 109
+04/13/26 20:02:10 Node SEARCH job proc (516.47.0) completed successfully.
+04/13/26 20:02:10 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.51.0) {04/13/26 20:02:07}
+04/13/26 20:02:10 Number of idle job procs: 108
+04/13/26 20:02:35 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:02:35 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.27.0) {04/13/26 20:02:31}
+04/13/26 20:02:35 Number of idle job procs: 108
+04/13/26 20:02:35 Node SEARCH job proc (516.27.0) completed successfully.
+04/13/26 20:02:35 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.52.0) {04/13/26 20:02:31}
+04/13/26 20:02:35 Number of idle job procs: 107
+04/13/26 20:02:45 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:02:45 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.30.0) {04/13/26 20:02:41}
+04/13/26 20:02:45 Number of idle job procs: 107
+04/13/26 20:02:45 Node SEARCH job proc (516.30.0) completed successfully.
+04/13/26 20:02:45 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.53.0) {04/13/26 20:02:43}
+04/13/26 20:02:45 Number of idle job procs: 106
+04/13/26 20:02:45 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.54.0) {04/13/26 20:02:43}
+04/13/26 20:02:45 Number of idle job procs: 105
+04/13/26 20:02:45 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.55.0) {04/13/26 20:02:43}
+04/13/26 20:02:45 Number of idle job procs: 104
+04/13/26 20:02:45 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.56.0) {04/13/26 20:02:43}
+04/13/26 20:02:45 Number of idle job procs: 103
+04/13/26 20:02:55 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:02:55 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.29.0) {04/13/26 20:02:52}
+04/13/26 20:02:55 Number of idle job procs: 103
+04/13/26 20:02:55 Node SEARCH job proc (516.29.0) completed successfully.
+04/13/26 20:02:55 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.57.0) {04/13/26 20:02:52}
+04/13/26 20:02:55 Number of idle job procs: 102
+04/13/26 20:02:55 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.35.0) {04/13/26 20:02:53}
+04/13/26 20:02:55 Number of idle job procs: 102
+04/13/26 20:02:55 Node SEARCH job proc (516.35.0) completed successfully.
+04/13/26 20:02:55 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.58.0) {04/13/26 20:02:53}
+04/13/26 20:02:55 Number of idle job procs: 101
+04/13/26 20:03:00 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:03:00 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.36.0) {04/13/26 20:02:58}
+04/13/26 20:03:00 Number of idle job procs: 101
+04/13/26 20:03:00 Node SEARCH job proc (516.36.0) completed successfully.
+04/13/26 20:03:00 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.59.0) {04/13/26 20:02:58}
+04/13/26 20:03:00 Number of idle job procs: 100
+04/13/26 20:03:20 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:03:20 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.12.0) {04/13/26 20:03:19}
+04/13/26 20:03:20 Number of idle job procs: 100
+04/13/26 20:03:20 Node SEARCH job proc (516.12.0) completed successfully.
+04/13/26 20:03:20 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.60.0) {04/13/26 20:03:19}
+04/13/26 20:03:20 Number of idle job procs: 99
+04/13/26 20:03:25 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:03:25 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.33.0) {04/13/26 20:03:21}
+04/13/26 20:03:25 Number of idle job procs: 99
+04/13/26 20:03:25 Node SEARCH job proc (516.33.0) completed successfully.
+04/13/26 20:03:25 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.61.0) {04/13/26 20:03:21}
+04/13/26 20:03:25 Number of idle job procs: 98
+04/13/26 20:03:30 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:03:30 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.38.0) {04/13/26 20:03:25}
+04/13/26 20:03:30 Number of idle job procs: 98
+04/13/26 20:03:30 Node SEARCH job proc (516.38.0) completed successfully.
+04/13/26 20:03:30 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.62.0) {04/13/26 20:03:25}
+04/13/26 20:03:30 Number of idle job procs: 97
+04/13/26 20:03:30 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.37.0) {04/13/26 20:03:27}
+04/13/26 20:03:30 Number of idle job procs: 97
+04/13/26 20:03:30 Node SEARCH job proc (516.37.0) completed successfully.
+04/13/26 20:03:30 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.63.0) {04/13/26 20:03:27}
+04/13/26 20:03:30 Number of idle job procs: 96
+04/13/26 20:03:30 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.34.0) {04/13/26 20:03:28}
+04/13/26 20:03:30 Number of idle job procs: 96
+04/13/26 20:03:30 Node SEARCH job proc (516.34.0) completed successfully.
+04/13/26 20:03:30 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.64.0) {04/13/26 20:03:28}
+04/13/26 20:03:30 Number of idle job procs: 95
+04/13/26 20:03:30 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.39.0) {04/13/26 20:03:28}
+04/13/26 20:03:30 Number of idle job procs: 95
+04/13/26 20:03:30 Node SEARCH job proc (516.39.0) completed successfully.
+04/13/26 20:03:30 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.65.0) {04/13/26 20:03:28}
+04/13/26 20:03:30 Number of idle job procs: 94
+04/13/26 20:03:30 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.43.0) {04/13/26 20:03:29}
+04/13/26 20:03:30 Number of idle job procs: 94
+04/13/26 20:03:30 Node SEARCH job proc (516.43.0) completed successfully.
+04/13/26 20:03:30 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.66.0) {04/13/26 20:03:30}
+04/13/26 20:03:30 Number of idle job procs: 93
+04/13/26 20:03:50 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:03:50 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.40.0) {04/13/26 20:03:47}
+04/13/26 20:03:50 Number of idle job procs: 93
+04/13/26 20:03:50 Node SEARCH job proc (516.40.0) completed successfully.
+04/13/26 20:03:50 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.67.0) {04/13/26 20:03:47}
+04/13/26 20:03:50 Number of idle job procs: 92
+04/13/26 20:03:55 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:03:55 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.32.0) {04/13/26 20:03:54}
+04/13/26 20:03:55 Number of idle job procs: 92
+04/13/26 20:03:55 Node SEARCH job proc (516.32.0) completed successfully.
+04/13/26 20:03:55 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.68.0) {04/13/26 20:03:54}
+04/13/26 20:03:55 Number of idle job procs: 91
+04/13/26 20:04:30 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:04:30 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.45.0) {04/13/26 20:04:26}
+04/13/26 20:04:30 Number of idle job procs: 91
+04/13/26 20:04:30 Node SEARCH job proc (516.45.0) completed successfully.
+04/13/26 20:04:30 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.69.0) {04/13/26 20:04:26}
+04/13/26 20:04:30 Number of idle job procs: 90
+04/13/26 20:05:10 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:05:10 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.46.0) {04/13/26 20:05:07}
+04/13/26 20:05:10 Number of idle job procs: 90
+04/13/26 20:05:10 Node SEARCH job proc (516.46.0) completed successfully.
+04/13/26 20:05:10 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.70.0) {04/13/26 20:05:07}
+04/13/26 20:05:10 Number of idle job procs: 89
+04/13/26 20:05:50 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:05:50 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.48.0) {04/13/26 20:05:46}
+04/13/26 20:05:50 Number of idle job procs: 89
+04/13/26 20:05:50 Node SEARCH job proc (516.48.0) completed successfully.
+04/13/26 20:05:50 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.71.0) {04/13/26 20:05:46}
+04/13/26 20:05:50 Number of idle job procs: 88
+04/13/26 20:06:00 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:06:00 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.41.0) {04/13/26 20:05:56}
+04/13/26 20:06:00 Number of idle job procs: 88
+04/13/26 20:06:00 Node SEARCH job proc (516.41.0) completed successfully.
+04/13/26 20:06:00 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.72.0) {04/13/26 20:05:56}
+04/13/26 20:06:00 Number of idle job procs: 87
+04/13/26 20:06:20 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:06:20 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.49.0) {04/13/26 20:06:17}
+04/13/26 20:06:20 Number of idle job procs: 87
+04/13/26 20:06:20 Node SEARCH job proc (516.49.0) completed successfully.
+04/13/26 20:06:20 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.73.0) {04/13/26 20:06:17}
+04/13/26 20:06:20 Number of idle job procs: 86
+04/13/26 20:06:45 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:06:45 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.63.0) {04/13/26 20:06:44}
+04/13/26 20:06:45 Number of idle job procs: 86
+04/13/26 20:06:45 Node SEARCH job proc (516.63.0) completed successfully.
+04/13/26 20:06:45 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.74.0) {04/13/26 20:06:44}
+04/13/26 20:06:45 Number of idle job procs: 85
+04/13/26 20:08:20 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:08:20 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.50.0) {04/13/26 20:08:19}
+04/13/26 20:08:20 Number of idle job procs: 85
+04/13/26 20:08:20 Node SEARCH job proc (516.50.0) completed successfully.
+04/13/26 20:08:20 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.75.0) {04/13/26 20:08:19}
+04/13/26 20:08:20 Number of idle job procs: 84
+04/13/26 20:08:45 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:08:45 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.51.0) {04/13/26 20:08:43}
+04/13/26 20:08:45 Number of idle job procs: 84
+04/13/26 20:08:45 Node SEARCH job proc (516.51.0) completed successfully.
+04/13/26 20:08:45 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.76.0) {04/13/26 20:08:43}
+04/13/26 20:08:45 Number of idle job procs: 83
+04/13/26 20:09:20 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:09:20 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.56.0) {04/13/26 20:09:16}
+04/13/26 20:09:20 Number of idle job procs: 83
+04/13/26 20:09:20 Node SEARCH job proc (516.56.0) completed successfully.
+04/13/26 20:09:20 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.77.0) {04/13/26 20:09:16}
+04/13/26 20:09:20 Number of idle job procs: 82
+04/13/26 20:09:30 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:09:30 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.28.0) {04/13/26 20:09:27}
+04/13/26 20:09:30 Number of idle job procs: 82
+04/13/26 20:09:30 Node SEARCH job proc (516.28.0) completed successfully.
+04/13/26 20:09:30 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.78.0) {04/13/26 20:09:27}
+04/13/26 20:09:30 Number of idle job procs: 81
+04/13/26 20:09:30 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.52.0) {04/13/26 20:09:28}
+04/13/26 20:09:30 Number of idle job procs: 81
+04/13/26 20:09:30 Node SEARCH job proc (516.52.0) completed successfully.
+04/13/26 20:09:30 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.79.0) {04/13/26 20:09:29}
+04/13/26 20:09:30 Number of idle job procs: 80
+04/13/26 20:09:45 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:09:45 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.54.0) {04/13/26 20:09:42}
+04/13/26 20:09:45 Number of idle job procs: 80
+04/13/26 20:09:45 Node SEARCH job proc (516.54.0) completed successfully.
+04/13/26 20:09:45 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.80.0) {04/13/26 20:09:42}
+04/13/26 20:09:45 Number of idle job procs: 79
+04/13/26 20:09:45 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.59.0) {04/13/26 20:09:44}
+04/13/26 20:09:45 Number of idle job procs: 79
+04/13/26 20:09:45 Node SEARCH job proc (516.59.0) completed successfully.
+04/13/26 20:09:45 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.81.0) {04/13/26 20:09:44}
+04/13/26 20:09:45 Number of idle job procs: 78
+04/13/26 20:09:45 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.53.0) {04/13/26 20:09:45}
+04/13/26 20:09:45 Number of idle job procs: 78
+04/13/26 20:09:45 Node SEARCH job proc (516.53.0) completed successfully.
+04/13/26 20:09:45 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.82.0) {04/13/26 20:09:45}
+04/13/26 20:09:45 Number of idle job procs: 77
+04/13/26 20:09:50 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:09:50 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.55.0) {04/13/26 20:09:48}
+04/13/26 20:09:50 Number of idle job procs: 77
+04/13/26 20:09:50 Node SEARCH job proc (516.55.0) completed successfully.
+04/13/26 20:09:50 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.83.0) {04/13/26 20:09:48}
+04/13/26 20:09:50 Number of idle job procs: 76
+04/13/26 20:10:00 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:10:00 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.68.0) {04/13/26 20:09:57}
+04/13/26 20:10:00 Number of idle job procs: 76
+04/13/26 20:10:00 Node SEARCH job proc (516.68.0) completed successfully.
+04/13/26 20:10:00 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.62.0) {04/13/26 20:09:58}
+04/13/26 20:10:00 Number of idle job procs: 76
+04/13/26 20:10:00 Node SEARCH job proc (516.62.0) completed successfully.
+04/13/26 20:10:05 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:10:05 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.84.0) {04/13/26 20:10:02}
+04/13/26 20:10:05 Number of idle job procs: 75
+04/13/26 20:10:05 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.85.0) {04/13/26 20:10:02}
+04/13/26 20:10:05 Number of idle job procs: 74
+04/13/26 20:10:05 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.67.0) {04/13/26 20:10:05}
+04/13/26 20:10:05 Number of idle job procs: 74
+04/13/26 20:10:05 Node SEARCH job proc (516.67.0) completed successfully.
+04/13/26 20:10:10 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:10:10 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.86.0) {04/13/26 20:10:07}
+04/13/26 20:10:10 Number of idle job procs: 73
+04/13/26 20:10:10 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.65.0) {04/13/26 20:10:08}
+04/13/26 20:10:10 Number of idle job procs: 73
+04/13/26 20:10:10 Node SEARCH job proc (516.65.0) completed successfully.
+04/13/26 20:10:15 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:10:15 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.64.0) {04/13/26 20:10:11}
+04/13/26 20:10:15 Number of idle job procs: 73
+04/13/26 20:10:15 Node SEARCH job proc (516.64.0) completed successfully.
+04/13/26 20:10:15 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.87.0) {04/13/26 20:10:12}
+04/13/26 20:10:15 Number of idle job procs: 72
+04/13/26 20:10:15 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.88.0) {04/13/26 20:10:12}
+04/13/26 20:10:15 Number of idle job procs: 71
+04/13/26 20:10:15 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.61.0) {04/13/26 20:10:12}
+04/13/26 20:10:15 Number of idle job procs: 71
+04/13/26 20:10:15 Node SEARCH job proc (516.61.0) completed successfully.
+04/13/26 20:10:20 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:10:20 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.89.0) {04/13/26 20:10:17}
+04/13/26 20:10:20 Number of idle job procs: 70
+04/13/26 20:10:50 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:10:50 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.44.0) {04/13/26 20:10:47}
+04/13/26 20:10:50 Number of idle job procs: 70
+04/13/26 20:10:50 Node SEARCH job proc (516.44.0) completed successfully.
+04/13/26 20:10:50 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.90.0) {04/13/26 20:10:47}
+04/13/26 20:10:50 Number of idle job procs: 69
+04/13/26 20:10:50 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.66.0) {04/13/26 20:10:49}
+04/13/26 20:10:50 Number of idle job procs: 69
+04/13/26 20:10:50 Node SEARCH job proc (516.66.0) completed successfully.
+04/13/26 20:10:55 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:10:55 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.91.0) {04/13/26 20:10:52}
+04/13/26 20:10:55 Number of idle job procs: 68
+04/13/26 20:11:55 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:11:55 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.70.0) {04/13/26 20:11:52}
+04/13/26 20:11:55 Number of idle job procs: 68
+04/13/26 20:11:55 Node SEARCH job proc (516.70.0) completed successfully.
+04/13/26 20:11:55 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.92.0) {04/13/26 20:11:53}
+04/13/26 20:11:55 Number of idle job procs: 67
+04/13/26 20:11:55 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.57.0) {04/13/26 20:11:54}
+04/13/26 20:11:55 Number of idle job procs: 67
+04/13/26 20:11:55 Node SEARCH job proc (516.57.0) completed successfully.
+04/13/26 20:12:00 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:12:00 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.93.0) {04/13/26 20:11:58}
+04/13/26 20:12:00 Number of idle job procs: 66
+04/13/26 20:12:20 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:12:20 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.69.0) {04/13/26 20:12:18}
+04/13/26 20:12:20 Number of idle job procs: 66
+04/13/26 20:12:20 Node SEARCH job proc (516.69.0) completed successfully.
+04/13/26 20:12:20 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.94.0) {04/13/26 20:12:18}
+04/13/26 20:12:20 Number of idle job procs: 65
+04/13/26 20:12:30 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:12:30 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.72.0) {04/13/26 20:12:29}
+04/13/26 20:12:30 Number of idle job procs: 65
+04/13/26 20:12:30 Node SEARCH job proc (516.72.0) completed successfully.
+04/13/26 20:12:35 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:12:35 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.95.0) {04/13/26 20:12:33}
+04/13/26 20:12:35 Number of idle job procs: 64
+04/13/26 20:12:35 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.79.0) {04/13/26 20:12:34}
+04/13/26 20:12:35 Number of idle job procs: 64
+04/13/26 20:12:35 Node SEARCH job proc (516.79.0) completed successfully.
+04/13/26 20:12:40 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:12:40 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.96.0) {04/13/26 20:12:39}
+04/13/26 20:12:40 Number of idle job procs: 63
+04/13/26 20:14:00 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:14:00 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.71.0) {04/13/26 20:13:59}
+04/13/26 20:14:00 Number of idle job procs: 63
+04/13/26 20:14:00 Node SEARCH job proc (516.71.0) completed successfully.
+04/13/26 20:14:00 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.97.0) {04/13/26 20:13:59}
+04/13/26 20:14:00 Number of idle job procs: 62
+04/13/26 20:14:41 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:14:41 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.75.0) {04/13/26 20:14:38}
+04/13/26 20:14:41 Number of idle job procs: 62
+04/13/26 20:14:41 Node SEARCH job proc (516.75.0) completed successfully.
+04/13/26 20:14:41 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.98.0) {04/13/26 20:14:40}
+04/13/26 20:14:41 Number of idle job procs: 61
+04/13/26 20:15:06 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:15:06 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.73.0) {04/13/26 20:15:02}
+04/13/26 20:15:06 Number of idle job procs: 61
+04/13/26 20:15:06 Node SEARCH job proc (516.73.0) completed successfully.
+04/13/26 20:15:06 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.99.0) {04/13/26 20:15:05}
+04/13/26 20:15:06 Number of idle job procs: 60
+04/13/26 20:15:41 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:15:41 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.77.0) {04/13/26 20:15:36}
+04/13/26 20:15:41 Number of idle job procs: 60
+04/13/26 20:15:41 Node SEARCH job proc (516.77.0) completed successfully.
+04/13/26 20:15:41 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.100.0) {04/13/26 20:15:36}
+04/13/26 20:15:41 Number of idle job procs: 59
+04/13/26 20:16:01 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:16:01 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.81.0) {04/13/26 20:15:58}
+04/13/26 20:16:01 Number of idle job procs: 59
+04/13/26 20:16:01 Node SEARCH job proc (516.81.0) completed successfully.
+04/13/26 20:16:01 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.78.0) {04/13/26 20:15:59}
+04/13/26 20:16:01 Number of idle job procs: 59
+04/13/26 20:16:01 Node SEARCH job proc (516.78.0) completed successfully.
+04/13/26 20:16:01 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.101.0) {04/13/26 20:16:01}
+04/13/26 20:16:01 Number of idle job procs: 58
+04/13/26 20:16:01 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.102.0) {04/13/26 20:16:01}
+04/13/26 20:16:01 Number of idle job procs: 57
+04/13/26 20:16:06 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:16:06 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.82.0) {04/13/26 20:16:05}
+04/13/26 20:16:06 Number of idle job procs: 57
+04/13/26 20:16:06 Node SEARCH job proc (516.82.0) completed successfully.
+04/13/26 20:16:06 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.103.0) {04/13/26 20:16:05}
+04/13/26 20:16:06 Number of idle job procs: 56
+04/13/26 20:16:11 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:16:11 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.95.0) {04/13/26 20:16:10}
+04/13/26 20:16:11 Number of idle job procs: 56
+04/13/26 20:16:11 Node SEARCH job proc (516.95.0) completed successfully.
+04/13/26 20:16:11 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.104.0) {04/13/26 20:16:11}
+04/13/26 20:16:11 Number of idle job procs: 55
+04/13/26 20:16:16 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:16:16 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.87.0) {04/13/26 20:16:13}
+04/13/26 20:16:16 Number of idle job procs: 55
+04/13/26 20:16:16 Node SEARCH job proc (516.87.0) completed successfully.
+04/13/26 20:16:16 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.105.0) {04/13/26 20:16:14}
+04/13/26 20:16:16 Number of idle job procs: 54
+04/13/26 20:16:16 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.60.0) {04/13/26 20:16:15}
+04/13/26 20:16:16 Number of idle job procs: 54
+04/13/26 20:16:16 Node SEARCH job proc (516.60.0) completed successfully.
+04/13/26 20:16:21 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:16:21 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.106.0) {04/13/26 20:16:16}
+04/13/26 20:16:21 Number of idle job procs: 53
+04/13/26 20:16:26 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:16:26 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.80.0) {04/13/26 20:16:26}
+04/13/26 20:16:26 Number of idle job procs: 53
+04/13/26 20:16:26 Node SEARCH job proc (516.80.0) completed successfully.
+04/13/26 20:16:31 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:16:31 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.107.0) {04/13/26 20:16:26}
+04/13/26 20:16:31 Number of idle job procs: 52
+04/13/26 20:16:36 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:16:36 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.88.0) {04/13/26 20:16:33}
+04/13/26 20:16:36 Number of idle job procs: 52
+04/13/26 20:16:36 Node SEARCH job proc (516.88.0) completed successfully.
+04/13/26 20:16:36 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.108.0) {04/13/26 20:16:33}
+04/13/26 20:16:36 Number of idle job procs: 51
+04/13/26 20:17:01 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:17:01 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.84.0) {04/13/26 20:16:58}
+04/13/26 20:17:01 Number of idle job procs: 51
+04/13/26 20:17:01 Node SEARCH job proc (516.84.0) completed successfully.
+04/13/26 20:17:01 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.109.0) {04/13/26 20:16:58}
+04/13/26 20:17:01 Number of idle job procs: 50
+04/13/26 20:17:16 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:17:16 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.91.0) {04/13/26 20:17:14}
+04/13/26 20:17:16 Number of idle job procs: 50
+04/13/26 20:17:16 Node SEARCH job proc (516.91.0) completed successfully.
+04/13/26 20:17:16 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.110.0) {04/13/26 20:17:15}
+04/13/26 20:17:16 Number of idle job procs: 49
+04/13/26 20:17:36 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:17:36 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.86.0) {04/13/26 20:17:33}
+04/13/26 20:17:36 Number of idle job procs: 49
+04/13/26 20:17:36 Node SEARCH job proc (516.86.0) completed successfully.
+04/13/26 20:17:36 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.111.0) {04/13/26 20:17:33}
+04/13/26 20:17:36 Number of idle job procs: 48
+04/13/26 20:18:16 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:18:16 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.93.0) {04/13/26 20:18:13}
+04/13/26 20:18:16 Number of idle job procs: 48
+04/13/26 20:18:16 Node SEARCH job proc (516.93.0) completed successfully.
+04/13/26 20:18:16 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.112.0) {04/13/26 20:18:13}
+04/13/26 20:18:16 Number of idle job procs: 47
+04/13/26 20:18:26 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:18:26 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.94.0) {04/13/26 20:18:24}
+04/13/26 20:18:26 Number of idle job procs: 47
+04/13/26 20:18:26 Node SEARCH job proc (516.94.0) completed successfully.
+04/13/26 20:18:26 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.113.0) {04/13/26 20:18:24}
+04/13/26 20:18:26 Number of idle job procs: 46
+04/13/26 20:19:06 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:19:06 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.96.0) {04/13/26 20:19:04}
+04/13/26 20:19:06 Number of idle job procs: 46
+04/13/26 20:19:06 Node SEARCH job proc (516.96.0) completed successfully.
+04/13/26 20:19:06 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.114.0) {04/13/26 20:19:05}
+04/13/26 20:19:06 Number of idle job procs: 45
+04/13/26 20:19:36 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:19:36 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.89.0) {04/13/26 20:19:36}
+04/13/26 20:19:36 Number of idle job procs: 45
+04/13/26 20:19:36 Node SEARCH job proc (516.89.0) completed successfully.
+04/13/26 20:19:36 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.115.0) {04/13/26 20:19:36}
+04/13/26 20:19:36 Number of idle job procs: 44
+04/13/26 20:20:16 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:20:16 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.97.0) {04/13/26 20:20:12}
+04/13/26 20:20:16 Number of idle job procs: 44
+04/13/26 20:20:16 Node SEARCH job proc (516.97.0) completed successfully.
+04/13/26 20:20:16 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.116.0) {04/13/26 20:20:12}
+04/13/26 20:20:16 Number of idle job procs: 43
+04/13/26 20:20:31 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:20:31 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.83.0) {04/13/26 20:20:27}
+04/13/26 20:20:31 Number of idle job procs: 43
+04/13/26 20:20:31 Node SEARCH job proc (516.83.0) completed successfully.
+04/13/26 20:20:31 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.117.0) {04/13/26 20:20:27}
+04/13/26 20:20:31 Number of idle job procs: 42
+04/13/26 20:21:06 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:21:06 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.111.0) {04/13/26 20:21:04}
+04/13/26 20:21:06 Number of idle job procs: 42
+04/13/26 20:21:06 Node SEARCH job proc (516.111.0) completed successfully.
+04/13/26 20:21:06 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.118.0) {04/13/26 20:21:04}
+04/13/26 20:21:06 Number of idle job procs: 41
+04/13/26 20:21:06 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.99.0) {04/13/26 20:21:05}
+04/13/26 20:21:06 Number of idle job procs: 41
+04/13/26 20:21:06 Node SEARCH job proc (516.99.0) completed successfully.
+04/13/26 20:21:06 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.119.0) {04/13/26 20:21:06}
+04/13/26 20:21:06 Number of idle job procs: 40
+04/13/26 20:21:26 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:21:26 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.98.0) {04/13/26 20:21:26}
+04/13/26 20:21:26 Number of idle job procs: 40
+04/13/26 20:21:26 Node SEARCH job proc (516.98.0) completed successfully.
+04/13/26 20:21:26 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.120.0) {04/13/26 20:21:26}
+04/13/26 20:21:26 Number of idle job procs: 39
+04/13/26 20:21:36 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:21:36 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.76.0) {04/13/26 20:21:34}
+04/13/26 20:21:36 Number of idle job procs: 39
+04/13/26 20:21:36 Node SEARCH job proc (516.76.0) completed successfully.
+04/13/26 20:21:41 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:21:41 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.100.0) {04/13/26 20:21:38}
+04/13/26 20:21:41 Number of idle job procs: 39
+04/13/26 20:21:41 Node SEARCH job proc (516.100.0) completed successfully.
+04/13/26 20:21:41 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.121.0) {04/13/26 20:21:38}
+04/13/26 20:21:41 Number of idle job procs: 38
+04/13/26 20:21:41 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.122.0) {04/13/26 20:21:39}
+04/13/26 20:21:41 Number of idle job procs: 37
+04/13/26 20:22:01 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:22:01 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.101.0) {04/13/26 20:21:57}
+04/13/26 20:22:01 Number of idle job procs: 37
+04/13/26 20:22:01 Node SEARCH job proc (516.101.0) completed successfully.
+04/13/26 20:22:01 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.123.0) {04/13/26 20:21:57}
+04/13/26 20:22:01 Number of idle job procs: 36
+04/13/26 20:22:16 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:22:16 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.102.0) {04/13/26 20:22:15}
+04/13/26 20:22:16 Number of idle job procs: 36
+04/13/26 20:22:16 Node SEARCH job proc (516.102.0) completed successfully.
+04/13/26 20:22:16 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.124.0) {04/13/26 20:22:15}
+04/13/26 20:22:16 Number of idle job procs: 35
+04/13/26 20:22:21 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:22:21 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.107.0) {04/13/26 20:22:18}
+04/13/26 20:22:21 Number of idle job procs: 35
+04/13/26 20:22:21 Node SEARCH job proc (516.107.0) completed successfully.
+04/13/26 20:22:21 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.125.0) {04/13/26 20:22:19}
+04/13/26 20:22:21 Number of idle job procs: 34
+04/13/26 20:22:31 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:22:31 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.104.0) {04/13/26 20:22:30}
+04/13/26 20:22:31 Number of idle job procs: 34
+04/13/26 20:22:31 Node SEARCH job proc (516.104.0) completed successfully.
+04/13/26 20:22:31 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.126.0) {04/13/26 20:22:31}
+04/13/26 20:22:31 Number of idle job procs: 33
+04/13/26 20:22:46 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:22:46 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.85.0) {04/13/26 20:22:44}
+04/13/26 20:22:46 Number of idle job procs: 33
+04/13/26 20:22:46 Node SEARCH job proc (516.85.0) completed successfully.
+04/13/26 20:22:46 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.127.0) {04/13/26 20:22:44}
+04/13/26 20:22:46 Number of idle job procs: 32
+04/13/26 20:23:36 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:23:36 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.110.0) {04/13/26 20:23:35}
+04/13/26 20:23:36 Number of idle job procs: 32
+04/13/26 20:23:36 Node SEARCH job proc (516.110.0) completed successfully.
+04/13/26 20:23:36 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.128.0) {04/13/26 20:23:36}
+04/13/26 20:23:36 Number of idle job procs: 31
+04/13/26 20:23:46 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:23:46 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.109.0) {04/13/26 20:23:42}
+04/13/26 20:23:46 Number of idle job procs: 31
+04/13/26 20:23:46 Node SEARCH job proc (516.109.0) completed successfully.
+04/13/26 20:23:46 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.129.0) {04/13/26 20:23:42}
+04/13/26 20:23:46 Number of idle job procs: 30
+04/13/26 20:23:46 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.103.0) {04/13/26 20:23:42}
+04/13/26 20:23:46 Number of idle job procs: 30
+04/13/26 20:23:46 Node SEARCH job proc (516.103.0) completed successfully.
+04/13/26 20:23:46 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.130.0) {04/13/26 20:23:45}
+04/13/26 20:23:46 Number of idle job procs: 29
+04/13/26 20:24:26 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:24:26 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.112.0) {04/13/26 20:24:25}
+04/13/26 20:24:26 Number of idle job procs: 29
+04/13/26 20:24:26 Node SEARCH job proc (516.112.0) completed successfully.
+04/13/26 20:24:26 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.131.0) {04/13/26 20:24:25}
+04/13/26 20:24:26 Number of idle job procs: 28
+04/13/26 20:24:41 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:24:41 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.105.0) {04/13/26 20:24:40}
+04/13/26 20:24:41 Number of idle job procs: 28
+04/13/26 20:24:41 Node SEARCH job proc (516.105.0) completed successfully.
+04/13/26 20:24:41 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.132.0) {04/13/26 20:24:40}
+04/13/26 20:24:41 Number of idle job procs: 27
+04/13/26 20:24:51 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:24:51 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.92.0) {04/13/26 20:24:51}
+04/13/26 20:24:51 Number of idle job procs: 27
+04/13/26 20:24:51 Node SEARCH job proc (516.92.0) completed successfully.
+04/13/26 20:24:51 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.133.0) {04/13/26 20:24:51}
+04/13/26 20:24:51 Number of idle job procs: 26
+04/13/26 20:25:16 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:25:16 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.114.0) {04/13/26 20:25:14}
+04/13/26 20:25:16 Number of idle job procs: 26
+04/13/26 20:25:16 Node SEARCH job proc (516.114.0) completed successfully.
+04/13/26 20:25:16 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.134.0) {04/13/26 20:25:14}
+04/13/26 20:25:16 Number of idle job procs: 25
+04/13/26 20:25:41 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:25:41 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.115.0) {04/13/26 20:25:41}
+04/13/26 20:25:41 Number of idle job procs: 25
+04/13/26 20:25:41 Node SEARCH job proc (516.115.0) completed successfully.
+04/13/26 20:25:41 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.135.0) {04/13/26 20:25:41}
+04/13/26 20:25:41 Number of idle job procs: 24
+04/13/26 20:26:06 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:26:06 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.127.0) {04/13/26 20:26:05}
+04/13/26 20:26:06 Number of idle job procs: 24
+04/13/26 20:26:06 Node SEARCH job proc (516.127.0) completed successfully.
+04/13/26 20:26:06 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.136.0) {04/13/26 20:26:05}
+04/13/26 20:26:06 Number of idle job procs: 23
+04/13/26 20:26:21 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:26:21 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.117.0) {04/13/26 20:26:21}
+04/13/26 20:26:21 Number of idle job procs: 23
+04/13/26 20:26:21 Node SEARCH job proc (516.117.0) completed successfully.
+04/13/26 20:26:26 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:26:26 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.137.0) {04/13/26 20:26:22}
+04/13/26 20:26:26 Number of idle job procs: 22
+04/13/26 20:26:31 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:26:31 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.116.0) {04/13/26 20:26:28}
+04/13/26 20:26:31 Number of idle job procs: 22
+04/13/26 20:26:31 Node SEARCH job proc (516.116.0) completed successfully.
+04/13/26 20:26:31 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.138.0) {04/13/26 20:26:28}
+04/13/26 20:26:31 Number of idle job procs: 21
+04/13/26 20:26:46 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:26:46 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.113.0) {04/13/26 20:26:45}
+04/13/26 20:26:46 Number of idle job procs: 21
+04/13/26 20:26:46 Node SEARCH job proc (516.113.0) completed successfully.
+04/13/26 20:26:46 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.139.0) {04/13/26 20:26:45}
+04/13/26 20:26:46 Number of idle job procs: 20
+04/13/26 20:27:31 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:27:31 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.118.0) {04/13/26 20:27:28}
+04/13/26 20:27:31 Number of idle job procs: 20
+04/13/26 20:27:31 Node SEARCH job proc (516.118.0) completed successfully.
+04/13/26 20:27:31 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.140.0) {04/13/26 20:27:28}
+04/13/26 20:27:31 Number of idle job procs: 19
+04/13/26 20:27:41 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:27:41 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.120.0) {04/13/26 20:27:40}
+04/13/26 20:27:41 Number of idle job procs: 19
+04/13/26 20:27:41 Node SEARCH job proc (516.120.0) completed successfully.
+04/13/26 20:27:41 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.141.0) {04/13/26 20:27:40}
+04/13/26 20:27:41 Number of idle job procs: 18
+04/13/26 20:27:46 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:27:46 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.123.0) {04/13/26 20:27:44}
+04/13/26 20:27:46 Number of idle job procs: 18
+04/13/26 20:27:46 Node SEARCH job proc (516.123.0) completed successfully.
+04/13/26 20:27:46 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.142.0) {04/13/26 20:27:44}
+04/13/26 20:27:46 Number of idle job procs: 17
+04/13/26 20:27:56 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:27:56 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.119.0) {04/13/26 20:27:55}
+04/13/26 20:27:56 Number of idle job procs: 17
+04/13/26 20:27:56 Node SEARCH job proc (516.119.0) completed successfully.
+04/13/26 20:27:56 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.143.0) {04/13/26 20:27:55}
+04/13/26 20:27:56 Number of idle job procs: 16
+04/13/26 20:28:51 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:28:51 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.125.0) {04/13/26 20:28:48}
+04/13/26 20:28:51 Number of idle job procs: 16
+04/13/26 20:28:51 Node SEARCH job proc (516.125.0) completed successfully.
+04/13/26 20:28:56 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:28:56 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.144.0) {04/13/26 20:28:53}
+04/13/26 20:28:56 Number of idle job procs: 15
+04/13/26 20:29:06 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:29:06 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.126.0) {04/13/26 20:29:04}
+04/13/26 20:29:06 Number of idle job procs: 15
+04/13/26 20:29:06 Node SEARCH job proc (516.126.0) completed successfully.
+04/13/26 20:29:06 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.145.0) {04/13/26 20:29:04}
+04/13/26 20:29:06 Number of idle job procs: 14
+04/13/26 20:29:56 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:29:56 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.121.0) {04/13/26 20:29:51}
+04/13/26 20:29:56 Number of idle job procs: 14
+04/13/26 20:29:56 Node SEARCH job proc (516.121.0) completed successfully.
+04/13/26 20:29:56 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.146.0) {04/13/26 20:29:54}
+04/13/26 20:29:56 Number of idle job procs: 13
+04/13/26 20:30:01 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:30:01 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.130.0) {04/13/26 20:29:57}
+04/13/26 20:30:01 Number of idle job procs: 13
+04/13/26 20:30:01 Node SEARCH job proc (516.130.0) completed successfully.
+04/13/26 20:30:01 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.147.0) {04/13/26 20:29:57}
+04/13/26 20:30:01 Number of idle job procs: 12
+04/13/26 20:30:01 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.108.0) {04/13/26 20:29:57}
+04/13/26 20:30:01 Number of idle job procs: 12
+04/13/26 20:30:01 Node SEARCH job proc (516.108.0) completed successfully.
+04/13/26 20:30:01 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.148.0) {04/13/26 20:29:57}
+04/13/26 20:30:01 Number of idle job procs: 11
+04/13/26 20:30:26 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:30:26 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.131.0) {04/13/26 20:30:22}
+04/13/26 20:30:26 Number of idle job procs: 11
+04/13/26 20:30:26 Node SEARCH job proc (516.131.0) completed successfully.
+04/13/26 20:30:26 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.149.0) {04/13/26 20:30:22}
+04/13/26 20:30:26 Number of idle job procs: 10
+04/13/26 20:30:31 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:30:31 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.128.0) {04/13/26 20:30:27}
+04/13/26 20:30:31 Number of idle job procs: 10
+04/13/26 20:30:31 Node SEARCH job proc (516.128.0) completed successfully.
+04/13/26 20:30:31 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.150.0) {04/13/26 20:30:27}
+04/13/26 20:30:31 Number of idle job procs: 9
+04/13/26 20:30:41 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:30:41 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.133.0) {04/13/26 20:30:37}
+04/13/26 20:30:41 Number of idle job procs: 9
+04/13/26 20:30:41 Node SEARCH job proc (516.133.0) completed successfully.
+04/13/26 20:30:41 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.151.0) {04/13/26 20:30:38}
+04/13/26 20:30:41 Number of idle job procs: 8
+04/13/26 20:30:51 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:30:51 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.132.0) {04/13/26 20:30:47}
+04/13/26 20:30:51 Number of idle job procs: 8
+04/13/26 20:30:51 Node SEARCH job proc (516.132.0) completed successfully.
+04/13/26 20:30:51 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.152.0) {04/13/26 20:30:49}
+04/13/26 20:30:51 Number of idle job procs: 7
+04/13/26 20:30:56 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:30:56 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.143.0) {04/13/26 20:30:53}
+04/13/26 20:30:56 Number of idle job procs: 7
+04/13/26 20:30:56 Node SEARCH job proc (516.143.0) completed successfully.
+04/13/26 20:30:56 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.153.0) {04/13/26 20:30:54}
+04/13/26 20:30:56 Number of idle job procs: 6
+04/13/26 20:31:26 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:31:26 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.134.0) {04/13/26 20:31:25}
+04/13/26 20:31:26 Number of idle job procs: 6
+04/13/26 20:31:26 Node SEARCH job proc (516.134.0) completed successfully.
+04/13/26 20:31:26 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.154.0) {04/13/26 20:31:25}
+04/13/26 20:31:26 Number of idle job procs: 5
+04/13/26 20:31:46 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:31:46 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.135.0) {04/13/26 20:31:43}
+04/13/26 20:31:46 Number of idle job procs: 5
+04/13/26 20:31:46 Node SEARCH job proc (516.135.0) completed successfully.
+04/13/26 20:31:46 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.155.0) {04/13/26 20:31:45}
+04/13/26 20:31:46 Number of idle job procs: 4
+04/13/26 20:32:11 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:32:11 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.129.0) {04/13/26 20:32:06}
+04/13/26 20:32:11 Number of idle job procs: 4
+04/13/26 20:32:11 Node SEARCH job proc (516.129.0) completed successfully.
+04/13/26 20:32:11 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.136.0) {04/13/26 20:32:08}
+04/13/26 20:32:11 Number of idle job procs: 4
+04/13/26 20:32:11 Node SEARCH job proc (516.136.0) completed successfully.
+04/13/26 20:32:11 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.156.0) {04/13/26 20:32:10}
+04/13/26 20:32:11 Number of idle job procs: 3
+04/13/26 20:32:11 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.157.0) {04/13/26 20:32:10}
+04/13/26 20:32:11 Number of idle job procs: 2
+04/13/26 20:32:41 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:32:41 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.139.0) {04/13/26 20:32:36}
+04/13/26 20:32:41 Number of idle job procs: 2
+04/13/26 20:32:41 Node SEARCH job proc (516.139.0) completed successfully.
+04/13/26 20:32:41 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.158.0) {04/13/26 20:32:41}
+04/13/26 20:32:41 Number of idle job procs: 1
+04/13/26 20:33:31 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:33:31 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.141.0) {04/13/26 20:33:29}
+04/13/26 20:33:31 Number of idle job procs: 1
+04/13/26 20:33:31 Node SEARCH job proc (516.141.0) completed successfully.
+04/13/26 20:33:31 Event: ULOG_EXECUTE for HTCondor Node SEARCH (516.159.0) {04/13/26 20:33:29}
+04/13/26 20:33:31 Number of idle job procs: 0
+04/13/26 20:33:56 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:33:56 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.142.0) {04/13/26 20:33:52}
+04/13/26 20:33:56 Number of idle job procs: 0
+04/13/26 20:33:56 Node SEARCH job proc (516.142.0) completed successfully.
+04/13/26 20:34:31 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:34:31 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.137.0) {04/13/26 20:34:30}
+04/13/26 20:34:31 Number of idle job procs: 0
+04/13/26 20:34:31 Node SEARCH job proc (516.137.0) completed successfully.
+04/13/26 20:35:01 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:35:01 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.124.0) {04/13/26 20:34:57}
+04/13/26 20:35:01 Number of idle job procs: 0
+04/13/26 20:35:01 Node SEARCH job proc (516.124.0) completed successfully.
+04/13/26 20:35:11 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:35:11 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.144.0) {04/13/26 20:35:06}
+04/13/26 20:35:11 Number of idle job procs: 0
+04/13/26 20:35:11 Node SEARCH job proc (516.144.0) completed successfully.
+04/13/26 20:35:41 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:35:41 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.145.0) {04/13/26 20:35:38}
+04/13/26 20:35:41 Number of idle job procs: 0
+04/13/26 20:35:41 Node SEARCH job proc (516.145.0) completed successfully.
+04/13/26 20:35:41 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.148.0) {04/13/26 20:35:39}
+04/13/26 20:35:41 Number of idle job procs: 0
+04/13/26 20:35:41 Node SEARCH job proc (516.148.0) completed successfully.
+04/13/26 20:35:41 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.147.0) {04/13/26 20:35:41}
+04/13/26 20:35:41 Number of idle job procs: 0
+04/13/26 20:35:41 Node SEARCH job proc (516.147.0) completed successfully.
+04/13/26 20:35:46 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:35:46 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.146.0) {04/13/26 20:35:45}
+04/13/26 20:35:46 Number of idle job procs: 0
+04/13/26 20:35:46 Node SEARCH job proc (516.146.0) completed successfully.
+04/13/26 20:36:11 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:36:11 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.149.0) {04/13/26 20:36:07}
+04/13/26 20:36:11 Number of idle job procs: 0
+04/13/26 20:36:11 Node SEARCH job proc (516.149.0) completed successfully.
+04/13/26 20:36:21 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:36:21 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.159.0) {04/13/26 20:36:17}
+04/13/26 20:36:21 Number of idle job procs: 0
+04/13/26 20:36:21 Node SEARCH job proc (516.159.0) completed successfully.
+04/13/26 20:36:26 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:36:26 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.150.0) {04/13/26 20:36:24}
+04/13/26 20:36:26 Number of idle job procs: 0
+04/13/26 20:36:26 Node SEARCH job proc (516.150.0) completed successfully.
+04/13/26 20:36:36 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:36:36 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.152.0) {04/13/26 20:36:32}
+04/13/26 20:36:36 Number of idle job procs: 0
+04/13/26 20:36:36 Node SEARCH job proc (516.152.0) completed successfully.
+04/13/26 20:37:11 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:37:11 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.155.0) {04/13/26 20:37:10}
+04/13/26 20:37:11 Number of idle job procs: 0
+04/13/26 20:37:11 Node SEARCH job proc (516.155.0) completed successfully.
+04/13/26 20:37:41 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:37:41 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.157.0) {04/13/26 20:37:38}
+04/13/26 20:37:41 Number of idle job procs: 0
+04/13/26 20:37:41 Node SEARCH job proc (516.157.0) completed successfully.
+04/13/26 20:37:41 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.151.0) {04/13/26 20:37:40}
+04/13/26 20:37:41 Number of idle job procs: 0
+04/13/26 20:37:41 Node SEARCH job proc (516.151.0) completed successfully.
+04/13/26 20:38:11 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:38:11 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.158.0) {04/13/26 20:38:11}
+04/13/26 20:38:11 Number of idle job procs: 0
+04/13/26 20:38:11 Node SEARCH job proc (516.158.0) completed successfully.
+04/13/26 20:38:31 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:38:31 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.153.0) {04/13/26 20:38:27}
+04/13/26 20:38:31 Number of idle job procs: 0
+04/13/26 20:38:31 Node SEARCH job proc (516.153.0) completed successfully.
+04/13/26 20:39:36 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:39:36 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.140.0) {04/13/26 20:39:36}
+04/13/26 20:39:36 Number of idle job procs: 0
+04/13/26 20:39:36 Node SEARCH job proc (516.140.0) completed successfully.
+04/13/26 20:43:46 Currently monitoring 1 HTCondor log file(s)
+04/13/26 20:43:46 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.156.0) {04/13/26 20:43:45}
+04/13/26 20:43:46 Number of idle job procs: 0
+04/13/26 20:43:46 Node SEARCH job proc (516.156.0) completed successfully.
+04/13/26 20:53:47 601 seconds since last log event
+04/13/26 20:53:47 Pending DAG nodes:
+04/13/26 20:53:47   Node SEARCH, HTCondor ID 516, status STATUS_SUBMITTED
+04/13/26 21:00:48 Currently monitoring 1 HTCondor log file(s)
+04/13/26 21:00:48 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.10.0) {04/13/26 21:00:46}
+04/13/26 21:00:48 Number of idle job procs: 0
+04/13/26 21:00:48 Node SEARCH job proc (516.10.0) completed successfully.
+04/13/26 21:04:53 Currently monitoring 1 HTCondor log file(s)
+04/13/26 21:04:53 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.26.0) {04/13/26 21:04:50}
+04/13/26 21:04:53 Number of idle job procs: 0
+04/13/26 21:04:53 Node SEARCH job proc (516.26.0) completed successfully.
+04/13/26 21:05:48 Currently monitoring 1 HTCondor log file(s)
+04/13/26 21:05:48 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.42.0) {04/13/26 21:05:45}
+04/13/26 21:05:48 Number of idle job procs: 0
+04/13/26 21:05:48 Node SEARCH job proc (516.42.0) completed successfully.
+04/13/26 21:15:48 600 seconds since last log event
+04/13/26 21:15:48 Pending DAG nodes:
+04/13/26 21:15:48   Node SEARCH, HTCondor ID 516, status STATUS_SUBMITTED
+04/13/26 21:15:53 Currently monitoring 1 HTCondor log file(s)
+04/13/26 21:15:53 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.58.0) {04/13/26 21:15:51}
+04/13/26 21:15:53 Number of idle job procs: 0
+04/13/26 21:15:53 Node SEARCH job proc (516.58.0) completed successfully.
+04/13/26 21:18:24 Currently monitoring 1 HTCondor log file(s)
+04/13/26 21:18:24 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.74.0) {04/13/26 21:18:22}
+04/13/26 21:18:24 Number of idle job procs: 0
+04/13/26 21:18:24 Node SEARCH job proc (516.74.0) completed successfully.
+04/13/26 21:19:34 Currently monitoring 1 HTCondor log file(s)
+04/13/26 21:19:34 Event: ULOG_JOB_TERMINATED for HTCondor Node SEARCH (516.90.0) {04/13/26 21:19:33}
+04/13/26 21:19:34 Number of idle job procs: 0
+04/13/26 21:19:34 Node SEARCH job proc (516.90.0) completed successfully.
+04/13/26 21:28:10 Received SIGUSR1
+04/13/26 21:28:10 Aborting DAG...
+04/13/26 21:28:10 Writing Rescue DAG to /home/stu_jamsin/peket/test_injection/sub_files/pipeline.dag.rescue001...
+04/13/26 21:28:10 Removing submitted jobs...
+04/13/26 21:28:10 Removing any/all submitted HTCondor jobs...
+04/13/26 21:28:10 Running: /usr/bin/condor_rm -const DAGManJobId==514 -reason DAG' 'Removed:' 'User' 'removed' 'scheduler' 'job' 'from' 'queue.
+04/13/26 21:28:10 Note: 0 total job deferrals because of -MaxJobs limit (0)
+04/13/26 21:28:10 Note: 0 total job deferrals because of -MaxIdle limit (1000)
+04/13/26 21:28:10 Note: 0 total job deferrals because of node category throttles
+04/13/26 21:28:10 Note: 0 total PRE script deferrals because of -MaxPre limit (10) or DEFER
+04/13/26 21:28:10 Note: 0 total POST script deferrals because of -MaxPost limit (10) or DEFER
+04/13/26 21:28:10 Note: 0 total HOLD script deferrals because of -MaxHold limit (20) or DEFER
+04/13/26 21:28:10 DAG status: 4 (DAG_STATUS_RM)
+04/13/26 21:28:10 Of 3 nodes total:
+04/13/26 21:28:10  Done     Pre   Queued    Post   Ready   Un-Ready   Failed   Futile
+04/13/26 21:28:10   ===     ===      ===     ===     ===        ===      ===      ===
+04/13/26 21:28:10     1       0        1       0       0          1        0        0
+04/13/26 21:28:10 0 job proc(s) currently held
+04/13/26 21:28:10 DAGMan Runtime Statistics: [ EventCycleTimeAvg = 0.0005165562206253582; EventCycleTimeCount = 1295.0; EventCycleTimeMax = 0.1139190196990967; EventCycleTimeMin = 1.001358032226562E-05; EventCycleTimeStd = 0.004206691389355647; EventCycleTimeSum = 0.6689403057098389; LogProcessCycleTimeAvg = 0.0004053254058395607; LogProcessCycleTimeCount = 138.0; LogProcessCycleTimeMax = 0.008804082870483398; LogProcessCycleTimeMin = 0.0001518726348876953; LogProcessCycleTimeStd = 0.0007332386900844892; LogProcessCycleTimeSum = 0.05593490600585938; SleepCycleTimeAvg = 5.004206091027355; SleepCycleTimeCount = 1294.0; SleepCycleTimeMax = 5.00660514831543; SleepCycleTimeMin = 4.004112958908081; SleepCycleTimeStd = 0.02782607432975999; SleepCycleTimeSum = 6475.442681789398; SubmitCycleTimeAvg = 0.0001258480042564363; SubmitCycleTimeCount = 1295.0; SubmitCycleTimeMax = 0.1137130260467529; SubmitCycleTimeMin = 2.86102294921875E-06; SubmitCycleTimeStd = 0.003278713650525583; SubmitCycleTimeSum = 0.162973165512085; ]
+04/13/26 21:28:10 Wrote metrics file /home/stu_jamsin/peket/test_injection/sub_files/pipeline.dag.metrics.
+04/13/26 21:28:10 DAGMan Runtime Statistics: [ EventCycleTimeAvg = 0.0005165562206253582; EventCycleTimeCount = 1295.0; EventCycleTimeMax = 0.1139190196990967; EventCycleTimeMin = 1.001358032226562E-05; EventCycleTimeStd = 0.004206691389355647; EventCycleTimeSum = 0.6689403057098389; LogProcessCycleTimeAvg = 0.0004053254058395607; LogProcessCycleTimeCount = 138.0; LogProcessCycleTimeMax = 0.008804082870483398; LogProcessCycleTimeMin = 0.0001518726348876953; LogProcessCycleTimeStd = 0.0007332386900844892; LogProcessCycleTimeSum = 0.05593490600585938; SleepCycleTimeAvg = 5.004206091027355; SleepCycleTimeCount = 1294.0; SleepCycleTimeMax = 5.00660514831543; SleepCycleTimeMin = 4.004112958908081; SleepCycleTimeStd = 0.02782607432975999; SleepCycleTimeSum = 6475.442681789398; SubmitCycleTimeAvg = 0.0001258480042564363; SubmitCycleTimeCount = 1295.0; SubmitCycleTimeMax = 0.1137130260467529; SubmitCycleTimeMin = 2.86102294921875E-06; SubmitCycleTimeStd = 0.003278713650525583; SubmitCycleTimeSum = 0.162973165512085; ]
+04/13/26 21:28:10 **** condor_scheduniv_exec.514.0 (condor_DAGMAN) pid 1294757 EXITING WITH STATUS 2

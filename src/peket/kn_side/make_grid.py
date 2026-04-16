@@ -119,7 +119,6 @@ def main():
             zeta = np.random.uniform(0.01, 1)
             log10_mej_wind = wind_ej(M1=p[1], M2=p[2], Mtov=np.max(M_eos), R16=R_16) + np.log10(zeta) # consider between 1 and 100% of the disk mass as wind ejecta
             if mej_dyn > 0 and p[0] > p[1]:
-                M_ej_tot = mej_dyn + 10**log10_mej_wind
                 dic = {
                     "mass_1": p[0],
                     "mass_2": p[1],

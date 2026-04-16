@@ -145,10 +145,6 @@ def main():
     t_start_pycbc = gps_start - 16
     t_end_pycbc = gps_end + 16
 
-    # For the plot boundaries (this matches what PyCBC searched)
-    DATA_START_TIME = t_start_pycbc
-    DATA_END_TIME = t_end_pycbc
-
     if args.injection:
         # open the injection trigger time file
         inj_time_file = os.path.join(f"{BASE_DIR}", f'{SUFFIX}_injection_time.txt')
@@ -191,7 +187,7 @@ def main():
     plt.savefig(os.path.join(f"{BASE_DIR}/plots", f'{SUFFIX}_trigger_distribution.png'))
 
     '''
-    Strain plot for the best candidate (if the flag is set)
+    Spectrogram plot for the best candidate (if the flag is set)
     '''
     if args.plot_spectrogram:
         print("\nGenerating spectrogram for the best candidate")
