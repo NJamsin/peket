@@ -5,10 +5,15 @@ Before installing PEKET, ensure you have the following dependencies correctly se
 
 * **HTCondor**: ``gw-setup-pipeline`` heavily relies on [HTCondor](https://htcondor.readthedocs.io/en/latest/) (creates multiples `.sub` or `.dag` files). Make sure HTCondor is installed on your device. Dynamic slots are recommended (the main job reserves 16 Gb of RAM, and sub-jobs reserve 4 Gb).
 * **FIESTA & NMMA**: Build [FIESTA](https://github.com/nuclear-multimessenger-astronomy/fiestaEM/tree/main) and [NMMA](https://github.com/nuclear-multimessenger-astronomy/nmma) from source in the same environment. **Important:** NMMA requires Python 3.12. HTCondor is not required for ``kn-make-grid`` and ``kn-ts-loop``.
-* **rubin_sim** *(Optional)*: If you plan to use the LSST synthetic lightcurve generation utilities (`generate_synth_lc_lsst`), you will need the Rubin Observatory simulation framework. It is highly recommended to install it via `conda-forge` to gracefully handle its complex dependencies:
+* **rubin_sim** *(Optional)*: If you plan to use the LSST synthetic lightcurve generation utilities (`generate_synth_lc_lsst`), you will need the Rubin Observatory simulation framework. It is highly recommended to install it via `conda-forge` to handle its complex dependencies:
 ```bash
 conda install -c conda-forge rubin_sim
 ```
+You also need to run
+```bash
+rs_download_data -d throughputs
+```
+To get the throughputs files of the filters needed for the LSST related functions.
 ---
 
 ## 2. Source Code Modifications

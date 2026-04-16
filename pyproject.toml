@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "peket"
-version = "0.1.0"
+version = "0.1.1"
 description = "An add-on package for PyCBC and NMMA/FIESTA, includes a PyCBC coherent search pipeline generator targeted at BNS and a KN synthetic lightcurve generator based on NMMA."
 dependencies = [
     "numpy",

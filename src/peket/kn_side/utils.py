@@ -11,6 +11,7 @@ import matplotlib.colors as mcolors
 from rubin_sim.phot_utils import PhotometricParameters, Bandpass
 from rubin_sim.phot_utils import calc_snr_m5, calc_mag_error_m5
 from rubin_scheduler.data import get_data_dir
+from astropy.cosmology import Planck18, z_at_value
 from lal import MRSUN_SI
 import glob
 from nmma.em.model import FiestaKilonovaModel
@@ -514,6 +515,7 @@ def generate_synth_lc_fiesta(model_name='Bu2026_MLP',
             to_remove = filter_mask & limit_mask # combine masks
             data_nmma_svd = data_nmma_svd[~to_remove]
     if save:
+        os.makedirs(os.path.dirname(filename), exist_ok=True)
         data_nmma_svd.to_csv(filename, sep=' ', index=False, header=False)
     return data_nmma_svd, trigger
 
@@ -620,6 +622,7 @@ def generate_synth_lc_v2(model_name='Bu2019lm',
             to_remove = filter_mask & limit_mask # combine masks
             data_nmma_svd = data_nmma_svd[~to_remove]
     if save:
+        os.makedirs(os.path.dirname(filename), exist_ok=True)
         data_nmma_svd.to_csv(filename, sep=' ', index=False, header=False)
     return data_nmma_svd, trigger
 
@@ -793,8 +796,15 @@ def plot_param_evolution(MODEL, DIR, UL=False, true_merger='2020-01-07T00:00:00.
         # stock the time list 
         times2 = data[0].unique()
         # attribute the left column to timeshift evolution and the right column to lightcurve and set up correctly the axes
-        ax = axs[idx // col_num, (idx % col_num) * 2]
-        axx = axs[idx // col_num, (idx % col_num) * 2 + 1]
+        if col_num > 1 and row_num > 1:
+            ax = axs[idx // col_num, (idx % col_num) * 2]
+            axx = axs[idx // col_num, (idx % col_num) * 2 + 1]
+        elif row_num > 1 and col_num == 1:
+            ax = axs[idx, 0]
+            axx = axs[idx, 1]
+        else: 
+            ax = axs[idx * 2]
+            axx = axs[idx * 2 + 1]
 
         lc = pd.read_csv(f"{BASE_DIR}/data{idx}.dat", delimiter=' ', header=None)
         param = pd.read_csv(f"{BASE_DIR}/true{idx}.csv")
@@ -832,6 +842,9 @@ def plot_param_evolution(MODEL, DIR, UL=False, true_merger='2020-01-07T00:00:00.
             times = pd.to_datetime(band_df[0].values)
             axx.errorbar(times, band_df[2], yerr=band_df[3], fmt='o', label=band, ls='-')
         axx.text(0.001, 0.99, f"LC {idx}", transform=axx.transAxes, fontsize=20, verticalalignment='top')
+        # temp modif for 1 plot
+        #txt = "Bu2019lm" if idx == 0 else "Ka2017" if idx == 1 else "Bu2026_MLP"
+        #axx.text(0.001, 0.99, txt, transform=axx.transAxes, fontsize=20, verticalalignment='top')
         axx.legend()
         axx.invert_yaxis()
         axx.set_xlabel('Time [days]')
@@ -894,8 +907,15 @@ def plot_param_evolution(MODEL, DIR, UL=False, true_merger='2020-01-07T00:00:00.
         for idx in range(lc_num):
             BASE_DIR = f"{DIR}/{idx}"
             # attribute the left column to timeshift evolution and the right column to lightcurve and set up correctly the axes
-            ax = axs[idx // col_num, (idx % col_num) * 2]
-            axx = axs[idx // col_num, (idx % col_num) * 2 + 1]
+            if col_num > 1 and row_num > 1:
+                ax = axs[idx // col_num, (idx % col_num) * 2]
+                axx = axs[idx // col_num, (idx % col_num) * 2 + 1]
+            elif row_num > 1 and col_num == 1:
+                ax = axs[idx, 0]
+                axx = axs[idx, 1]
+            else: 
+                ax = axs[idx * 2]
+                axx = axs[idx * 2 + 1]
             if os.path.getsize(f"{BASE_DIR}/data{idx}.dat") > 0:
                 lc = pd.read_csv(f"{BASE_DIR}/data{idx}.dat", delimiter=' ', header=None)
             else:
@@ -935,6 +955,8 @@ def plot_param_evolution(MODEL, DIR, UL=False, true_merger='2020-01-07T00:00:00.
                 times = pd.to_datetime(band_df[0].values)
                 axx.errorbar(times, band_df[2], yerr=band_df[3], fmt='o', label=band, ls='-')
             axx.text(0.001, 0.99, f"LC {idx}", transform=axx.transAxes, fontsize=20, verticalalignment='top')
+            #txt = "Bu2019lm" if idx == 0 else "Ka2017" if idx == 1 else "Bu2026_MLP"
+            #axx.text(0.001, 0.99, txt, transform=axx.transAxes, fontsize=20, verticalalignment='top')
             axx.legend()
             axx.invert_yaxis()
             axx.set_xlabel('Time [days]')
@@ -1120,3 +1142,65 @@ def build_dic(source):
         time_arrays[band] = temp_array
         time_arrays[f"{band}_m5"] = m5
     return time_arrays
+
+def regenerate_lc_from_truth(idx, truth_file, out_dir, model, filters, cadence, delay, noise_level, max_error_level=0.4, obs_duration=15, detection_limit_dict=None, jitter=0.0, svd_path="/home/stu_jamsin/jamsin/NMMA/svdmodels", ISOT_trigger="2020-01-07T00:00:00.000"):
+    '''
+    Regenerate a synthetic light curve from a given truth file and save it to the specified output directory.
+    The functions uses the generate_synth_lc functions from peket.kn_side.utils so the parameters are not exactly the same as the ones in the truth file, but they are derived from them. The function is designed to be compatible with the ts-loop.
+    Parameters:
+    - idx: the index of the light curve to regenerate (used for naming the output files)
+    - truth_file: the path to the truth file containing the parameters of the light curve to regenerate
+    - out_dir: the directory where the regenerated light curve will be saved (a subdirectory with the name of the idx will be created if it doesn't exist)
+    - model: the name of the model to use for generating the light curve (e.g. "Bu2019lm", "Ka2017", "Bu2026_MLP")
+    - filters: the list of filters to use for generating the light curve (e.g. ["ps1::g", "ps1::r", "ps1::i", "ps1::z", "ps1::y"])
+    - cadence: the cadence (in days) to use for generating the light curve (e.g. 0.5 for one point every 12 hours)
+    - delay: the delay (in days) to apply to the light curve (e.g. 0.3 for a delay of 7.2 hours)
+    - noise_level: the level of noise to add to the light curve (e.g. 0.2 for a noise level of 0.2 magnitudes)
+    - max_error_level: the maximum error level to use for generating the light curve (e.g. 0.4 for a maximum error level of 0.4 magnitudes)
+    - obs_duration: the duration (in days) of the observations to generate (e.g. 15 for a duration of 15 days)
+    - detection_limit_dict: a dictionary containing the detection limits for each filter (e.g. {'ps1::g': 24.7, 'ps1::r': 24.2, 'ps1::i': 23.8, 'ps1::z': 23.2, 'ps1::y': 22.3})
+    - jitter: the level of jitter to add to the light curve (e.g. 0.0 for no jitter, 0.1 for a jitter level of 0.1 magnitudes)
+    - svd_path: the path to the directory containing the SVD models to use for generating the light curve (only used for models other than "Bu2026_MLP")
+    - ISOT_trigger: the ISOT time of the trigger to use for generating the light curve (e.g. "2020-01-07T00:00:00.000" for a trigger on January 7th, 2020 at 00:00:00)
+    '''
+    df_truth = pd.read_csv(truth_file)
+    
+    if model == 'Bu2026_MLP':
+        model_param = {
+            "log10_mej_dyn": df_truth["log10_mej_dyn"].values[0],
+            "log10_mej_wind": df_truth["log10_mej_wind"].values[0],
+            "luminosity_distance": df_truth["luminosity_distance"].values[0],
+            "inclination_EM": df_truth["inclination_EM"].values[0],
+            "v_ej_dyn": df_truth["v_ej_dyn"].values[0],
+            "v_ej_wind": df_truth["v_ej_wind"].values[0],
+            "Ye_dyn":  df_truth["Ye_dyn"].values[0],
+            "Ye_wind": df_truth["Ye_wind"].values[0],
+            "redshift": np.array(z_at_value(Planck18.luminosity_distance, df_truth["luminosity_distance"].values[0]*u.Mpc)),
+            "timeshift": 0
+        }
+        lc, _ = generate_synth_lc_fiesta(model_name=model, model_param=model_param, save=1, max_error_level=max_error_level, filters_band=filters, pts_per_day=cadence, delay=delay, filename=out_dir+f"/{idx}/data{idx}.dat", obs_duration=obs_duration, noise_level=noise_level, detection_limit_dict=detection_limit_dict, jitter=jitter, trigger_iso=ISOT_trigger)
+        
+
+    elif model == 'Bu2019lm':
+        model_param = {
+                "KNphi": df_truth["KNphi"].values[0],
+                "log10_mej_dyn": df_truth["log10_mej_dyn"].values[0],
+                "log10_mej_wind": df_truth["log10_mej_wind"].values[0],
+                "inclination_EM": df_truth["inclination_EM"].values[0],
+                "luminosity_distance": df_truth["luminosity_distance"].values[0],
+                "timeshift": 0
+        }
+    elif model == 'Ka2017':
+        model_param = {
+                "luminosity_distance": df_truth["luminosity_distance"].values[0],
+                "log10_vej": df_truth["log10_vej"].values[0],
+                "log10_Xlan": df_truth["log10_Xlan"].values[0],
+                "timeshift": 0,
+                "log10_mej": np.log10(10**(df_truth["log10_mej_wind"].values[0]) + 10**(df_truth["log10_mej_dyn"].values[0])), # total ejecta mass for Ka2017
+                "inclination_EM": df_truth["inclination_EM"].values[0]
+        }
+    if model != 'Bu2026_MLP':
+        lc, _ = generate_synth_lc_v2(model_name=model, model_param=model_param, save=1, max_error_level=max_error_level, filters_band=filters, pts_per_day=cadence, delay=delay, filename=out_dir+f"/{idx}/data{idx}.dat", obs_duration=obs_duration, noise_level=noise_level, detection_limit_dict=detection_limit_dict, jitter=jitter, svd_path=svd_path, trigger_iso=ISOT_trigger)
+    # copy the truth file to the output directory for reference
+    df_truth.to_csv(out_dir+f"/{idx}/true{idx}.csv", index=False)
+    return lc

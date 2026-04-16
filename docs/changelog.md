@@ -18,7 +18,9 @@
 * Automatically calculates observed magnitudes with realistic Gaussian noise and upper limits handling.
 
 ### Others
-Minor correction to other CLIs (cleaning of unused lines).
+* Minor correction to other CLIs (cleaning of unused lines).
+* Solved non multiple of 5 axis problem with plotting utils.
+* Added a function to regenerate/duplicate a specific lightcurve from a grid.
 ---
 
 ## Version 0.1.0
