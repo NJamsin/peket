@@ -707,7 +707,7 @@ def generate_synth_lc_lsst(source,
         mag_filter = abs_to_app_mag(mag_filter, model_param["luminosity_distance"])
 
         # get the mjd date of the first observation in that filter
-        mjd_epoch = source['observations'][source['observations']['filter'] == filter]['expMJD'].iloc[0]
+        mjd_epoch = source['t0_mjd']
         # transform it to ISOT date
         t = Time(mjd_epoch, format='mjd')
         iso_epoch = t.isot
@@ -1066,7 +1066,7 @@ def get_source_observations(df_lsst, t0_mjd, ra, dec, duration=20, verbose=True)
         return None
     return valid_obs
 
-def find_valid_sources(df_lsst, n_sources=5, duration=20, min_observations=3):
+def find_valid_sources(df_lsst, n_sources=5, duration=20, min_observations=3, seed=None):
     '''
     Find n_sources valid sources in the LSST database that have observations during their expected kilonova lifetime and are located within the field of view.
 
@@ -1075,8 +1075,11 @@ def find_valid_sources(df_lsst, n_sources=5, duration=20, min_observations=3):
     - n_sources: Number of valid sources to find (default is 5)
     - duration: Expected lifetime of the kilonova in days (default is 20)
     - min_observations: Minimum number of observations required for a source to be considered valid (default is 3)
+    - seed: Random seed for reproducibility (default is None)
     '''
     valid_sources = []
+    if seed is not None:
+        np.random.seed(seed)
     while len(valid_sources) < n_sources:
         # Randomly select a source position and explosion time
         ra = np.random.uniform(0, 360)
@@ -1102,8 +1105,12 @@ def get_obs_mag_from_lsst(filter, model_mag, m5):
     phot_params = PhotometricParameters(bandpass=filter)
 
     # load filter bandpass with lsst's throughtput files
-    throughput_dir = os.path.join(get_data_dir(), "throughputs", "baseline")
-    bp_filepath = os.path.join(throughput_dir, f"total_{filter}.dat")
+    if filter == "u":
+        throughput_dir = os.path.join(get_data_dir(), "throughputs", "sdss")
+        bp_filepath = os.path.join(throughput_dir, f"doi_{filter}.dat")
+    else:
+        throughput_dir = os.path.join(get_data_dir(), "throughputs", "panStarrs")
+        bp_filepath = os.path.join(throughput_dir, f"panStarrs_{filter}.dat")
     bp = Bandpass()
     bp.read_throughput(bp_filepath)
 
@@ -1142,6 +1149,10 @@ def build_dic(source):
         time_arrays[band] = temp_array
         time_arrays[f"{band}_m5"] = m5
     return time_arrays
+
+'''
+Other utils (for ts-loop)
+'''
 
 def regenerate_lc_from_truth(idx, truth_file, out_dir, model, filters, cadence, delay, noise_level, max_error_level=0.4, obs_duration=15, detection_limit_dict=None, jitter=0.0, svd_path="/home/stu_jamsin/jamsin/NMMA/svdmodels", ISOT_trigger="2020-01-07T00:00:00.000"):
     '''
@@ -1204,3 +1215,17 @@ def regenerate_lc_from_truth(idx, truth_file, out_dir, model, filters, cadence, 
     # copy the truth file to the output directory for reference
     df_truth.to_csv(out_dir+f"/{idx}/true{idx}.csv", index=False)
     return lc
+
+import shutil
+def duplicate_grid(original_dir, new_dir, num_lc=25):
+    os.makedirs(new_dir, exist_ok=True)
+    for i in range(num_lc):
+        src_csv = f"{original_dir}/{i}/true{i}.csv"
+        src_dat = f"{original_dir}/{i}/data{i}.dat"
+        dst_csv = f"{new_dir}/{i}/true{i}.csv"
+        dst_dat = f"{new_dir}/{i}/data{i}.dat"
+        # create subdir for each lc
+        os.makedirs(os.path.dirname(dst_csv), exist_ok=True)
+        shutil.copy(src_csv, dst_csv)
+        shutil.copy(src_dat, dst_dat)
+    print(f"Grid duplicated from {original_dir} to {new_dir}.")

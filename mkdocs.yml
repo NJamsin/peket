@@ -7,9 +7,13 @@ theme:
   features:
     - navigation.tabs
     - toc.integrate
+    - to.follow
     - search.suggest
     - navigation.footer
     - content.code.copy
+    - navigation.top
+    - search.highlight
+    - navigation.tracking
   palette:
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
@@ -45,3 +49,18 @@ markdown_extensions:
       pygments_lang_class: true
   - pymdownx.inlinehilite
   - pymdownx.superfences
+  - admonition
+  - pymdownx.details
+
+repo_name: NJamsin/PEKET
+repo_url: https://github.com/NJamsin/PEKET
+
+copyright: Copyright &copy; 2026 Noah Jamsin - Developed for my Master's Thesis and future research.
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/NJamsin
+      name: Github profile
+    - icon: fontawesome/solid/envelope
+      link: noah.jamsin@student.uliege.be
+      name: Mail me

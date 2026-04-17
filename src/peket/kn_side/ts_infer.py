@@ -32,6 +32,7 @@ def main():
     parser.add_argument('--eos-path', type=str, default='/home/stu_jamsin/jamsin/NMMA/EOS/15nsat_cse_uniform_R14/macro/', help='Path to the EOS models for the resampling (default: /home/stu_jamsin/jamsin/NMMA/EOS/15nsat_cse_uniform_R14/macro/, update as needed)')
     parser.add_argument('--GW-prior', type=str, default='/home/stu_jamsin/jamsin/NMMA/priors/GWBNS.prior', help='Path to the GW prior file for the resampling (default: /home/stu_jamsin/jamsin/NMMA/priors/GWBNS.prior, update as needed)')
     parser.add_argument('--EM-prior', type=str, default='/home/stu_jamsin/jamsin/NMMA/priors/mespriors/Bu19_GW.prior', help='Path to the EM prior file for the resampling (default: /home/stu_jamsin/jamsin/NMMA/priors/mespriors/Bu19_GW.prior, update as needed)')
+    parser.add_argument('--restrict-dist-prior', type=float, default=None, help='Whether to restrict the distance prior, will restrict the prior as true_val +/- value (Default is None)')
     args = parser.parse_args()
     idx = args.idx
     MODEL = args.model
@@ -167,6 +168,40 @@ def main():
     data = pd.read_csv(f"{BASE_DIR}/data{idx}.dat", delimiter=' ', header=None, dtype={0: str, 1: str, 2: DTYPE_FLOAT, 3: DTYPE_FLOAT})
     truth = pd.read_csv(f"{BASE_DIR}/true{idx}.csv")
 
+    current_prior_file = prior_file
+    if args.restrict_dist_prior is not None:
+        true_dl = truth['luminosity_distance'].values[0]
+        # On évite d'avoir une distance minimale négative
+        dl_min = max(1.0, true_dl - args.restrict_dist_prior) 
+        dl_max = true_dl + args.restrict_dist_prior
+        
+        custom_prior_path = f"{BASE_DIR}/custom_dist_{idx}.prior"
+
+        with open(prior_file, 'r') as f:
+            prior_lines = f.readlines()
+            
+        with open(custom_prior_path, 'w') as f:
+            for line in prior_lines:
+                if line.startswith('luminosity_distance'): # change the D_L line
+                    f.write(f"luminosity_distance = Uniform(minimum={dl_min}, maximum={dl_max}, name='luminosity_distance', latex_label='$D_L$')\n")
+                else:
+                    f.write(line)
+        current_prior_file = custom_prior_path
+        print(f"Custom prior created with restricted distance [{dl_min:.2f}, {dl_max:.2f}] Mpc at {current_prior_file}")
+        if args.resampling:
+            # also need to create a custom GW prior for the resampling
+            custom_gw_prior_path = f"{BASE_DIR}/custom_GW.prior"
+            with open(args.GW_prior, 'r') as f:
+                gw_prior_lines = f.readlines()
+            with open(custom_gw_prior_path, 'w') as f:
+                for line in gw_prior_lines:
+                    if line.startswith('luminosity_distance'): # change the D_L line
+                        f.write(f"luminosity_distance = Uniform(minimum={dl_min}, maximum={dl_max}, name='luminosity_distance', latex_label='$D_L$')\n")
+                    else:
+                        f.write(line)
+            print(f"Custom GW prior created with restricted distance [{dl_min:.2f}, {dl_max:.2f}] Mpc at {custom_gw_prior_path}")
+            args.GW_prior = custom_gw_prior_path
+
     # sort by time
     data = data.sort_values(by=0, ascending=True).reset_index(drop=True)
     # stock the time list
@@ -185,7 +220,7 @@ em-model : {MODEL}
 em-transient-class : svd
 svd-path : {svd_path} 
 label : minus0_{idx}
-prior-file :  {prior_file}
+prior-file :  {current_prior_file}
 nlive : {nlive}
 sampler : pymultinest
 light-curve-data : {BASE_DIR}/data{idx}.dat
@@ -203,7 +238,7 @@ interpolation-type : tensorflow
 em-model : Bu2026_MLP
 em-transient-class : fiesta_kn
 label : minus0_{idx}
-prior-file :  {prior_file}
+prior-file :  {current_prior_file}
 nlive : {nlive}
 sampler : pymultinest
 light-curve-data : {BASE_DIR}/data{idx}.dat
@@ -278,7 +313,7 @@ em-model : {MODEL}
 em-transient-class : svd
 svd-path : {svd_path} 
 label : minus{j+1}_{idx}
-prior-file :  {prior_file}
+prior-file :  {current_prior_file}
 nlive : {nlive}
 sampler : pymultinest
 light-curve-data : {BASE_DIR}/data_minus{j+1}.dat
@@ -296,7 +331,7 @@ interpolation-type : tensorflow
 em-model : Bu2026_MLP
 em-transient-class : fiesta_kn
 label : minus{j+1}_{idx}
-prior-file :  {prior_file}
+prior-file :  {current_prior_file}
 nlive : {nlive}
 sampler : pymultinest
 light-curve-data : {BASE_DIR}/data_minus{j+1}.dat

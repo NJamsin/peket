@@ -19,6 +19,7 @@ Performs iterative inference on synthetic or real kilonova lightcurve data by pr
 * `--eos-path`: Path to EOS files used for resampling.
 * `--GW-prior`: Path to GW prior file for resampling.
 * `--EM-prior`: Path to EM prior file for resampling.
+* `--restrict-dist-prior`: Restrict the distance prior, will restrict the prior as true_val +/- value.
 
 ## Example
 Iterative inference removing the first 2 points, adding upper limits, and executing resampling:
