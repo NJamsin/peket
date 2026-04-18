@@ -119,8 +119,8 @@ def collect_background_stats(bg_dir):
     """
     all_snrs = []
     all_times = []
-    
-    for fpath in sorted(glob.glob(os.path.join(bg_dir, '*.hdf'))):
+    search_path = os.path.join(bg_dir, '*/*.hdf')
+    for fpath in sorted(glob.glob(search_path)):
         try:
             with h5py.File(fpath, 'r') as hf:
                 if 'network' not in hf: continue
@@ -263,6 +263,7 @@ def main():
     parser.add_argument("--submit", action="store_true", help="Auto-submit background jobs to HTCondor.")
     parser.add_argument("--monitor", action="store_true", help="Monitor the background jobs.")
     parser.add_argument("--window", default='both', choices=['both', 'before', 'after'], help="Which off-source window(s) to use for background estimation.")
+    parser.add_argument("--minimal-log", default=None, action="store_true", help="Reduce logging output to essentials only.")
     args = parser.parse_args()
 
     with open(args.config, 'r') as f:
@@ -414,8 +415,10 @@ def main():
     #return 0
     if args.run_background:
         # delete the content of the output directory to avoid mixing with previous runs
-        for f in glob.glob(os.path.join(BG_OUT_DIR, '*.hdf')):
-            os.remove(f)
+        import shutil
+        if os.path.exists(BG_OUT_DIR):
+            shutil.rmtree(BG_OUT_DIR)
+        os.makedirs(BG_OUT_DIR, exist_ok=True)
         # Threshold Optimizations
         s_snr_thresh = 4.5
         coinc_threshold = 4 # low limit to get more tirgger for plotting
@@ -440,6 +443,8 @@ BANK_NUM=$2
 START_TIME=$3
 END_TIME=$4
 TT=$5
+
+mkdir -p {BG_OUT_DIR}/bank_${{BANK_NUM}}
 
 {pycbc_inspiral} \\
     -v \\
@@ -476,18 +481,25 @@ TT=$5
     --cluster-method window \\
     --cluster-window 1.0 \\
     --slide-shift ${{SLIDE}} \\
-    --output {BG_OUT_DIR}/{SUFFIX}_bg_bank${{BANK_NUM}}_${{START_TIME}}-${{END_TIME}}_slide${{SLIDE}}.hdf
+    --output {BG_OUT_DIR}/bank_${{BANK_NUM}}/{SUFFIX}_bg_bank${{BANK_NUM}}_${{START_TIME}}-${{END_TIME}}_slide${{SLIDE}}.hdf
 """
         with open(sh_bg, 'w') as f:
             f.write(sh_content.strip() + "\n")
         os.chmod(sh_bg, os.stat(sh_bg).st_mode | stat.S_IEXEC)
-
+        log_out = f"{LOG_DIR}/{SUFFIX}_sig_cluster.log"
+        
+        if getattr(args, 'minimal_log', False):
+            output = "/dev/null"
+            error  = "/dev/null"
+        else:
+            output = f"{LOG_DIR}/{SUFFIX}_sig_$(bank)_slide$(slide)_$(window).out"
+            error  = f"{LOG_DIR}/{SUFFIX}_sig_$(bank)_slide$(slide)_$(window).err"
         sub_content = f"""executable = {sh_bg}
 universe   = vanilla
 arguments  = "$(slide) $(bank) $(start) $(end) $(tt)"
-output     = {LOG_DIR}/{SUFFIX}_sig_$(bank)_slide$(slide)_$(window).out
-error      = {LOG_DIR}/{SUFFIX}_sig_$(bank)_slide$(slide)_$(window).err
-log        = {LOG_DIR}/{SUFFIX}_sig_cluster.log
+output     = {output}
+error      = {error}
+log        = {log_out}
 request_cpus   = 1
 request_memory = 4GB
 request_disk   = 1MB
@@ -542,7 +554,8 @@ queue slide, bank, start, end, tt from {window_file}
     T_bg = 0
     analyzed_segments = set()
     
-    for fpath in sorted(glob.glob(os.path.join(BG_OUT_DIR, '*.hdf'))):
+    search_path = os.path.join(BG_OUT_DIR, '*/*.hdf')
+    for fpath in sorted(glob.glob(search_path)):
         try:
             # outfile name: {SUFFIX}_bg_bank{BANK_NUM}_{START_TIME}-{END_TIME}_slide{SLIDE}.hdf
             basename = os.path.basename(fpath)
