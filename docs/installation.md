@@ -13,8 +13,8 @@ Before installing PEKET, ensure you have the following dependencies correctly se
     Build [FIESTA](https://github.com/nuclear-multimessenger-astronomy/fiestaEM/tree/main) and [NMMA](https://github.com/nuclear-multimessenger-astronomy/nmma) from source in the same environment. 
     **NMMA explicitly requires Python 3.12.**
 
-!!! tip "LSST Utilities (Optional)"
-    If you plan to use the LSST synthetic lightcurve generation utilities (`generate_synth_lc_lsst`), you will need the Rubin Observatory simulation framework. It is highly recommended to install it via `conda-forge` to gracefully handle its complex dependencies:
+!!! tip "LSST Utilities (Required for the `kn_side`)"
+    If you plane to use the KN related cli or utils or the LSST synthetic lightcurve generation utilities (`generate_synth_lc_lsst`), you will need the Rubin Observatory simulation framework. It is highly recommended to install it via `conda-forge` to gracefully handle its complex dependencies (`rubin_sim` is not in the requirements **BUT** is necessary):
     ```bash
     conda install -c conda-forge rubin_sim
     ```
@@ -66,7 +66,7 @@ def loadtxt2d(intext):
 ## 3. Install PEKET
 Once prerequisites and modifications are done, clone and install the package:
 ```bash
-git clone -b main git@github.com:NJamsin/PEKET.git
-cd PEKET
+git clone -b main git@github.com:NJamsin/peket.git
+cd peket
 pip install -e .
 ```

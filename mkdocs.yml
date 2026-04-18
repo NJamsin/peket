@@ -52,8 +52,8 @@ markdown_extensions:
   - admonition
   - pymdownx.details
 
-repo_name: NJamsin/PEKET
-repo_url: https://github.com/NJamsin/PEKET
+repo_name: NJamsin/peket
+repo_url: https://github.com/NJamsin/peket
 
 copyright: Copyright &copy; 2026 Noah Jamsin - Developed for my Master's Thesis and future research.
 extra:
