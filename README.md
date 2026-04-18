@@ -19,7 +19,7 @@ cd PEKET
 pip install -e .
 ```
 
-Read the full documentation [here](https://NJamsin.github.io/PEKET/)
+Read the full documentation [here](https://NJamsin.github.io/peket/)
 
 ### Acknowledgements
 I would like to acknowledge the use of [Gemini](https://gemini.google.com/app) for fixing code errors and assisting with the logo design.
