@@ -2,6 +2,7 @@
 __pycache__/
 *.py[cod]
 *$py.class
+.vscode
 
 # Distribution / packaging
 .Python
@@ -17,6 +18,8 @@ eggs/
 jamsin/
 memoir_grid/
 *sig_search*
+
+obsolete_gw_part
 
 test_injection/data/background/*.gwf
 

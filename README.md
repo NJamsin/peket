@@ -3,9 +3,15 @@
 
 ![logo](logo.png)
 
-**NOTE**: ``peket`` is still under development. Feel free to contact me if you have any question
+**NOTE**: This repo is no more active, this is a **legacy** code - The final version of the search pipeline will be moved to GitLab (LIGO) when finalized
 
 ## Overview
+[!WARNING] 
+>"REMOVED CLI"
+>All the CLI where removed from the `pyproject.toml` as they are no longer supported.
+>    
+>*(Note: The source code is still avaiable).*
+
 PEKET is an add-on package for PyCBC and NMMA/FIESTA. It provides command-line tools to bridge Kilonova emission inferences with Gravitational Wave coherent searches:
 * ``gw-setup-pipeline``: Performs coherent GW searches based on properties inferred from KNe.
 * ``gw-search-significance``: Estimates the statistical significance (FAR and p-value) of the top GW trigger using time slides.
@@ -22,4 +28,4 @@ pip install -e .
 Read the full documentation [here](https://NJamsin.github.io/peket/)
 
 ### Acknowledgements
-I would like to acknowledge the use of [Gemini](https://gemini.google.com/app) for fixing code errors and assisting with the logo design.
+I would like to acknowledge the use of AI for this project.

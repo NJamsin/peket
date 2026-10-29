@@ -1,5 +1,13 @@
 # Changelog
 
+## Last changes
+
+### This repo now only contains the `kn_side` subpackage
+* The only remaining use of this work is the `kn_side.utils` package
+* Now supports all fiesta surrogates (and even custom fiesta surrogates if you edit `config.py`)
+* Now supports the most recent [LSST baseline db](https://s3df.slac.stanford.edu/data/rubin/sim-data/sims_featureScheduler_runs5.3/baseline/baseline_v5.3.0_10yrs.db)
+* Modified LSST light curve generation to have a minimal timeshift and introduced a minimal delay to consider to pointings as different observations 
+
 ## Latest Updates 0.1.2
 
 ### Documentation and MkDocs refresh

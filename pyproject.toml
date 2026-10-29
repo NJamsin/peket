@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "peket"
 version = "0.1.1"
-description = "An add-on package for PyCBC and NMMA/FIESTA, includes a PyCBC coherent search pipeline generator targeted at BNS and a KN synthetic lightcurve generator based on NMMA."
+description = "Legacy add-on package for PyCBC includes an incomplete coherent search pipeline for orphan KN candidates. Now, only contains a utility function related to lc generation in NMMA/FiestaEM."
 dependencies = [
     "numpy",
     "pandas",
@@ -13,35 +13,32 @@ dependencies = [
     "pyyaml",
     "astropy",
     "matplotlib",
-    "gwpy",
-    "gwosc",
-    "pycbc",
     "scipy",
 ]
 
 [project.scripts]
 # GW search commands
-gw-setup-pipeline = "peket.gw_search.setup_pipeline:main"
-gw-search-prep = "peket.gw_search.GWsearch_prep:main"
-gw-search-post = "peket.gw_search.GWsearch_post:main"
+#gw-setup-pipeline = "peket.gw_search.setup_pipeline:main"
+#gw-search-prep = "peket.gw_search.GWsearch_prep:main"
+#gw-search-post = "peket.gw_search.GWsearch_post:main"
 
-gw-setup-pipeline2 = "peket.gw_search.setup_pipeline2:main"
-gw-search-prep2 = "peket.gw_search.GWsearch_prep2:main"
-gw-search-post2 = "peket.gw_search.GWsearch_post2:main"
+#gw-setup-pipeline2 = "peket.gw_search.setup_pipeline2:main"
+#gw-search-prep2 = "peket.gw_search.GWsearch_prep2:main"
+#gw-search-post2 = "peket.gw_search.GWsearch_post2:main"
 
 # GW significance commands
-gw-setup-sig = "peket.gw_search.setup_sig_pipeline:main"
-gw-sig-prep = "peket.gw_search.GWsig_prep:main"
-gw-sig-post = "peket.gw_search.GWsig_post:main"
+#gw-setup-sig = "peket.gw_search.setup_sig_pipeline:main"
+#gw-sig-prep = "peket.gw_search.GWsig_prep:main"
+#gw-sig-post = "peket.gw_search.GWsig_post:main"
 
-gw-setup-sig2 = "peket.gw_search.setup_sig_pipeline2:main"
-gw-sig-prep2 = "peket.gw_search.GWsig_prep2:main"
-gw-sig-post2 = "peket.gw_search.GWsig_post2:main"
+#gw-setup-sig2 = "peket.gw_search.setup_sig_pipeline2:main"
+#gw-sig-prep2 = "peket.gw_search.GWsig_prep2:main"
+#gw-sig-post2 = "peket.gw_search.GWsig_post2:main"
 
-gw-setup-sig3 = "peket.gw_search.setup_sig_pipeline3:main"
-gw-sig-prep3 = "peket.gw_search.GWsig_prep3:main"
-gw-sig-post3 = "peket.gw_search.GWsig_post3:main"
+#gw-setup-sig3 = "peket.gw_search.setup_sig_pipeline3:main"
+#gw-sig-prep3 = "peket.gw_search.GWsig_prep3:main"
+#gw-sig-post3 = "peket.gw_search.GWsig_post3:main"
 
 # KN side commands
-kn-make-grid = "peket.kn_side.make_grid:main"
-kn-ts-loop = "peket.kn_side.ts_infer:main"
+#kn-make-grid = "peket.kn_side.make_grid:main"
+#kn-ts-loop = "peket.kn_side.ts_infer:main"

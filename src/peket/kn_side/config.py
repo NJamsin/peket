@@ -183,11 +183,35 @@ models = {'afgpy_gaussian_CVAE': {'kind': 'GRB',
    'log10_Xlan': -4.0,
    'inclination_EM': 0.0,
    'luminosity_distance': 40.0,
-   'timeshift': 0.0}}} # super model dictionnary
+   'timeshift': 0.0}},
+ 'LANLTS2': {'kind': 'svd',
+   'params': {'log10_mej_dyn': -2.0,
+    'log10_mej_wind': -1.5,
+    'vej_dyn': 0.2,
+    'vej_wind': 0.1,
+    'inclination_EM': 0.7853981633974483,
+    'luminosity_distance': 40.0,
+    'timeshift': 0.0}},
+ 'LANLTP2': {'kind': 'svd',
+    'params': {'log10_mej_dyn': -2.0,
+     'log10_mej_wind': -1.5,
+     'vej_dyn': 0.2,
+     'vej_wind': 0.1,
+     'inclination_EM': 0.7853981633974483,
+     'luminosity_distance': 40.0,
+     'timeshift': 0.0}},
+'Bu2019nsbh_MLP': {'kind': 'KN', # Custom Bu2019 NSBH based on the An21Bu19 dataset trained by Thibeau Wouters
+    'params': {'log10_mej_dyn': -1.75,
+     'log10_mej_wind': -1.5,
+     'KNtheta': 45,
+     'luminosity_distance': 40.0,
+     'timeshift': 0.0}},
+} # super model dictionnary
 
 all_params = [
     'Gamma0',
     'KNphi',
+    'KNtheta',
     'Ye_dyn',
     'Ye_wind',
     'alphaWing',
@@ -212,6 +236,8 @@ all_params = [
     'v_ej_dyn',
     'v_ej_wind',
     'vkin',
+    'vej_dyn',
+    'vej_wind',
 ]
 
 grb_params = [
@@ -232,6 +258,7 @@ grb_params = [
 
 kn_params = [
     'KNphi',
+    'KNtheta',
     'Ye_dyn',
     'Ye_wind',
     'dens_slope',
@@ -246,6 +273,8 @@ kn_params = [
     'v_ej_dyn',
     'v_ej_wind',
     'vkin',
+    'vej_dyn',
+    'vej_wind',
 ]
 
 GRB_FIESTA_PARAM_RANGES = {
@@ -403,5 +432,24 @@ KN_FIESTA_PARAM_RANGES = {
         'log10_vej': (-1.52, -0.52),
         'log10_Xlan': (-9.0, -1.0),
         'inclination_EM': (0.0, 1.5707963267948966),
-    }
+    },
+    'LANLTS2': {
+        'log10_mej_dyn': (-3.0, -1.3010299956639813),
+        'log10_mej_wind': (-3.0, -0.8860566476931633),
+        'vej_dyn': (0.05, 0.3),
+        'vej_wind': (0.05, 0.3),
+        'inclination_EM': (0.0, 1.5707963267948966),
+    },
+    'LANLTP2': {
+        'log10_mej_dyn': (-3.0, -1.3010299956639813),
+        'log10_mej_wind': (-3.0, -0.8860566476931633),
+        'vej_dyn': (0.05, 0.3),
+        'vej_wind': (0.05, 0.3),
+        'inclination_EM': (0.0, 1.5707963267948966),
+        },
+    'Bu2019nsbh_MLP': {
+        'log10_mej_dyn': (-2.0, -1.0457574905606752),
+        'log10_mej_wind': (-2.0, -1.0457574905606752),
+        'KNtheta': (0, 90),
+    },
 }

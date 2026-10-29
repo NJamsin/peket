@@ -23,10 +23,18 @@ from nmma.em.model import SVDLightCurveModel
 '''
 Fitting formulae (see https://arxiv.org/abs/2205.08513)
 '''
+G_per_c2 = c.G/c.c**2
+geom_msun_km = (c.M_sun*G_per_c2).to(u.km).value
+
+def NS_compactness(M, R):
+    '''
+    Compute the compactness of a neutron star for a given M and R (u: Msol & km)
+    '''
+    return M * geom_msun_km / R
 
 def dyn_ej(a = -9.3335, b = 114.17, d = -337.56, n = 1.5465, M1 = 1.4, R1 = 10, M2 = 1.4, R2 = 10):
-    C1 = M1 / (R1 * 1e3 / MRSUN_SI)
-    C2 = M2 / (R2 * 1e3 / MRSUN_SI)
+    C1 = NS_compactness(M1, R1)
+    C2 = NS_compactness(M2, R2)
     x = (a/C1 + b*(M2**n/M1**n) + d*C1)*M1 + (a/C2 + b*(M1**n/M2**n) + d*C2)*M2
     if x < 0:
         return 0
@@ -44,6 +52,90 @@ def wind_ej(M1, M2, a0=-1.725, deltaa=-2.337, b0=-0.564, deltab=-0.437, c=0.958,
     mwind = np.maximum(-3.0, mwind)
     return mwind
 
+# NSBH formulae (taken from nmma: https://github.com/nuclear-multimessenger-astronomy/nmma/blob/main/nmma/core/conversion.py)
+
+def chibh2risco(chi_bh):
+    """see, e.g., https://arxiv.org/pdf/2011.08948.pdf, eq. 2-4.
+    This expression gives the innermost stable circular orbit (ISCO) in units of the black hole mass as a function of the dimensionless spin parameter chi_bh.
+    """
+    Z1 = 1.0 + (1.0 - chi_bh**2) ** (1.0 / 3) * (
+        (1 + chi_bh) ** (1.0 / 3) + (1 - chi_bh) ** (1.0 / 3)
+    )
+    Z2 = np.sqrt(3.0 * chi_bh**2 + Z1**2.0)
+
+    return 3.0 + Z2 - np.sign(chi_bh) * np.sqrt((3.0 - Z1) * (3.0 + Z1 + 2.0 * Z2))
+
+def baryon_mass_NS(source_mass, compactness):
+    """
+    equation (7) in https://arxiv.org/abs/2002.07728
+    """
+
+    return source_mass * (1.0 + 0.6 * compactness / (1.0 - 0.5 * compactness))
+
+def remnant_disk_mass_fitting(
+        mass_1_source,
+        mass_2_source,
+        compactness_2,
+        chi_bh,
+        a=0.40642158,
+        b=0.13885773,
+        c=0.25512517,
+        d=0.761250847,
+    ):
+    """
+    equation (4) in https://arxiv.org/pdf/1807.00011
+    """
+
+    mass_ratio = mass_2_source / mass_1_source
+    symm_mass_ratio = mass_ratio / (1.0 + mass_ratio) ** 2
+
+    #  use the BH spin to find the normalized risco
+    risco = chibh2risco(chi_bh)
+    baryon_mass_2 = baryon_mass_NS(mass_2_source, compactness_2)
+
+    remnant_mass = (
+        a * np.power(symm_mass_ratio, -1.0 / 3.0) * (1.0 - 2.0 * compactness_2)
+    )
+    remnant_mass += -b * risco / symm_mass_ratio * compactness_2 + c
+
+    remnant_mass = np.maximum(remnant_mass, 0.0)
+
+    remnant_mass = np.power(remnant_mass, 1.0 + d)
+
+    remnant_mass *= baryon_mass_2
+
+    return remnant_mass
+
+def dynamic_mass_fitting(
+        mass_1_source,
+        mass_2_source,
+        compactness_2,
+        chi_bh,
+        a1=7.11595154e-03,
+        a2=1.43636803e-03,
+        a4=-2.76202990e-02,
+        n1=-8.63604211e-01,
+        n2=-1.68399507,
+    ):
+
+    """
+    equation (9) in https://arxiv.org/abs/2002.07728
+    """
+
+    mass_ratio = mass_2_source / mass_1_source
+
+    #  use the BH spin to find the normalized risco
+    risco = chibh2risco(chi_bh)
+    baryon_mass_2 = baryon_mass_NS(mass_2_source, compactness_2)
+
+    mdyn = a1 * mass_ratio**n1 * (1.0 - 2.0 * compactness_2) / compactness_2
+    mdyn += -a2 * mass_ratio**n2 * risco + a4
+    mdyn *= baryon_mass_2
+
+    mdyn = np.maximum(0.0, mdyn)
+
+    return mdyn
+
 # mass chirp
 def chirp_mass(m1, m2):
     return (m1*m2)**(3/5) / (m1 + m2)**(1/5)
@@ -51,6 +143,20 @@ def chirp_mass(m1, m2):
 # mass ratio
 def mass_ratio(m1, m2):
     return m2 / m1
+
+# disk fraction
+def zeta_nsbh(Q, seed=42):
+    '''
+    Compute the disk fraction turn into wind as a function of the inverted mass ratio Q, see Eq 12 in https://iopscience.iop.org/article/10.3847/1538-4357/ac222d
+    '''
+    np.random.seed(seed)
+    zeta1 = np.random.uniform(0.04, 0.32)
+    zeta2 = np.random.uniform(0.14, 0.44)
+    while zeta1 > zeta2:
+        np.random.seed(seed+1)
+        zeta1 = np.random.uniform(0.04, 0.32)
+        zeta2 = np.random.uniform(0.14, 0.44)
+    return zeta1 + (zeta2 - zeta1)/(1 + np.exp(1.5 * (Q - 3)))
 
 '''
 Class to load and explore the eos files from https://zenodo.org/records/6106130#.Y1pdM9JBxhG (15nsat_cse_uniform_R14)
@@ -555,7 +661,8 @@ def generate_synth_lc_lsst(source,
                     params,
                     save=False,
                     filename='test_lc_lsst.dat',
-                    svd_path = None):
+                    svd_path = None,
+                    ext_model=None):
     '''
     Generate a synthetic light curve based on the LSST observations of a given source and a given model. The light curve is generated for each filter in the observations and then merged together to have a full light curve with all the filters. The generated light curve is then saved to a file if save is True.
 
@@ -577,6 +684,8 @@ def generate_synth_lc_lsst(source,
         Name of the file where the generated light curve will be saved if save is True. The file will be saved in the current working directory.
     svd_path : str
         Path to the directory where the SVD models are stored. This is used only if the model_name is not 'Bu2026_MLP' because this model is not an SVD model and is directly instantiated with the FiestaKilonovaModel class.
+    ext_model : NMMA lc model
+        Should allow to pass a FiestaKilonovaModel instead of having to instantiate a model at each call
     Returns
     -------
     full_lc : pd.DataFrame
@@ -599,9 +708,12 @@ def generate_synth_lc_lsst(source,
 
     # extract the filter from the obs
     filters = source['observations']['filter'].unique()
-    print(f"Filters in the observations: {filters.tolist()}")
+    filters = [filt[0] for filt in filters]
+    print(f"Filters in the observations: {filters}")
+    if ext_model is not None:
+        model = ext_model
     # need to transform the filter names to match the ones used in the model: go from i to ps1::i for example
-    if model_info["kind"] == "KN" or model_info["kind"] == "GRB":
+    elif model_info["kind"] == "KN" or model_info["kind"] == "GRB":
         filters = [f"lsst{filt}" for filt in filters]
         try:
             model = FiestaKilonovaModel(model_name, filters=filters)
@@ -611,9 +723,8 @@ def generate_synth_lc_lsst(source,
         filters = [("sdssu" if filt == "u" else f"ps1::{filt}") for filt in filters] # not lsst filters, we use the ps1 and sdss filters instead due to nmma lack of support for lsst filters in the SVD models
     
     dic = build_dic(source) # get the diff samples times for each filter
-
+    print(dic)
     full_lc = None # instanciate a var to store the full light curve (with all the filters merged together)
-
     # loop over the filters and generate the light curve for each filter
     for filter in dic.keys():
         if len(filter) > 1: 
@@ -674,12 +785,10 @@ def generate_synth_lc_lsst(source,
 
 
     if save:
-        # get the directory path from the executed file path and create the directory if it doesn't exist
-        dirpath = os.getcwd()
-        print(f"Saving synthetic lightcurve data to {dirpath}...")
-        if dirpath:
-            os.makedirs(dirpath, exist_ok=True)
-            filename = os.path.join(dirpath, filename)
+        #print(f"Saving synthetic lightcurve data to {filename}...")
+        dirpath = os.path.dirname(filename)
+        print(f"Directory path: {dirpath}")
+        os.makedirs(dirpath, exist_ok=True)
         full_lc.to_csv(filename, sep=' ', index=False, header=False)
     return full_lc
 
@@ -1022,7 +1131,7 @@ def get_source_observations(df_lsst, t0_mjd, ra, dec, duration=20, verbose=True)
         return None
     return valid_obs
 
-def find_valid_sources(df_lsst, n_sources=5, duration=20, min_observations=3, seed=None):
+def find_valid_sources(df_lsst, n_sources=5, duration=20, min_observations=3, seed=None, t0_min=0.22, cadence=1/24):
     '''
     Find n_sources valid sources in the LSST database that have observations during their expected kilonova lifetime and are located within the field of view.
 
@@ -1032,6 +1141,8 @@ def find_valid_sources(df_lsst, n_sources=5, duration=20, min_observations=3, se
     - duration: Expected lifetime of the kilonova in days (default is 20)
     - min_observations: Minimum number of observations required for a source to be considered valid (default is 3)
     - seed: Random seed for reproducibility (default is None)
+    - t0_min: Minimum time since the explosion for a valid source (default is 0.22 days)
+    - cadence: Minimum time between 2 successive pointings to be considered distinct observations in days (default is 1/24: 1h)
     '''
     valid_sources = []
     if seed is not None:
@@ -1039,17 +1150,29 @@ def find_valid_sources(df_lsst, n_sources=5, duration=20, min_observations=3, se
     while len(valid_sources) < n_sources:
         # Randomly select a source position and explosion time
         ra = np.random.uniform(0, 360)
-        dec = np.random.uniform(-90, 90)
+        dec_min, dec_max = -90.0, 30.0
+        sin_dec =np.random.uniform(np.sin(np.radians(dec_min)), np.sin(np.radians(dec_max))) # avoid oversampling of the poles
+        dec = np.degrees(np.arcsin(sin_dec))
         t0_mjd = np.random.uniform(df_lsst['expMJD'].min(), df_lsst['expMJD'].max() - duration)
 
-        obs = get_source_observations(df_lsst, t0_mjd, ra, dec, duration, verbose=False)
-        if obs is not None and len(obs) >= min_observations:
-            valid_sources.append({
-                'ra': ra,
-                'dec': dec,
-                't0_mjd': t0_mjd,
-                'observations': obs
-            })
+        obs = get_source_observations(df_lsst, t0_mjd+t0_min, ra, dec, duration, verbose=False)
+        if obs is not None:
+            MJD = list(obs['expMJD'])
+            #print(MJD)
+            #MJD = [int(obs) for obs in MJD] # allows to have only one "obs" per night -> change for a delay of roughly 1h
+            #MJD = set(MJD)
+            epochs = [MJD[0]]
+            for i in range(len(MJD)-1):
+                if MJD[i] - MJD[i+1] > 1/24:
+                    epochs.append(MJD[i+1])
+            if len(MJD) >= min_observations:
+                valid_sources.append({
+                    'ra': ra,
+                    'dec': dec,
+                    't0_mjd': t0_mjd,
+                    'observations': obs
+                })
+                print(f"Found source {len(valid_sources)}/{n_sources}")
     
     return valid_sources
 
@@ -1085,7 +1208,7 @@ def get_obs_mag_from_lsst(filter, model_mag, m5, kind="KN"):
         return m5, np.inf # upper lim at m5
     else:
         return mag_obs, mag_err
-    
+
 def build_dic(source):
     '''
     Build a dic containing: 
@@ -1096,7 +1219,7 @@ def build_dic(source):
     Used for generate_synth_lc_lsst()
     '''
     observations = source['observations']
-    obs_per_band = observations['filter']
+    obs_per_band = observations['filter'].str.split('_').str[0]
     time_arrays = {}
 
     for band in obs_per_band.unique():
@@ -1135,7 +1258,7 @@ def regenerate_lc_from_truth(idx, truth_file, out_dir, model, filters, cadence, 
     - ISOT_trigger: the ISOT time of the trigger to use for generating the light curve (e.g. "2020-01-07T00:00:00.000" for a trigger on January 7th, 2020 at 00:00:00)
     '''
     df_truth = pd.read_csv(truth_file)
-    
+    os.makedirs(out_dir+f"/{idx}", exist_ok=True)
     if model == 'Bu2026_MLP':
         model_param = {
             "log10_mej_dyn": df_truth["log10_mej_dyn"].values[0],
@@ -1171,7 +1294,7 @@ def regenerate_lc_from_truth(idx, truth_file, out_dir, model, filters, cadence, 
                 "inclination_EM": df_truth["inclination_EM"].values[0]
         }
     if model != 'Bu2026_MLP':
-        lc, _ = generate_synth_lc_v2(model_name=model, model_param=model_param, save=1, max_error_level=max_error_level, filters_band=filters, pts_per_day=cadence, delay=delay, filename=out_dir+f"/{idx}/data{idx}.dat", obs_duration=obs_duration, noise_level=noise_level, detection_limit_dict=detection_limit_dict, jitter=jitter, svd_path=svd_path, trigger_iso=ISOT_trigger)
+        lc, _ = generate_synth_lc(model_name=model, params=model_param, save=1, max_error=max_error_level, filters=filters, pts_per_day=cadence, delay=delay, filename=out_dir+f"/{idx}/data{idx}.dat", obs_duration=obs_duration, noise=noise_level, detection_limit_dict=detection_limit_dict, jitter=jitter, trigger_iso=ISOT_trigger, svd_path=svd_path)
     # copy the truth file to the output directory for reference
     df_truth.to_csv(out_dir+f"/{idx}/true{idx}.csv", index=False)
     return lc
