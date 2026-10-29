@@ -7,6 +7,10 @@ This section provides information on the tutorials available in the repository, 
 ## Available Tutorials
 Examples and tutorials are provided in the GitHub repository under the [`example_file`](https://github.com/NJamsin/PEKET/tree/main/example_file) directory:
 
+### Remaining tutorial:
+* **LSST lc generation:** Jupyter notebook with a step by step guide on how to use the LSST related functions (The only useful thing here)
+
+### Deprecated:
 * **Real KN-GW Data:** Configuration for analyzing AT2017gfo-GW170817. Outputs are located in the [`test_real_data`](https://github.com/NJamsin/PEKET/tree/main/test_real_data) directory.
 * **Artificial Injection:** A KN generated with NMMA (`Bu2019lm`) with an injected GW in real H1/L1 strain data. Outputs are located in [`test_injection`](https://github.com/NJamsin/PEKET/tree/main/test_injection).
 * **Timeshift Loop Tutorial:** A guide on combining `kn-ts-loop`, `kn-make-grid`, and `plot_param_evolution` is available in the [`example_file/ts-loop`](https://github.com/NJamsin/PEKET/tree/main/example_file/ts-loop) directory. It includes example prior files for all supported models.

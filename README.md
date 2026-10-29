@@ -5,12 +5,13 @@
 
 **NOTE**: This repo is no more active, this is a **legacy** code - The final version of the search pipeline will be moved to GitLab (LIGO) when finalized
 
+## Please see the latest changelog to know what can still be used with this repo
+
 ## Overview
-[!WARNING] 
->"REMOVED CLI"
+>**REMOVED CLI**
 >All the CLI where removed from the `pyproject.toml` as they are no longer supported.
 >    
->*(Note: The source code is still avaiable).*
+>*(Note: The source code for the KN related function is still avaiable).*
 
 PEKET is an add-on package for PyCBC and NMMA/FIESTA. It provides command-line tools to bridge Kilonova emission inferences with Gravitational Wave coherent searches:
 * ``gw-setup-pipeline``: Performs coherent GW searches based on properties inferred from KNe.

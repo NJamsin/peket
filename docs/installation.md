@@ -3,6 +3,8 @@
 ## 1. Prerequisites
 Before installing PEKET, ensure you have the following dependencies correctly set up in your environment:
 
+### With the latest release of NMMA and Fiesta you don't need to modify the source code anympore - only rubin sim is still needed (and recommend to install via conda)
+
 !!! warning "HTCondor Requirement"
     The GW DAG builders (`gw-setup-pipeline`, `gw-setup-pipeline2`, `gw-setup-sig`, and `gw-setup-sig3`) heavily rely on [HTCondor](https://htcondor.readthedocs.io/en/latest/) to create multiples `.sub` or `.dag` files. Make sure HTCondor is installed on your cluster/device.
     

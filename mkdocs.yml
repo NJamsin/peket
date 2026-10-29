@@ -41,6 +41,7 @@ nav:
     - kn-ts-loop: tools/kn-ts-loop.md
   - Tutorials & Utilities: tutorials.md
   - Changelog: changelog.md
+  - API reference: api.md
 
 markdown_extensions:
   - pymdownx.highlight:
@@ -62,5 +63,17 @@ extra:
       link: https://github.com/NJamsin
       name: Github profile
     - icon: fontawesome/solid/envelope
-      link: noah.jamsin@student.uliege.be
+      link: noah.jamsin@ijclab.in2p3.fr
       name: Mail me
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [src]         
+          options:
+            docstring_style: numpy  
+            show_source: true
+            show_root_heading: true
+            members_order: source

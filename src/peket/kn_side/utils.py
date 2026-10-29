@@ -1163,7 +1163,7 @@ def find_valid_sources(df_lsst, n_sources=5, duration=20, min_observations=3, se
             #MJD = set(MJD)
             epochs = [MJD[0]]
             for i in range(len(MJD)-1):
-                if MJD[i] - MJD[i+1] > 1/24:
+                if MJD[i] - MJD[i+1] > cadence:
                     epochs.append(MJD[i+1])
             if len(MJD) >= min_observations:
                 valid_sources.append({
